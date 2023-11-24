@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://csgynvcxwma88"]
+
+[ext_resource type="Script" path="res://Torpedo_normal.gd" id="1_rh35h"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4c12g"]
+size = Vector2(50, 50)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+script = ExtResource("1_rh35h")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(2.5, 2.5, 2.5, -2.5, -2.5, -2.5, -2.5, 2.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = SubResource("PlaceholderTexture2D_4c12g")
