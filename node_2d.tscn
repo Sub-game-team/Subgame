@@ -1,12 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct2gdi5dvmsha"]
+[gd_scene load_steps=12 format=3 uid="uid://ct2gdi5dvmsha"]
 
 [ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_o3057"]
 [ext_resource type="Texture2D" uid="uid://dyin74fbqfreg" path="res://pixil-frame-0.png" id="2_63fto"]
 [ext_resource type="Texture2D" uid="uid://cy2vf6e010hwk" path="res://icon.svg" id="2_vwv6h"]
 [ext_resource type="Texture2D" uid="uid://wioep15nc23y" path="res://test-tilemap.png" id="4_dx0sx"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3e7a"]
-size = Vector2(30, 30)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0qwb"]
 rough = true
@@ -37,6 +34,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 0, 32, 0, 32, 32, 
 resource_name = "Test"
 texture = ExtResource("4_dx0sx")
 texture_region_size = Vector2i(64, 64)
+0:0/next_alternative_id = 2
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -47,28 +45,65 @@ texture_region_size = Vector2i(64, 64)
 0:0/0/terrains_peering_bit/bottom_right_corner = 1
 0:0/0/terrains_peering_bit/bottom_side = 1
 0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
 0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_aljhy")
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/1/flip_v = true
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+1:0/next_alternative_id = 2
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/terrain = 1
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32)
+1:0/0/terrains_peering_bit/right_side = 1
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/top_left_corner = 0
+1:0/0/terrains_peering_bit/top_side = 1
+1:0/0/terrains_peering_bit/top_right_corner = 1
 1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_wduer")
+1:0/1 = 1
+1:0/1/flip_h = true
+1:0/1/flip_v = true
+1:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/1/physics_layer_0/angular_velocity = 0.0
+0:1/next_alternative_id = 2
 0:1/0 = 0
 0:1/0/terrain_set = 0
 0:1/0/terrain = 2
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, 0, 32, 32, 32, 32, -32)
+0:1/0/terrains_peering_bit/right_side = 1
+0:1/0/terrains_peering_bit/bottom_right_corner = 1
+0:1/0/terrains_peering_bit/bottom_side = 2
+0:1/0/terrains_peering_bit/top_side = 2
+0:1/0/terrains_peering_bit/top_right_corner = 1
 0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_y63u5")
+0:1/1 = 1
+0:1/1/flip_h = true
+0:1/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/1/physics_layer_0/angular_velocity = 0.0
+1:1/next_alternative_id = 2
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 3
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 0, 32, 0, 32, 32, -32, 32)
+1:1/0/terrains_peering_bit/right_side = 2
+1:1/0/terrains_peering_bit/bottom_right_corner = 1
+1:1/0/terrains_peering_bit/bottom_side = 1
+1:1/0/terrains_peering_bit/bottom_left_corner = 1
+1:1/0/terrains_peering_bit/left_side = 2
 1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_j81ko")
+1:1/1 = 1
+1:1/1/flip_v = true
+1:1/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/1/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_e8kt8"]
 tile_size = Vector2i(64, 64)
@@ -90,11 +125,9 @@ sources/0 = SubResource("TileSetAtlasSource_l5pgv")
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_o3057")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_w3e7a")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 z_index = 1
@@ -108,6 +141,10 @@ drag_vertical_enabled = true
 drag_left_margin = 0.3
 drag_right_margin = 0.3
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+polygon = PackedVector2Array(0, 8, 9, 8, 9, 7, 16, 7, 16, 6, 20, 6, 20, 5, 24, 5, 24, 4, 26, 4, 26, 3, 28, 3, 28, 2, 30, 2, 30, 1, 31, 1, 31, 0, 32, 0, 32, -2, 33, -2, 33, -5, 32, -5, 32, -7, 31, -7, 31, -8, 30, -8, 30, -9, 28, -9, 28, -10, 26, -10, 26, -11, 24, -11, 24, -12, 20, -12, 20, -13, 16, -13, 16, -14, 9, -14, 9, -15, 1, -15, -10, -15, -10, -14, -17, -14, -17, -13, -21, -13, -21, -12, -25, -12, -25, -11, -27, -11, -27, -10, -29, -10, -29, -9, -31, -9, -31, -8, -32, -8, -32, -7, -33, -7, -33, -5, -34, -5, -34, -2, -33, -2, -33, 0, -32, 0, -32, 1, -31, 1, -31, 2, -29, 2, -29, 3, -27, 3, -27, 4, -25, 4, -25, 5, -21, 5, -21, 6, -17, 6, -17, 7, -10, 7, -10, 8)
+one_way_collision = true
+
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 scale = Vector2(50, 50)
 texture = ExtResource("2_vwv6h")
@@ -115,3 +152,4 @@ texture = ExtResource("2_vwv6h")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_e8kt8")
 format = 2
+layer_0/tile_data = PackedInt32Array(458760, 0, 0, 524295, 0, 0, 589830, 0, 0, 655365, 0, 0, 720900, 0, 0, 786435, 0, 0, 851970, 0, 0, 917505, 65536, 65537, 917504, 65536, 65537, 983039, 65536, 65537, 983038, 65536, 65537, 917501, 65536, 65536, 851964, 65536, 65536, 786427, 65536, 65536, 720890, 65536, 65536, 655353, 65536, 65536, 589816, 65536, 65536, 524279, 65536, 65536, 458742, 0, 1, 393206, 0, 1, 262134, 0, 1, 327670, 0, 1, 131062, 0, 1, 196598, 0, 1, 393225, 0, 0, 327690, 0, 65537, 262154, 0, 65537, 196618, 0, 65537, 131082, 0, 65537, 65546, 0, 65537, 10, 0, 65537, 65526, 0, 1, -10, 0, 1, -65546, 0, 1, -65526, 0, 65537, -131062, 0, 65537)
