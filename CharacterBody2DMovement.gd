@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@export var speed = 0
 var input_direction2
 var yMovement = 0
 var xMovement = 0

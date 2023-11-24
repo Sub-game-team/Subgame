@@ -1,117 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct2gdi5dvmsha"]
+[gd_scene load_steps=4 format=3 uid="uid://ct2gdi5dvmsha"]
 
-[ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_o3057"]
-[ext_resource type="Texture2D" uid="uid://dyin74fbqfreg" path="res://pixil-frame-0.png" id="2_63fto"]
-[ext_resource type="Texture2D" uid="uid://cy2vf6e010hwk" path="res://icon.svg" id="2_vwv6h"]
-[ext_resource type="Texture2D" uid="uid://wioep15nc23y" path="res://test-tilemap.png" id="4_dx0sx"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3e7a"]
-size = Vector2(30, 30)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0qwb"]
-rough = true
-bounce = 0.1
-absorbent = true
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_aljhy"]
-vertices = PackedVector2Array(32, -32, 32, 32, -32, 32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 32, 32, 32, 32, -32)])
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_y63u5"]
-vertices = PackedVector2Array(32, -32, 32, 32, 0, 32, 0, -32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(0, -32, 0, 32, 32, 32, 32, -32)])
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_wduer"]
-vertices = PackedVector2Array(-32, -32, 32, -32, 32, 32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 0)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, -32)])
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_j81ko"]
-vertices = PackedVector2Array(-32, 0, 32, 0, 32, 32, -32, 32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 0, 32, 0, 32, 32, -32, 32)])
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5pgv"]
-resource_name = "Test"
-texture = ExtResource("4_dx0sx")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:0/0/terrain_set = 0
-0:0/0/terrain = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, 32, 32, 32, -32)
-0:0/0/terrains_peering_bit/right_side = 1
-0:0/0/terrains_peering_bit/bottom_right_corner = 1
-0:0/0/terrains_peering_bit/bottom_side = 1
-0:0/0/terrains_peering_bit/bottom_left_corner = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_aljhy")
-1:0/0 = 0
-1:0/0/terrain_set = 0
-1:0/0/terrain = 1
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32)
-1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_wduer")
-0:1/0 = 0
-0:1/0/terrain_set = 0
-0:1/0/terrain = 2
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, 0, 32, 32, 32, 32, -32)
-0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_y63u5")
-1:1/0 = 0
-1:1/0/terrain_set = 0
-1:1/0/terrain = 3
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 0, 32, 0, 32, 32, -32, 32)
-1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_j81ko")
-
-[sub_resource type="TileSet" id="TileSet_e8kt8"]
-tile_size = Vector2i(64, 64)
-physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 5
-physics_layer_0/physics_material = SubResource("PhysicsMaterial_x0qwb")
-terrain_set_0/mode = 0
-terrain_set_0/terrain_0/name = "Testterrain"
-terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-terrain_set_0/terrain_1/name = "Terrain 1"
-terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
-terrain_set_0/terrain_2/name = "Terrain 2"
-terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
-terrain_set_0/terrain_3/name = "Terrain 3"
-terrain_set_0/terrain_3/color = Color(0.375, 0.5, 0.25, 1)
-navigation_layer_0/layers = 2
-sources/0 = SubResource("TileSetAtlasSource_l5pgv")
+[ext_resource type="PackedScene" uid="uid://c21pvhb186jhm" path="res://character_body_2d.tscn" id="1_sd6mp"]
+[ext_resource type="PackedScene" uid="uid://d3h45xhyxdvt8" path="res://sprite_2d_2.tscn" id="2_0uw3w"]
+[ext_resource type="PackedScene" uid="uid://b0yd7j66iyryd" path="res://tile_map.tscn" id="3_qpsny"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-motion_mode = 1
-script = ExtResource("1_o3057")
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_sd6mp")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_w3e7a")
+[node name="Sprite2D2" parent="." instance=ExtResource("2_0uw3w")]
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-z_index = 1
-texture = ExtResource("2_63fto")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-limit_smoothed = true
-position_smoothing_speed = 3.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.3
-drag_right_margin = 0.3
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-scale = Vector2(50, 50)
-texture = ExtResource("2_vwv6h")
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_e8kt8")
-format = 2
+[node name="TileMap" parent="." instance=ExtResource("3_qpsny")]
