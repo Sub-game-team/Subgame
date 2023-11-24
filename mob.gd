@@ -8,6 +8,7 @@ func _ready():
 func _process(delta):
 	pass
 	# go in the direction of player
+	# look at direction
 	# damage
 	# retreat a bit
 	

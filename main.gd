@@ -7,8 +7,8 @@ func create_mob():
 	var mob = mob_scene.instantiate()
 	var direction = 0
 	mob.rotation = direction
-	mob.position = Vector2(0,0)
-	var velocity = Vector2(randf_range(15.0, 25.0), 0.0)
+	mob.position = Vector2(0,0) # just temporary
+	var velocity = Vector2(randf_range(15.0, 25.0), 0.0) # wil be removed
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	add_child(mob)
