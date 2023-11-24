@@ -1,12 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct2gdi5dvmsha"]
+[gd_scene load_steps=9 format=3 uid="uid://ct2gdi5dvmsha"]
 
-[ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_o3057"]
-[ext_resource type="Texture2D" uid="uid://dyin74fbqfreg" path="res://pixil-frame-0.png" id="2_63fto"]
-[ext_resource type="Texture2D" uid="uid://cy2vf6e010hwk" path="res://icon.svg" id="2_vwv6h"]
 [ext_resource type="Texture2D" uid="uid://wioep15nc23y" path="res://test-tilemap.png" id="4_dx0sx"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3e7a"]
-size = Vector2(30, 30)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0qwb"]
 rough = true
@@ -89,29 +83,7 @@ sources/0 = SubResource("TileSetAtlasSource_l5pgv")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-motion_mode = 1
-script = ExtResource("1_o3057")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_w3e7a")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-z_index = 1
-texture = ExtResource("2_63fto")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-limit_smoothed = true
-position_smoothing_speed = 3.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.3
-drag_right_margin = 0.3
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-scale = Vector2(50, 50)
-texture = ExtResource("2_vwv6h")
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_e8kt8")
 format = 2
+metadata/_edit_group_ = true
