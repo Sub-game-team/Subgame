@@ -7,7 +7,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0qwb"]
 rough = true
-bounce = 0.1
+bounce = 0.4
 absorbent = true
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aljhy"]
@@ -52,6 +52,7 @@ texture_region_size = Vector2i(64, 64)
 0:0/1/flip_v = true
 0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, -32, 32)
 1:0/next_alternative_id = 2
 1:0/0 = 0
 1:0/0/terrain_set = 0
@@ -70,6 +71,7 @@ texture_region_size = Vector2i(64, 64)
 1:0/1/flip_v = true
 1:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/1/physics_layer_0/angular_velocity = 0.0
+1:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -32, 32, 32, 32)
 0:1/next_alternative_id = 2
 0:1/0 = 0
 0:1/0/terrain_set = 0
@@ -87,6 +89,7 @@ texture_region_size = Vector2i(64, 64)
 0:1/1/flip_h = true
 0:1/1/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/1/physics_layer_0/angular_velocity = 0.0
+0:1/1/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, 0, 32, -32, 32, -32, -32)
 1:1/next_alternative_id = 2
 1:1/0 = 0
 1:1/0/terrain_set = 0
@@ -104,6 +107,7 @@ texture_region_size = Vector2i(64, 64)
 1:1/1/flip_v = true
 1:1/1/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/1/physics_layer_0/angular_velocity = 0.0
+1:1/1/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -32, 0, 32, 0, 32, -32)
 
 [sub_resource type="TileSet" id="TileSet_e8kt8"]
 tile_size = Vector2i(64, 64)
@@ -127,6 +131,7 @@ sources/0 = SubResource("TileSetAtlasSource_l5pgv")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_mask = 7
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_o3057")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
