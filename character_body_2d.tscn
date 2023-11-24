@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c21pvhb186jhm"]
+
+[ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_pvo8g"]
+[ext_resource type="Texture2D" uid="uid://dyin74fbqfreg" path="res://pixil-frame-0.png" id="2_x0gem"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_pvo8g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_x0gem")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_smoothed = true
+position_smoothing_speed = 3.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_right_margin = 0.3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 8, 9, 8, 9, 7, 16, 7, 16, 6, 20, 6, 20, 5, 24, 5, 24, 4, 26, 4, 26, 3, 28, 3, 28, 2, 30, 2, 30, 1, 31, 1, 31, 0, 32, 0, 32, -2, 33, -2, 33, -5, 32, -5, 32, -7, 31, -7, 31, -8, 30, -8, 30, -9, 28, -9, 28, -10, 26, -10, 26, -11, 24, -11, 24, -12, 20, -12, 20, -13, 16, -13, 16, -14, 9, -14, 9, -15, 1, -15, -10, -15, -10, -14, -17, -14, -17, -13, -21, -13, -21, -12, -25, -12, -25, -11, -27, -11, -27, -10, -29, -10, -29, -9, -31, -9, -31, -8, -32, -8, -32, -7, -33, -7, -33, -5, -34, -5, -34, -2, -33, -2, -33, 0, -32, 0, -32, 1, -31, 1, -31, 2, -29, 2, -29, 3, -27, 3, -27, 4, -25, 4, -25, 5, -21, 5, -21, 6, -17, 6, -17, 7, -10, 7, -10, 8)
+one_way_collision = true
