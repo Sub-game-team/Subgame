@@ -1,21 +1,25 @@
 extends Node
 
 @export var mob_scene: PackedScene
-@export var character_body_2d: PackedScene
+@export var player_scene: PackedScene
+
 
 func create_mob():
 	var mob = mob_scene.instantiate()
 	var direction = 0
 	mob.rotation = direction
-	mob.position = Vector2(0,0) # just temporary
-	var velocity = Vector2(randf_range(15.0, 25.0), 0.0) # wil be removed
-	mob.linear_velocity = velocity.rotated(direction)
-	
+	mob.position = Vector2(500, 0)  # just temporary
+
+	# Pass the player node reference to the mob
+	mob.set_player_reference($Player) 
+
 	add_child(mob)
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var player = character_body_2d.instantiate()
+	var player = player_scene.instantiate()
 	add_child(player)
 	create_mob()
 

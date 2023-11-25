@@ -22,3 +22,5 @@ z_index = 1
 texture = ExtResource("2_00tpv")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Mob_Timer" type="Timer" parent="."]
