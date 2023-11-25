@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0yd7j66iyryd"]
+[gd_scene load_steps=9 format=3 uid="uid://ct2gdi5dvmsha"]
 
-[ext_resource type="Texture2D" uid="uid://wioep15nc23y" path="res://test-tilemap.png" id="1_iefaw"]
+[ext_resource type="Texture2D" uid="uid://wioep15nc23y" path="res://test-tilemap.png" id="4_dx0sx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x0qwb"]
 rough = true
-bounce = 0.4
+bounce = 0.1
 absorbent = true
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aljhy"]
@@ -29,9 +29,8 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 0, 32, 0, 32, 32, 
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5pgv"]
 resource_name = "Test"
-texture = ExtResource("1_iefaw")
+texture = ExtResource("4_dx0sx")
 texture_region_size = Vector2i(64, 64)
-0:0/next_alternative_id = 2
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -42,69 +41,28 @@ texture_region_size = Vector2i(64, 64)
 0:0/0/terrains_peering_bit/bottom_right_corner = 1
 0:0/0/terrains_peering_bit/bottom_side = 1
 0:0/0/terrains_peering_bit/bottom_left_corner = 0
-0:0/0/terrains_peering_bit/top_right_corner = 0
 0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_aljhy")
-0:0/1 = 1
-0:0/1/flip_h = true
-0:0/1/flip_v = true
-0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/1/physics_layer_0/angular_velocity = 0.0
-0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, -32, 32)
-1:0/next_alternative_id = 2
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/terrain = 1
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32)
-1:0/0/terrains_peering_bit/right_side = 1
-1:0/0/terrains_peering_bit/bottom_right_corner = 0
-1:0/0/terrains_peering_bit/top_left_corner = 0
-1:0/0/terrains_peering_bit/top_side = 1
-1:0/0/terrains_peering_bit/top_right_corner = 1
 1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_wduer")
-1:0/1 = 1
-1:0/1/flip_h = true
-1:0/1/flip_v = true
-1:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/1/physics_layer_0/angular_velocity = 0.0
-1:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -32, 32, 32, 32)
-0:1/next_alternative_id = 2
 0:1/0 = 0
 0:1/0/terrain_set = 0
 0:1/0/terrain = 2
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, 0, 32, 32, 32, 32, -32)
-0:1/0/terrains_peering_bit/right_side = 1
-0:1/0/terrains_peering_bit/bottom_right_corner = 1
-0:1/0/terrains_peering_bit/bottom_side = 2
-0:1/0/terrains_peering_bit/top_side = 2
-0:1/0/terrains_peering_bit/top_right_corner = 1
 0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_y63u5")
-0:1/1 = 1
-0:1/1/flip_h = true
-0:1/1/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/1/physics_layer_0/angular_velocity = 0.0
-0:1/1/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, 0, 32, -32, 32, -32, -32)
-1:1/next_alternative_id = 2
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 3
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 0, 32, 0, 32, 32, -32, 32)
-1:1/0/terrains_peering_bit/right_side = 2
-1:1/0/terrains_peering_bit/bottom_right_corner = 1
-1:1/0/terrains_peering_bit/bottom_side = 1
-1:1/0/terrains_peering_bit/bottom_left_corner = 1
-1:1/0/terrains_peering_bit/left_side = 2
 1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_j81ko")
-1:1/1 = 1
-1:1/1/flip_v = true
-1:1/1/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/1/physics_layer_0/angular_velocity = 0.0
-1:1/1/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, -32, 0, 32, 0, 32, -32)
 
 [sub_resource type="TileSet" id="TileSet_e8kt8"]
 tile_size = Vector2i(64, 64)
@@ -124,7 +82,8 @@ navigation_layer_0/layers = 2
 sources/0 = SubResource("TileSetAtlasSource_l5pgv")
 
 [node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_e8kt8")
 format = 2
-layer_0/tile_data = PackedInt32Array(458760, 0, 0, 524295, 0, 0, 589830, 0, 0, 655365, 0, 0, 720900, 0, 0, 786435, 0, 0, 851970, 0, 0, 917505, 65536, 65537, 917504, 65536, 65537, 983039, 65536, 65537, 983038, 65536, 65537, 917501, 65536, 65536, 851964, 65536, 65536, 786427, 65536, 65536, 720890, 65536, 65536, 655353, 65536, 65536, 589816, 65536, 65536, 524279, 65536, 65536, 458742, 0, 1, 393206, 0, 1, 262134, 0, 1, 327670, 0, 1, 131062, 0, 1, 196598, 0, 1, 393225, 0, 0, 327690, 0, 65537, 262154, 0, 65537, 196618, 0, 65537, 131082, 0, 65537, 65546, 0, 65537, 10, 0, 65537, 65526, 0, 1, -10, 0, 1, -65546, 0, 1, -65526, 0, 65537, -131062, 0, 65537)
 metadata/_edit_group_ = true
