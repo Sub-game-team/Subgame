@@ -27,7 +27,7 @@ func _physics_process(delta):
 	linear_velocity = Vector2(-10.0,0.0).rotated(direction) * (speed + temp_speed)
 	# maybe save the points where to go in a list and thereby follow the player?
 	# later
-	print("Distance: ", player.global_position.distance_to(global_position), ", temporary speed: ", temp_speed, ", chase: ", chase)
+	#print("Distance: ", player.global_position.distance_to(global_position), ", temporary speed: ", temp_speed, ", chase: ", chase)
 	if player.global_position.distance_to(global_position) <= chase_distance and not chase:
 		chase = true
 		temp_speed += 10
