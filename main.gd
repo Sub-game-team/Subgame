@@ -2,7 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var player_scene: PackedScene
-
+@export var tileset: PackedScene
 
 func create_mob():
 	var mob = mob_scene.instantiate()
@@ -21,6 +21,8 @@ func create_mob():
 func _ready():
 	var player = player_scene.instantiate()
 	add_child(player)
+	var tile_set = tileset.instantiate()
+	add_child(tile_set)
 	create_mob()
 
 
