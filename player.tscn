@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch43k4w4dvjsy"]
+
+[ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_pvkax"]
+[ext_resource type="Texture2D" uid="uid://dyin74fbqfreg" path="res://pixil-frame-0.png" id="2_nkn1r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_asitc"]
+size = Vector2(30, 30)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_pvkax")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_asitc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_nkn1r")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_smoothed = true
+position_smoothing_speed = 3.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_right_margin = 0.3
