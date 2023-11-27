@@ -13,7 +13,7 @@ func get_input():
 		yMovement -= 4
 	if Input.is_action_pressed("down") and yMovement <= 498:
 		yMovement += 4
-	if xMovement >= 1 and not Input.is_action_pressed("right"):
+	if xMovement >= 0 and not Input.is_action_pressed("right"):
 		xMovement -= 2
 	if xMovement <= 0 and not Input.is_action_pressed("left"):
 		xMovement += 2
