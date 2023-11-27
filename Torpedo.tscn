@@ -13,6 +13,12 @@ script = ExtResource("1_rh35h")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(25, 25, 25, -25, -25, -25, -25, 25)
 
+[node name="Area2D" type="Area2D" parent="." groups=["Torpedo"]]
+collision_mask = 15
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(26, 26, 26, -26, -26, -26, -26, 26)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture = SubResource("PlaceholderTexture2D_4c12g")
@@ -26,4 +32,5 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

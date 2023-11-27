@@ -10,6 +10,17 @@ gravity_scale = 0.0
 script = ExtResource("1_o3kvi")
 metadata/_edit_group_ = true
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-19, 4, -2, 5, 4, 5, 10, 4, 14, 3, 16, 2, 17, 1, 18, 0, 18, -3, 21, -4, 23, -3, 26, -2, 29, -2, 29, -4, 27, -7, 26, -8, 27, -10, 27, -11, 24, -11, 20, -9, 19, -9, 14, -10, 9, -12, 1, -12, -5, -11, -10, -10, -16, -9, -18, -7, -20, -6, -22, -4, -24, -3, -26, -1, -29, 0, -29, 2, -23, 3)
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+collision_layer = 4
+collision_mask = 13
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(1.1, 1.1)
+polygon = PackedVector2Array(-19, 4, -2, 5, 4, 5, 10, 4, 14, 3, 16, 2, 17, 1, 18, 0, 18, -3, 21, -4, 23, -3, 26, -2, 29, -2, 29, -4, 27, -7, 26, -8, 27, -10, 27, -11, 24, -11, 20, -9, 19, -9, 14, -10, 9, -12, 1, -12, -5, -11, -10, -10, -16, -9, -18, -7, -20, -6, -22, -4, -24, -3, -26, -1, -29, 0, -29, 2, -23, 3)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture = ExtResource("2_00tpv")
@@ -18,5 +29,4 @@ texture = ExtResource("2_00tpv")
 
 [node name="Mob_Timer" type="Timer" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-19, 4, -2, 5, 4, 5, 10, 4, 14, 3, 16, 2, 17, 1, 18, 0, 18, -3, 21, -4, 23, -3, 26, -2, 29, -2, 29, -4, 27, -7, 26, -8, 27, -10, 27, -11, 24, -11, 20, -9, 19, -9, 14, -10, 9, -12, 1, -12, -5, -11, -10, -10, -16, -9, -18, -7, -20, -6, -22, -4, -24, -3, -26, -1, -29, 0, -29, 2, -23, 3)
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
