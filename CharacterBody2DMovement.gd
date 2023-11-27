@@ -5,6 +5,7 @@ var yMovement = 0
 var xMovement = 0
 @onready var player_body = get_node(".")
 var projectile_scene = preload("res://Torpedo.tscn")
+var readyToFire = true
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
@@ -39,7 +40,9 @@ func get_input():
 				yMovement = -18
 
 func _process(_delta):
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and readyToFire:
+		readyToFire = false
+		$Timer.start(3)
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position
@@ -51,3 +54,6 @@ func _process(_delta):
 func _physics_process(_delta):
 	get_input()
 	move_and_slide()
+
+func _on_timer_timeout():
+	readyToFire = true
