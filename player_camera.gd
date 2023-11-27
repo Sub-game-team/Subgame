@@ -32,6 +32,5 @@ func zoom_camera(zoom_input):
 
 func calculate_zoom_speed(zoom_speed_factor = 0.5) -> float:
 	# You can adjust the coefficients of the quadratic function
-
 	# Calculate the speed based on the current scale
-	return zoom_speed_factor * pow(zoom.x, 2.0)
+	return zoom_speed_factor * clamp(pow(zoom.x, 2.0),0.01, 1)
