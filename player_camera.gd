@@ -4,6 +4,7 @@ var zoom_speed_fact = 0.1
 var zoom_speed = 0
 var min_zoom = 0.5
 var max_zoom = 8
+var max_zoom_speed = 2
 
 func _ready():
 	pass
@@ -33,4 +34,4 @@ func zoom_camera(zoom_input):
 func calculate_zoom_speed(zoom_speed_factor = 0.5) -> float:
 	# You can adjust the coefficients of the quadratic function
 	# Calculate the speed based on the current scale
-	return zoom_speed_factor * clamp(pow(zoom.x, 2.0),0.01, 1)
+	return zoom_speed_factor * clamp(pow(zoom.x, 2.0),0.01, max_zoom_speed)
