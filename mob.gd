@@ -40,3 +40,7 @@ func _physics_process(delta):
 # Function to set the player reference
 func set_player_reference(player_ref: CharacterBody2D):
 	player = player_ref
+
+
+func _on_area_2d_area_entered(area):
+	pass # Replace with function body.
