@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://coqipnqfok8dj"]
 
 [ext_resource type="Script" path="res://Torpedo_normal.gd" id="1_rh35h"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4c12g"]
-size = Vector2(50, 50)
+[ext_resource type="Texture2D" uid="uid://btcsi3rrnhqv3" path="res://Art/torpedo_0-variant.png" id="2_mhcvj"]
 
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 8
@@ -11,20 +9,25 @@ collision_mask = 6
 script = ExtResource("1_rh35h")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(25, 25, 25, -25, -25, -25, -25, 25)
+rotation = 1.5708
+polygon = PackedVector2Array(5, 26, 5, -29, 4, -29, 4, -31, 3, -31, 3, -32, -3, -32, -3, -31, -4, -31, -4, -29, -5, -29, -5, 26, -6, 26, -6, 27, -7, 27, -7, 29, -8, 29, -8, 31, -9, 31, -9, 32, 9, 32, 9, 31, 8, 31, 8, 29, 7, 29, 7, 27, 6, 27, 6, 26)
 
 [node name="Area2D" type="Area2D" parent="." groups=["Torpedo"]]
+rotation = 1.5708
 collision_mask = 15
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(26, 26, 26, -26, -26, -26, -26, 26)
+polygon = PackedVector2Array(10, 33, 6, -33, -6, -33, -10, 33)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-texture = SubResource("PlaceholderTexture2D_4c12g")
+rotation = 1.5708
+texture = ExtResource("2_mhcvj")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-25, -25)
+position = Vector2(32, -9)
+rotation = 1.5708
+scale = Vector2(0.36, 1.28)
 rect = Rect2(0, 0, 50, 50)
 
 [node name="Timer" type="Timer" parent="."]

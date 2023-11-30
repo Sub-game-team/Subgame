@@ -9,21 +9,21 @@ var readyToFire = true
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
-		xMovement -= 4
-	if Input.is_action_pressed("right") and xMovement <= 498:
-		xMovement += 4
-	if Input.is_action_pressed("up") and yMovement >= -498:
-		yMovement -= 4
-	if Input.is_action_pressed("down") and yMovement <= 498:
-		yMovement += 4
-	if xMovement >= 0 and not Input.is_action_pressed("right"):
 		xMovement -= 2
-	if xMovement <= 0 and not Input.is_action_pressed("left"):
+	if Input.is_action_pressed("right") and xMovement <= 498:
 		xMovement += 2
-	if yMovement >= 0 and not Input.is_action_pressed("up"):
+	if Input.is_action_pressed("up") and yMovement >= -498:
 		yMovement -= 2
-	if yMovement <= 0 and not Input.is_action_pressed("down"):
+	if Input.is_action_pressed("down") and yMovement <= 498:
 		yMovement += 2
+	if xMovement >= 0 and not Input.is_action_pressed("right"):
+		xMovement -= 1
+	if xMovement <= 0 and not Input.is_action_pressed("left"):
+		xMovement += 1
+	if yMovement >= 0 and not Input.is_action_pressed("up"):
+		yMovement -= 1
+	if yMovement <= 0 and not Input.is_action_pressed("down"):
+		yMovement += 1
 	velocity = Vector2(xMovement, yMovement)
 	#print(velocity) #for debug
 	#print(player_body.get_real_velocity()) #for debug
@@ -46,7 +46,6 @@ func _process(_delta):
 		var projectile = projectile_scene.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position
-		var direction = Vector2(1, 0)  # Adjust the direction as needed
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
 		projectile.set_lock_rotation_enabled(true)

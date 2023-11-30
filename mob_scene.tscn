@@ -28,5 +28,3 @@ texture = ExtResource("2_00tpv")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="Mob_Timer" type="Timer" parent="."]
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
