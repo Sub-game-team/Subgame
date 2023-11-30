@@ -6,6 +6,9 @@ var xMovement = 0
 @onready var player_body = get_node(".")
 var projectile_scene = preload("res://Torpedo.tscn")
 var readyToFire = true
+var damage = 0
+var floodUnits = 0
+var flooded = false
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
@@ -56,3 +59,21 @@ func _physics_process(_delta):
 
 func _on_timer_timeout():
 	readyToFire = true
+
+func _on_area_2d_torpedos_area_entered(area):
+	if area.is_in_group("enemy"):
+		print("test1")
+		area.get_parent().queue_free()
+		
+
+func _on_area_2d_crew_area_entered(area):
+	if area.is_in_group("enemy"):
+		print("test2")
+
+func _on_area_2d_reactor_area_entered(area):
+	if area.is_in_group("enemy"):
+		print("test3")
+
+func _on_area_2d_engine_area_entered(area):
+	if area.is_in_group("enemy"):
+		print("test4")

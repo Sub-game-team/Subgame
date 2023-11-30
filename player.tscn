@@ -1,23 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=6 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_pvkax"]
 [ext_resource type="Texture2D" uid="uid://e1283ru3wlch" path="res://Art/U-BootV1.png" id="2_id3k4"]
 [ext_resource type="Script" path="res://player_camera.gd" id="3_1tnlc"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_prwus"]
-size = Vector2(74, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5meud"]
 size = Vector2(62, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kji73"]
 size = Vector2(80, 60)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6dj5"]
-size = Vector2(65, 60)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbio8"]
-size = Vector2(78, 60)
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -41,45 +32,49 @@ script = ExtResource("3_1tnlc")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 4)
-polygon = PackedVector2Array(0, 37, 141, 37, 152, 36, 156, 34, 166, 24, 168, 19, 168, 7, 167, 4, 166, 0, 163, -4, 162, -7, 150, -19, 147, -20, 145, -22, 135, -23, 53, -23, 43, -42, 28, -42, 28, -48, 32, -55, 32, -58, 29, -58, 29, -59, -14, -59, -14, -58, -16, -58, -12, -49, -12, -42, -26, -42, -35, -23, -92, -23, -103, -22, -116, -21, -124, -20, -129, -19, -139, -18, -150, -17, -156, -16, -161, -15, -171, -12, -184, -6, -191, 2, -191, 12, -189, 15, -184, 20, -165, 28, -150, 31, -139, 32, -129, 33, -116, 35, -92, 37)
+polygon = PackedVector2Array(0, 37, 141, 37, 152, 36, 156, 34, 166, 24, 167, 22, 168, 19, 168, 7, 167, 4, 166, 0, 164, -4, 163, -5, 162, -7, 150, -19, 148, -20, 147, -21, 145, -22, 136, -23, 52, -23, 52, -25, 44, -41, 43, -42, 28, -42, 29, -49, 32, -55, 32, -58, 29, -59, -14, -59, -16, -58, -16, -55, -13, -49, -12, -42, -26, -42, -27, -41, -35, -25, -35, -23, -92, -23, -103, -22, -116, -21, -124, -20, -129, -19, -139, -18, -150, -17, -156, -16, -161, -15, -165, -14, -171, -12, -173, -11, -176, -10, -184, -6, -189, -1, -190, 1, -191, 2, -191, 12, -190, 13, -189, 15, -184, 20, -176, 24, -173, 25, -171, 26, -168, 27, -165, 28, -161, 29, -156, 30, -150, 31, -139, 32, -129, 33, -124, 34, -116, 35, -103, 36, -92, 37)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
+[node name="Area2D_torpedos" type="Area2D" parent="."]
+collision_mask = 12
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D_torpedos"]
+position = Vector2(140, 0)
+polygon = PackedVector2Array(-46, -19, -4, -19, 5, -18, 7, -17, 8, -16, 10, -15, 22, -3, 23, -1, 24, 0, 25, 2, 26, 4, 27, 8, 28, 11, 28, 23, 27, 26, 26, 28, 16, 38, 12, 40, 1, 41, -46, 41)
+
+[node name="Area2D_crew" type="Area2D" parent="."]
+collision_mask = 12
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D_crew"]
+position = Vector2(63, 11)
+shape = SubResource("RectangleShape2D_5meud")
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(131, 11)
-shape = SubResource("RectangleShape2D_prwus")
-
-[node name="Area2D2" type="Area2D" parent="."]
-collision_mask = 12
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2"]
-position = Vector2(63, 11)
-shape = SubResource("RectangleShape2D_5meud")
-
-[node name="Area2D3" type="Area2D" parent="."]
-collision_mask = 12
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
 position = Vector2(-8, 11)
 shape = SubResource("RectangleShape2D_kji73")
 
-[node name="Area2D4" type="Area2D" parent="."]
+[node name="Area2D_reactor" type="Area2D" parent="."]
 collision_mask = 12
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-position = Vector2(-80.5, 11)
-shape = SubResource("RectangleShape2D_y6dj5")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D_reactor"]
+polygon = PackedVector2Array(-48, -19, -92, -19, -103, -18, -113, -17, -113, 39, -103, 40, -92, 41, -48, 41)
 
-[node name="Area2D5" type="Area2D" parent="."]
+[node name="Area2D_engine" type="Area2D" parent="."]
 collision_mask = 12
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
-position = Vector2(-152, 11)
-shape = SubResource("RectangleShape2D_sbio8")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D_engine"]
+position = Vector2(-119, 30)
+polygon = PackedVector2Array(6, 9, 3, 9, -5, 8, -10, 7, -20, 6, -31, 5, -37, 4, -42, 3, -46, 2, -49, 1, -52, 0, -54, -1, -57, -2, -59, -3, -61, -4, -63, -5, -65, -6, -70, -11, -71, -13, -72, -14, -72, -24, -71, -25, -70, -27, -69, -28, -68, -29, -65, -32, -57, -36, -54, -37, -52, -38, -46, -40, -42, -41, -37, -42, -31, -43, -20, -44, -10, -45, -5, -46, 3, -47, 6, -47)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_area_entered"]
+[connection signal="area_entered" from="Area2D_crew" to="." method="_on_area_2d_crew_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_3_area_entered"]
+[connection signal="area_entered" from="Area2D_reactor" to="." method="_on_area_2d_reactor_area_entered"]
+[connection signal="area_entered" from="Area2D_engine" to="." method="_on_area_2d_engine_area_entered"]
