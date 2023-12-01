@@ -105,7 +105,7 @@ func _process(_delta):
 	print(repairUnits)
 	print(draining)
 	print("---")
-	$Label.set_text(str(damage) + str(floodUnits))
+	$Label.set_text(str(damage) + str(floodUnits) + str(repairUnits))
 
 func _physics_process(_delta):
 	get_input()
@@ -117,15 +117,14 @@ func _on_timer_timeout():
 func _on_timer_damagecalculation_timeout():
 	for i in range(len(leak)):
 		if floodUnits[i] <= 299:
-			floodUnits[i] += leak[i]*2
+			floodUnits[i] += (leak[i]*2) / 4
 		if draining == i + 1:
 			if floodUnits[i] <= 0:
 				draining = 0
 			else:
 				floodUnits[i] -= 4
-		if damage[i] >= 0:
-			damage[i] -= repairUnits[i] * repairpenalty
-	#$timer_damagecalculation.start(0.25)
+		if damage[i] >= 1:
+			damage[i] -= (repairUnits[i] / 4) * repairpenalty
 
 func _on_area_2d_torpedos_area_entered(area):
 	if area.is_in_group("enemy"):
@@ -156,3 +155,10 @@ func _on_area_2d_engine_area_entered(area):
 		print("test5")
 		area.get_parent().queue_free()
 		damage[4] += 5
+
+func _on_area_2d_torpedos_input_event(_viewport, _event, _shape_idx):
+	print("test11")
+	if Input.is_action_just_pressed("repair_add"):
+		repairUnits[0] += 1
+	if Input.is_action_just_pressed("repair_remove"):
+		repairUnits[0] -= 1

@@ -37,7 +37,7 @@ script = ExtResource("3_1tnlc")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 4)
-polygon = PackedVector2Array(0, 37, 141, 37, 152, 36, 156, 34, 166, 24, 167, 22, 168, 19, 168, 7, 167, 4, 166, 0, 164, -4, 163, -5, 162, -7, 150, -19, 148, -20, 147, -21, 145, -22, 136, -23, 52, -23, 52, -25, 44, -41, 43, -42, 28, -42, 29, -49, 32, -55, 32, -58, 29, -59, -14, -59, -16, -58, -16, -55, -13, -49, -12, -42, -26, -42, -27, -41, -35, -25, -35, -23, -92, -23, -103, -22, -116, -21, -124, -20, -129, -19, -139, -18, -150, -17, -156, -16, -161, -15, -165, -14, -171, -12, -173, -11, -176, -10, -184, -6, -189, -1, -190, 1, -191, 2, -191, 12, -190, 13, -189, 15, -184, 20, -176, 24, -173, 25, -171, 26, -168, 27, -165, 28, -161, 29, -156, 30, -150, 31, -139, 32, -129, 33, -124, 34, -116, 35, -103, 36, -92, 37)
+polygon = PackedVector2Array(0, 37, 141, 37, 152, 36, 156, 34, 166, 24, 167, 22, 168, 19, 168, 7, 167, 4, 166, 0, 164, -4, 163, -5, 162, -7, 150, -19, 148, -20, 147, -21, 145, -22, 136, -23, 52, -23, -35, -23, -92, -23, -103, -22, -116, -21, -124, -20, -129, -19, -139, -18, -150, -17, -156, -16, -161, -15, -165, -14, -171, -12, -173, -11, -176, -10, -184, -6, -189, -1, -190, 1, -191, 2, -191, 12, -190, 13, -189, 15, -184, 20, -176, 24, -173, 25, -171, 26, -168, 27, -165, 28, -161, 29, -156, 30, -150, 31, -139, 32, -129, 33, -124, 34, -116, 35, -103, 36, -92, 37)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -83,6 +83,7 @@ autostart = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
+z_index = 2
 position = Vector2(131, 11)
 texture = SubResource("PlaceholderTexture2D_x6llj")
 
@@ -96,6 +97,7 @@ text_overrun_behavior = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_area_entered"]
+[connection signal="input_event" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_input_event"]
 [connection signal="area_entered" from="Area2D_crew" to="." method="_on_area_2d_crew_area_entered"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_3_area_entered"]
 [connection signal="area_entered" from="Area2D_reactor" to="." method="_on_area_2d_reactor_area_entered"]

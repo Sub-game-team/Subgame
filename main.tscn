@@ -12,7 +12,7 @@ player_scene = ExtResource("3_8y4yx")
 tileset = ExtResource("4_njx7p")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
