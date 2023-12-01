@@ -15,6 +15,7 @@ var repair-penalty = 1
 var movement-penalty = 1
 var power-outage = false
 var reactor-power-override = false
+var repairUnits = [0, 0, 0, 0, 0]
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
@@ -59,7 +60,12 @@ func _process(_delta):
 		projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
 		projectile.set_lock_rotation_enabled(true)
         for i in range(len(damage)):
+            if damage[i] >= 31:
+                damage[i] = 30
+            elif damage[i] >= -1:
+                damage[i] = 0
             leak[i] = int(damage[i] / 10)
+            #activate flood warning visual depending on how severe the leak is
             if floodUnits[i] >= 300
                 floodUnits[i] = 300
                 flooded[i] = true
@@ -95,6 +101,19 @@ func _physics_process(_delta):
 
 func _on_timer_timeout():
 	readyToFire = true
+
+func _on_timer_damagecalculation_timeout():
+        for i in range(len(leak)):
+            if floodUnits[i] <= 299:
+                floodUnits[i] += leak[i]*2
+            if draining == i + 1:
+                if floodUnits[i] <= 0:
+                    draining = 0
+                else:
+                    floodUnits[i] -= 4
+        if damage[] = 
+        damage[i] -= repairUnits[i] * repair-penalty 
+        $timer_damagecalculation.start(0.25)
 
 func _on_area_2d_torpedos_area_entered(area):
 	if area.is_in_group("enemy"):
