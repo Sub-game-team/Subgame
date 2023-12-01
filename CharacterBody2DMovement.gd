@@ -8,7 +8,7 @@ var projectile_scene = preload("res://Torpedo.tscn")
 var readyToFire = true
 var damage = [0, 0, 0, 0, 0] #max 30
 var floodUnits = [0, 0, 0, 0, 0] #max 300
-var leaks = [0, 0, 0, 0, 0] #0 = no leak; 1 = small leak; 2 = major leak; 3 = big leak;
+var leak = [0, 0, 0, 0, 0] #0 = no leak; 1 = small leak; 2 = major leak; 3 = big leak;
 @export var flooded = [false, false, false, false, false]
 
 func get_input():
@@ -53,7 +53,17 @@ func _process(_delta):
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
 		projectile.set_lock_rotation_enabled(true)
-         for i <= 4
+        for i in damage:
+            if damage[i] >= 10:
+                if damage[i] >= 20:
+                    if damage[i] >= 30:
+                        leak[i] = 3
+                    else:
+                        leak[i] = 2
+                else:
+                    leak[i] =1
+            else: leak[i] = 0
+                
 
 func _physics_process(_delta):
 	get_input()
