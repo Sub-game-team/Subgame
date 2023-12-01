@@ -10,3 +10,9 @@ script = ExtResource("1_7x3uh")
 mob_scene = ExtResource("2_6ptv3")
 player_scene = ExtResource("3_8y4yx")
 tileset = ExtResource("4_njx7p")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
