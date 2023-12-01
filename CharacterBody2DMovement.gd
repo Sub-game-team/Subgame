@@ -53,9 +53,18 @@ func _process(_delta):
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
 		projectile.set_lock_rotation_enabled(true)
-        for i in damage:
+        for i in range(len(damage)):
             leak[i] = int(damage[i] / 10)
-                
+            if floodUnits[i] >= 300
+                floodUnits[i] = 300
+                flooded[i] = true
+            if floodUnits[i] <= 0
+                floodUnits[i] = 0
+                flooded[i] = true
+        if flooded[0]
+            torpedo-penalty = 0.25
+        if flooded[1]
+            repair-penalty = 0.25
 
 func _physics_process(_delta):
 	get_input()
