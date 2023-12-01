@@ -54,15 +54,7 @@ func _process(_delta):
 		projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
 		projectile.set_lock_rotation_enabled(true)
         for i in damage:
-            if damage[i] >= 10:
-                if damage[i] >= 20:
-                    if damage[i] >= 30:
-                        leak[i] = 3
-                    else:
-                        leak[i] = 2
-                else:
-                    leak[i] =1
-            else: leak[i] = 0
+            leak[i] = int(damage[i] / 10)
                 
 
 func _physics_process(_delta):
