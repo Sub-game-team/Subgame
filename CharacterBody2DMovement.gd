@@ -6,9 +6,10 @@ var xMovement = 0
 @onready var player_body = get_node(".")
 var projectile_scene = preload("res://Torpedo.tscn")
 var readyToFire = true
-var damage = 0
-var floodUnits = 0
-var flooded = false
+var damage = [0, 0, 0, 0, 0] #max 30
+var floodUnits = [0, 0, 0, 0, 0] #max 300
+var leaks = [0, 0, 0, 0, 0] #0 = no leak; 1 = small leak; 2 = major leak; 3 = big leak;
+@export var flooded = [false, false, false, false, false]
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
@@ -52,6 +53,7 @@ func _process(_delta):
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
 		projectile.set_lock_rotation_enabled(true)
+         for i <= 4
 
 func _physics_process(_delta):
 	get_input()
