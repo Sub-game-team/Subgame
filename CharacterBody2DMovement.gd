@@ -10,6 +10,11 @@ var damage = [0, 0, 0, 0, 0] #max 30
 var floodUnits = [0, 0, 0, 0, 0] #max 300
 var leak = [0, 0, 0, 0, 0] #0 = no leak; 1 = small leak; 2 = major leak; 3 = big leak;
 @export var flooded = [false, false, false, false, false]
+var torpedo-penalty = 1
+var repair-penalty = 1
+var movement-penalty = 1
+var power-outage = false
+var reactor-power-override = false
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
@@ -28,7 +33,7 @@ func get_input():
 		yMovement -= 1
 	if yMovement <= 0 and not Input.is_action_pressed("down"):
 		yMovement += 1
-	velocity = Vector2(xMovement, yMovement)
+	velocity = Vector2(xMovement, yMovement) * movement-penalty
 	#print(velocity) #for debug
 	#print(player_body.get_real_velocity()) #for debug
 	if abs(xMovement) >= 10 or abs(yMovement) >= 10:
@@ -61,10 +66,28 @@ func _process(_delta):
             if floodUnits[i] <= 0
                 floodUnits[i] = 0
                 flooded[i] = true
-        if flooded[0]
+        if flooded[0]:
             torpedo-penalty = 0.25
-        if flooded[1]
-            repair-penalty = 0.25
+        else:
+            torpedo-penalty = 1
+        if flooded[1]:
+            repair-penalty = 0.5
+        else:
+            repair-penalty = 1
+        if flooded[2]:
+            pass
+        else:
+            pass
+        if flooded[3]:
+            power-outage = true
+            reactor-outage-override = true
+        else:
+            power-outage = true
+            reactor-outage-override = true
+        if flooded[4]:
+            movement-penalty = 0.25
+        else:
+            movement-penalty = 1
 
 func _physics_process(_delta):
 	get_input()
