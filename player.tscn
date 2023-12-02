@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=13 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_pvkax"]
 [ext_resource type="Texture2D" uid="uid://e1283ru3wlch" path="res://Art/U-BootV1.png" id="2_id3k4"]
@@ -14,6 +14,21 @@ size = Vector2(80, 60)
 size = Vector2(20, 20)
 
 [sub_resource type="LabelSettings" id="LabelSettings_rrj6r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b6kgo"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_aogl1"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_fb05a"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_h0goc"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_1un0o"]
+font_size = 12
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -94,6 +109,48 @@ offset_right = -50.0
 offset_bottom = -49.0
 label_settings = SubResource("LabelSettings_rrj6r")
 text_overrun_behavior = 2
+
+[node name="Label2" type="Label" parent="."]
+z_index = 2
+offset_left = 106.0
+offset_top = -15.0
+offset_right = 146.0
+offset_bottom = 8.0
+label_settings = SubResource("LabelSettings_b6kgo")
+horizontal_alignment = 3
+vertical_alignment = 3
+
+[node name="Label3" type="Label" parent="."]
+z_index = 2
+offset_left = 45.0
+offset_top = -16.0
+offset_right = 85.0
+offset_bottom = 7.0
+label_settings = SubResource("LabelSettings_aogl1")
+
+[node name="Label4" type="Label" parent="."]
+z_index = 2
+offset_left = -27.0
+offset_top = -16.0
+offset_right = 13.0
+offset_bottom = 7.0
+label_settings = SubResource("LabelSettings_fb05a")
+
+[node name="Label5" type="Label" parent="."]
+z_index = 2
+offset_left = -100.0
+offset_top = -16.0
+offset_right = -60.0
+offset_bottom = 7.0
+label_settings = SubResource("LabelSettings_h0goc")
+
+[node name="Label6" type="Label" parent="."]
+z_index = 2
+offset_left = -156.0
+offset_top = -12.0
+offset_right = -116.0
+offset_bottom = 11.0
+label_settings = SubResource("LabelSettings_1un0o")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_area_entered"]

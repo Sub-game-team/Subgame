@@ -20,6 +20,7 @@ var draining = 0
 var x = 1
 var repairmax = 3
 var repaircurrent = 0
+var killcount = 0
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
@@ -70,8 +71,8 @@ func _process(_delta):
 			damage[i] = 0
 		leak[i] = int(damage[i] / 10)
 		#activate flood warning visual depending on how severe the leak is
-		if floodUnits[i] >= 300:
-			floodUnits[i] = 300
+		if floodUnits[i] >= 1200:
+			floodUnits[i] = 1200
 			flooded[i] = true
 		if floodUnits[i] <= 0:
 			floodUnits[i] = 0
@@ -109,7 +110,12 @@ func _process(_delta):
 	#print(draining)
 	#print("---")
 	#print(repaircurrent)
-	$Label.set_text(str(damage) + str(floodUnits) + str(repairUnits))
+	$Label.set_text(str(killcount))
+	$Label2.set_text(str(damage[0]) + "," + str(floodUnits[0]) + "," + str(repairUnits[0]))
+	$Label3.set_text(str(damage[1]) + "," + str(floodUnits[1]) + "," + str(repairUnits[1]))
+	$Label4.set_text(str(damage[2]) + "," + str(floodUnits[2]) + "," + str(repairUnits[2]))
+	$Label5.set_text(str(damage[3]) + "," + str(floodUnits[3]) + "," + str(repairUnits[3]))
+	$Label6.set_text(str(damage[4]) + "," + str(floodUnits[4]) + "," + str(repairUnits[4]))
 
 func _physics_process(_delta):
 	get_input()
@@ -131,36 +137,38 @@ func _on_timer_damagecalculation_timeout():
 			x = 1
 			if damage[i] >= 1:
 				damage[i] -= repairUnits[i] * repairpenalty
+			else:
+				repairUnits[i] = 0
 		else:
 			x += 1
 
 func _on_area_2d_torpedos_area_entered(area):
 	if area.is_in_group("enemy"):
-		print("test1")
+		#print("test1")
 		area.get_parent().queue_free()
 		damage[0] += 5
 
 func _on_area_2d_crew_area_entered(area):
 	if area.is_in_group("enemy"):
-		print("test2")
+		#print("test2")
 		area.get_parent().queue_free()
 		damage[1] += 5
 
 func _on_area_2d_3_area_entered(area):
 	if area.is_in_group("enemy"):
-		print("test3")
+		#print("test3")
 		area.get_parent().queue_free()
 		damage[2] += 5
 
 func _on_area_2d_reactor_area_entered(area):
 	if area.is_in_group("enemy"):
-		print("test4")
+		#print("test4")
 		area.get_parent().queue_free()
 		damage[3] += 5
 
 func _on_area_2d_engine_area_entered(area):
 	if area.is_in_group("enemy"):
-		print("test5")
+		#	print("test5")
 		area.get_parent().queue_free()
 		damage[4] += 5
 
@@ -179,6 +187,8 @@ func _on_area_2d_torpedos_input_event(_viewport, _event, _shape_idx):
 		repairUnits[0] += 1
 	if Input.is_action_just_pressed("repair_remove"):
 		repairUnits[0] -= 1
+	if Input.is_action_just_pressed("drain"):
+		draining = 1
 
 func _on_area_2d_crew_input_event(_viewport, _event, _shape_idx):
 	#print("test12")
@@ -186,6 +196,8 @@ func _on_area_2d_crew_input_event(_viewport, _event, _shape_idx):
 		repairUnits[1] += 1
 	if Input.is_action_just_pressed("repair_remove") and repairUnits[1] >= 1:
 		repairUnits[1] -= 1
+	if Input.is_action_just_pressed("drain"):
+		draining = 2
 
 func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 	#print("test13")
@@ -193,13 +205,16 @@ func _on_area_2d_input_event(_viewport, _event, _shape_idx):
 		repairUnits[2] += 1
 	if Input.is_action_just_pressed("repair_remove") and repairUnits[2] >= 1:
 		repairUnits[2] -= 1
-
+	if Input.is_action_just_pressed("drain"):
+		draining = 3
 func _on_area_2d_reactor_input_event(_viewport, _event, _shape_idx):
 	#print("test14")
 	if Input.is_action_just_pressed("repair_add") and repairfull():
 		repairUnits[3] += 1
 	if Input.is_action_just_pressed("repair_remove") and repairUnits[3] >= 1:
 		repairUnits[3] -= 1
+	if Input.is_action_just_pressed("drain"):
+		draining = 4
 
 func _on_area_2d_engine_input_event(_viewport, _event, _shape_idx):
 	#print("test15")
@@ -207,3 +222,5 @@ func _on_area_2d_engine_input_event(_viewport, _event, _shape_idx):
 		repairUnits[4] += 1
 	if Input.is_action_just_pressed("repair_remove") and repairUnits[4] >= 1:
 		repairUnits[4] -= 1
+	if Input.is_action_just_pressed("drain"):
+		draining = 5
