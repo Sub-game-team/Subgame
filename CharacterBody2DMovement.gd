@@ -108,7 +108,7 @@ func _process(_delta):
 	#print(repairUnits)
 	#print(draining)
 	#print("---")
-	print(repaircurrent)
+	#print(repaircurrent)
 	$Label.set_text(str(damage) + str(floodUnits) + str(repairUnits))
 
 func _physics_process(_delta):
@@ -174,35 +174,35 @@ func repairfull():
 		return false
 
 func _on_area_2d_torpedos_input_event(_viewport, _event, _shape_idx):
-	print("test11")
+	#print("test11")
 	if Input.is_action_just_pressed("repair_add") and repairfull():
 		repairUnits[0] += 1
 	if Input.is_action_just_pressed("repair_remove"):
 		repairUnits[0] -= 1
 
-func _on_area_2d_crew_input_event(viewport, event, shape_idx):
-	print("test12")
+func _on_area_2d_crew_input_event(_viewport, _event, _shape_idx):
+	#print("test12")
 	if Input.is_action_just_pressed("repair_add") and repairfull():
 		repairUnits[1] += 1
 	if Input.is_action_just_pressed("repair_remove") and repairUnits[1] >= 1:
 		repairUnits[1] -= 1
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
-	print("test13")
+func _on_area_2d_input_event(_viewport, _event, _shape_idx):
+	#print("test13")
 	if Input.is_action_just_pressed("repair_add") and repairfull():
 		repairUnits[2] += 1
 	if Input.is_action_just_pressed("repair_remove") and repairUnits[2] >= 1:
 		repairUnits[2] -= 1
 
-func _on_area_2d_reactor_input_event(viewport, event, shape_idx):
-	print("test14")
+func _on_area_2d_reactor_input_event(_viewport, _event, _shape_idx):
+	#print("test14")
 	if Input.is_action_just_pressed("repair_add") and repairfull():
 		repairUnits[3] += 1
 	if Input.is_action_just_pressed("repair_remove") and repairUnits[3] >= 1:
 		repairUnits[3] -= 1
 
-func _on_area_2d_engine_input_event(viewport, event, shape_idx):
-	print("test15")
+func _on_area_2d_engine_input_event(_viewport, _event, _shape_idx):
+	#print("test15")
 	if Input.is_action_just_pressed("repair_add") and repairfull():
 		repairUnits[4] += 1
 	if Input.is_action_just_pressed("repair_remove") and repairUnits[4] >= 1:
