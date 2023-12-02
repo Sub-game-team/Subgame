@@ -17,6 +17,9 @@ var poweroutage = false
 var reactoroutageoverride = false
 var repairUnits = [0, 0, 0, 0, 0]
 var draining = 0
+var x = 1
+var repairmax = 3
+var repaircurrent = 0
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
@@ -93,18 +96,19 @@ func _process(_delta):
 		movementpenalty = 0.25
 	else:
 		movementpenalty = 1
-	print(damage)
-	print(floodUnits)
-	print(leak)
-	print(flooded)
-	print(torpedopenalty)
-	print(repairpenalty)
-	print(movementpenalty)
-	print(poweroutage)
-	print(reactoroutageoverride)
-	print(repairUnits)
-	print(draining)
-	print("---")
+	#print(damage)
+	#print(floodUnits)
+	#print(leak)
+	#print(flooded)
+	#print(torpedopenalty)
+	#print(repairpenalty)
+	#print(movementpenalty)
+	#print(poweroutage)
+	#print(reactoroutageoverride)
+	#print(repairUnits)
+	#print(draining)
+	#print("---")
+	print(repaircurrent)
 	$Label.set_text(str(damage) + str(floodUnits) + str(repairUnits))
 
 func _physics_process(_delta):
@@ -116,15 +120,19 @@ func _on_timer_timeout():
 
 func _on_timer_damagecalculation_timeout():
 	for i in range(len(leak)):
-		if floodUnits[i] <= 299:
-			floodUnits[i] += (leak[i]*2) / 4
+		if floodUnits[i] <= 1199:
+			floodUnits[i] += leak[i]*2
 		if draining == i + 1:
 			if floodUnits[i] <= 0:
 				draining = 0
 			else:
 				floodUnits[i] -= 4
-		if damage[i] >= 1:
-			damage[i] -= (repairUnits[i] / 4) * repairpenalty
+		if x == 4:
+			x = 1
+			if damage[i] >= 1:
+				damage[i] -= repairUnits[i] * repairpenalty
+		else:
+			x += 1
 
 func _on_area_2d_torpedos_area_entered(area):
 	if area.is_in_group("enemy"):
@@ -156,9 +164,46 @@ func _on_area_2d_engine_area_entered(area):
 		area.get_parent().queue_free()
 		damage[4] += 5
 
+func repairfull():
+	repaircurrent = 0
+	for i in range(len(repairUnits)):
+		repaircurrent += repairUnits[i]
+	if repaircurrent < repairmax:
+		return true
+	else:
+		return false
+
 func _on_area_2d_torpedos_input_event(_viewport, _event, _shape_idx):
 	print("test11")
-	if Input.is_action_just_pressed("repair_add"):
+	if Input.is_action_just_pressed("repair_add") and repairfull():
 		repairUnits[0] += 1
 	if Input.is_action_just_pressed("repair_remove"):
 		repairUnits[0] -= 1
+
+func _on_area_2d_crew_input_event(viewport, event, shape_idx):
+	print("test12")
+	if Input.is_action_just_pressed("repair_add") and repairfull():
+		repairUnits[1] += 1
+	if Input.is_action_just_pressed("repair_remove") and repairUnits[1] >= 1:
+		repairUnits[1] -= 1
+
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	print("test13")
+	if Input.is_action_just_pressed("repair_add") and repairfull():
+		repairUnits[2] += 1
+	if Input.is_action_just_pressed("repair_remove") and repairUnits[2] >= 1:
+		repairUnits[2] -= 1
+
+func _on_area_2d_reactor_input_event(viewport, event, shape_idx):
+	print("test14")
+	if Input.is_action_just_pressed("repair_add") and repairfull():
+		repairUnits[3] += 1
+	if Input.is_action_just_pressed("repair_remove") and repairUnits[3] >= 1:
+		repairUnits[3] -= 1
+
+func _on_area_2d_engine_input_event(viewport, event, shape_idx):
+	print("test15")
+	if Input.is_action_just_pressed("repair_add") and repairfull():
+		repairUnits[4] += 1
+	if Input.is_action_just_pressed("repair_remove") and repairUnits[4] >= 1:
+		repairUnits[4] -= 1

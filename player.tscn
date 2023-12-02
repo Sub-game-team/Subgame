@@ -88,8 +88,8 @@ position = Vector2(131, 11)
 texture = SubResource("PlaceholderTexture2D_x6llj")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -301.0
-offset_top = -218.0
+offset_left = -466.0
+offset_top = -122.0
 offset_right = -50.0
 offset_bottom = -49.0
 label_settings = SubResource("LabelSettings_rrj6r")
@@ -99,7 +99,11 @@ text_overrun_behavior = 2
 [connection signal="area_entered" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_area_entered"]
 [connection signal="input_event" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_input_event"]
 [connection signal="area_entered" from="Area2D_crew" to="." method="_on_area_2d_crew_area_entered"]
+[connection signal="input_event" from="Area2D_crew" to="." method="_on_area_2d_crew_input_event"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_3_area_entered"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="area_entered" from="Area2D_reactor" to="." method="_on_area_2d_reactor_area_entered"]
+[connection signal="input_event" from="Area2D_reactor" to="." method="_on_area_2d_reactor_input_event"]
 [connection signal="area_entered" from="Area2D_engine" to="." method="_on_area_2d_engine_area_entered"]
+[connection signal="input_event" from="Area2D_engine" to="." method="_on_area_2d_engine_input_event"]
 [connection signal="timeout" from="Timer_damagecalculation" to="." method="_on_timer_damagecalculation_timeout"]
