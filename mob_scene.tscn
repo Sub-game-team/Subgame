@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2vonva0p6djd"]
+[gd_scene load_steps=5 format=3 uid="uid://b2vonva0p6djd"]
 
 [ext_resource type="Script" path="res://mob.gd" id="1_o3kvi"]
 [ext_resource type="Texture2D" uid="uid://df6asf71gxp7g" path="res://Art/enemy_normal.png" id="2_00tpv"]
+[ext_resource type="Shader" path="res://Shaders/mob_shader.gdshader" id="2_3xx8n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bp576"]
+shader = ExtResource("2_3xx8n")
+shader_parameter/tint_color = Color(0, 0.698039, 0.188235, 0.6)
+shader_parameter/glow_amount = 0.2
+shader_parameter/glow_threshold = 0.8
+shader_parameter/outline_width = 0.01
 
 [node name="mob" type="RigidBody2D"]
+material = SubResource("ShaderMaterial_bp576")
 collision_layer = 4
 collision_mask = 7
 gravity_scale = 0.0
@@ -22,6 +31,7 @@ polygon = PackedVector2Array(-19, 4, -2, 5, 4, 5, 10, 4, 14, 3, 16, 2, 17, 1, 18
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+use_parent_material = true
 texture = ExtResource("2_00tpv")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
