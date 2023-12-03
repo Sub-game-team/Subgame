@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3d142e6e7wlg"]
+[gd_scene load_steps=6 format=3 uid="uid://b3d142e6e7wlg"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_7x3uh"]
 [ext_resource type="PackedScene" uid="uid://b2vonva0p6djd" path="res://mob_scene.tscn" id="2_6ptv3"]
 [ext_resource type="PackedScene" uid="uid://ch43k4w4dvjsy" path="res://player.tscn" id="3_8y4yx"]
 [ext_resource type="PackedScene" uid="uid://ct2gdi5dvmsha" path="res://tilemap.tscn" id="4_njx7p"]
+[ext_resource type="PackedScene" uid="uid://cdt00qtk6kkbj" path="res://crosshair.tscn" id="5_3e7h7"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_7x3uh")
 mob_scene = ExtResource("2_6ptv3")
 player_scene = ExtResource("3_8y4yx")
 tileset = ExtResource("4_njx7p")
+crosshair_scene = ExtResource("5_3e7h7")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

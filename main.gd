@@ -3,6 +3,7 @@ extends Node
 @export var mob_scene: PackedScene
 @export var player_scene: PackedScene
 @export var tileset: PackedScene
+@export var crosshair_scene: PackedScene
 
 func create_mob():
 	var mob = mob_scene.instantiate()
@@ -23,7 +24,8 @@ func _ready():
 	var tile_set = tileset.instantiate()
 	add_child(tile_set)
 	create_mob()
-
+	var crosshair = crosshair_scene.instantiate()
+	add_child(crosshair)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
