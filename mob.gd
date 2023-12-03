@@ -23,7 +23,7 @@ func _process(_delta):
 
 func _physics_process(delta):
 	var direction = (player.global_position - global_position).angle() + 180 - 45
-	rotation += clampf(direction - rotation,-17,17)
+	rotation += clampf(direction - rotation,-170,170)
 	linear_velocity = Vector2(-10.0,0.0).rotated(direction) * (speed + temp_speed)
 	# maybe save the points where to go in a list and thereby follow the player?
 	# later
