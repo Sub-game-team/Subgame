@@ -12,7 +12,6 @@ func create_mob():
 
 	# Pass the player node reference to the mob
 	mob.set_player_reference($Player) 
-
 	add_child(mob)
 
 

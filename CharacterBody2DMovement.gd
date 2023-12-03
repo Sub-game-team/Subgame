@@ -4,7 +4,7 @@ var input_direction2
 var yMovement = 0
 var xMovement = 0
 @onready var player_body = get_node(".")
-var projectile_scene = preload("res://Torpedo.tscn")
+var projectile_scene = preload("res://Torpedo0.tscn")
 var readyToFire = true
 var damage = [0, 0, 0, 0, 0] #max 30
 var floodUnits = [0, 0, 0, 0, 0] #max 300
@@ -24,22 +24,22 @@ var killcount = 0
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
-		xMovement -= 2
+		xMovement -= 2 * movementpenalty
 	if Input.is_action_pressed("right") and xMovement <= 498:
-		xMovement += 2
+		xMovement += 2 * movementpenalty
 	if Input.is_action_pressed("up") and yMovement >= -498:
-		yMovement -= 2
+		yMovement -= 2 * movementpenalty
 	if Input.is_action_pressed("down") and yMovement <= 498:
-		yMovement += 2
-	if xMovement >= -1 and not Input.is_action_pressed("right"):
+		yMovement += 2 * movementpenalty
+	if xMovement >= 1 and not Input.is_action_pressed("right"):
 		xMovement -= 1
-	if xMovement <= 1 and not Input.is_action_pressed("left"):
+	if xMovement <= -1 and not Input.is_action_pressed("left"):
 		xMovement += 1
-	if yMovement >= -1 and not Input.is_action_pressed("up"):
+	if yMovement >= 1 and not Input.is_action_pressed("up"):
 		yMovement -= 1
-	if yMovement <= 1 and not Input.is_action_pressed("down"):
+	if yMovement <= -1 and not Input.is_action_pressed("down"):
 		yMovement += 1
-	velocity = Vector2(xMovement, yMovement) * movementpenalty
+	velocity = Vector2(xMovement, yMovement)
 	#print(velocity) #for debug
 	#print(player_body.get_real_velocity()) #for debug
 	if abs(xMovement) >= 10 or abs(yMovement) >= 10:
@@ -64,6 +64,7 @@ func _process(_delta):
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
 		projectile.set_lock_rotation_enabled(true)
+		projectile.set_player_reference(self)
 	for i in range(len(damage)):
 		if damage[i] >= 31:
 			damage[i] = 30
@@ -145,32 +146,39 @@ func _on_timer_damagecalculation_timeout():
 func _on_area_2d_torpedos_area_entered(area):
 	if area.is_in_group("enemy"):
 		#print("test1")
+		if area.is_in_group("damage5"):
+			damage[0] += 5
 		area.get_parent().queue_free()
-		damage[0] += 5
+
 
 func _on_area_2d_crew_area_entered(area):
 	if area.is_in_group("enemy"):
 		#print("test2")
+		if area.is_in_group("damage5"):
+			damage[1] += 5
 		area.get_parent().queue_free()
-		damage[1] += 5
 
 func _on_area_2d_3_area_entered(area):
 	if area.is_in_group("enemy"):
 		#print("test3")
+		if area.is_in_group("damage5"):
+			damage[2] += 5
 		area.get_parent().queue_free()
-		damage[2] += 5
 
 func _on_area_2d_reactor_area_entered(area):
 	if area.is_in_group("enemy"):
 		#print("test4")
+		if area.is_in_group("damage5"):
+			damage[3] += 5
 		area.get_parent().queue_free()
-		damage[3] += 5
+		
 
 func _on_area_2d_engine_area_entered(area):
 	if area.is_in_group("enemy"):
 		#	print("test5")
+		if area.is_in_group("damage5"):
+			damage[4] += 5
 		area.get_parent().queue_free()
-		damage[4] += 5
 
 func repairfull():
 	repaircurrent = 0
