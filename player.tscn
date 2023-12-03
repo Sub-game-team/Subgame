@@ -30,7 +30,7 @@ font_size = 12
 [sub_resource type="LabelSettings" id="LabelSettings_1un0o"]
 font_size = 12
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_mask = 7
 motion_mode = 1

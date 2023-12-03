@@ -4,7 +4,9 @@ var input_direction2
 var yMovement = 0
 var xMovement = 0
 @onready var player_body = get_node(".")
-var projectile_scene = preload("res://Torpedo0.tscn")
+var projectile_scene0 = preload("res://Torpedo0.tscn")
+#var projectile_scene1 = preload("res://Torpedo1.tscn")
+var projectile_scene2 = preload("res://Torpedo2.tscn")
 var readyToFire = true
 var damage = [0, 0, 0, 0, 0] #max 30
 var floodUnits = [0, 0, 0, 0, 0] #max 300
@@ -21,6 +23,8 @@ var x = 1
 var repairmax = 3
 var repaircurrent = 0
 var killcount = 0
+var activetorpedo = 0
+var projectile
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:
@@ -55,10 +59,17 @@ func get_input():
 				yMovement = -18
 
 func _process(_delta):
-	if Input.is_action_just_pressed("shoot") and readyToFire:
+	if Input.is_action_just_pressed("torpedo1", true):
+		activetorpedo = 0
+	if Input.is_action_just_pressed("torpedo2", true):
+		activetorpedo = 2
+	if Input.is_action_just_pressed("shoot", true) and readyToFire:
 		readyToFire = false
 		$Timer.start(3 * torpedopenalty)
-		var projectile = projectile_scene.instantiate()
+		if activetorpedo == 0:
+			projectile = projectile_scene0.instantiate()
+		if activetorpedo == 2:
+			projectile = projectile_scene2.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
