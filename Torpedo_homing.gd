@@ -6,8 +6,8 @@ var player
 func _process(_delta):
 	pass
 
-func _integrate_forces(state):
-	SmoothLookAtRigid(self, player.global_position, 0.1)
+func _integrate_forces(_state):
+	SmoothLookAtRigid(self, player.global_position, 0.01)
 	apply_force(transform.x * speed)
 
 func _on_timer_timeout():
@@ -24,7 +24,7 @@ func _on_body_entered(body):
 	if body.is_in_group("enemy"):
 		body.queue_free()
 		player.killcount += 1
-	set_visible(false)
+	#set_visible(false)
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
 	nodeToTurn.angular_velocity = AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed )
