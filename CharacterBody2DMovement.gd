@@ -26,6 +26,7 @@ var repaircurrent = 0
 var killcount = 0
 var activetorpedo = 0
 var projectile
+var distancetomouse
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -498:

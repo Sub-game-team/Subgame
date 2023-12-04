@@ -1,10 +1,13 @@
 extends RigidBody2D
 
-var speed = 800
+var speed = 800000
 var player
 
 func _process(_delta):
 	pass
+
+func _integrate_forces(_state):
+	apply_force(transform.x * speed)
 
 func _on_timer_timeout():
 	queue_free()
