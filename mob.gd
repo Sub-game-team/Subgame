@@ -8,8 +8,22 @@ var chase = false
 
 var chase_distance = 300
 
+var shader_material : ShaderMaterial = preload("res://Shaders/mob_shader_mat.tres")
+
 func _ready():
-	pass
+	# Assume the Sprite2D node is a direct child named "Sprite2D"
+	var sprite_node = $Sprite2D
+	sprite_node.material = shader_material
+	#shader_material.set_shader_param("tint_color", Color(0.1, 0.69, 0.33, 0.6)) # Set your initial tint color
+
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			# Right mouse button pressed, activate the shader
+			$Sprite2D.material = shader_material
+		else:
+			# Right mouse button released, deactivate the shader
+			$Sprite2D.material = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
