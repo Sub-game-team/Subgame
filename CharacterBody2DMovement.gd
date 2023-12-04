@@ -5,8 +5,9 @@ var yMovement = 0
 var xMovement = 0
 @onready var player_body = get_node(".")
 var projectile_scene0 = preload("res://Torpedo0.tscn")
-#var projectile_scene1 = preload("res://Torpedo1.tscn")
+var projectile_scene1 = preload("res://Torpedo1.tscn")
 var projectile_scene2 = preload("res://Torpedo2.tscn")
+var projectile_scene3 = preload("res://Torpedo3.tscn")
 var readyToFire = true
 var damage = [0, 0, 0, 0, 0] #max 30
 var floodUnits = [0, 0, 0, 0, 0] #max 300
@@ -59,21 +60,29 @@ func get_input():
 				yMovement = -18
 
 func _process(_delta):
-	if Input.is_action_just_pressed("torpedo1", true):
+	if Input.is_action_just_pressed("torpedo0"):
 		activetorpedo = 0
-	if Input.is_action_just_pressed("torpedo2", true):
+	if Input.is_action_just_pressed("torpedo1"):
+		activetorpedo = 1
+	if Input.is_action_just_pressed("torpedo2"):
 		activetorpedo = 2
+	if Input.is_action_just_pressed("torpedo3"):
+		activetorpedo = 3
 	if Input.is_action_just_pressed("shoot", true) and readyToFire:
 		#readyToFire = false
 		$Timer.start(3 * torpedopenalty)
 		if activetorpedo == 0:
 			projectile = projectile_scene0.instantiate()
+		if activetorpedo == 1:
+			projectile = projectile_scene1.instantiate()
 		if activetorpedo == 2:
 			projectile = projectile_scene2.instantiate()
+		if activetorpedo == 3:
+			projectile = projectile_scene3.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
-		projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
+		#projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
 		projectile.set_lock_rotation_enabled(true)
 		projectile.set_player_reference(self)
 	for i in range(len(damage)):
