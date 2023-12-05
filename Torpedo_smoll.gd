@@ -4,8 +4,8 @@ var speed = 8000
 var player
 
 func _integrate_forces(_state):
-    if get_real_velocity() <= transform.x * speed:
-	    apply_force(transform.x * speed)
+	if get_linear_velocity() <= transform.x * speed:
+		apply_force(transform.x * speed)
 
 func _process(_delta):
 	pass

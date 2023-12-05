@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://coqipnqfok8dj"]
 
 [ext_resource type="Script" path="res://Torpedo_normal.gd" id="1_rh35h"]
-[ext_resource type="Texture2D" uid="uid://btcsi3rrnhqv3" path="res://Art/torpedo_0-variant.png" id="2_mhcvj"]
+[ext_resource type="Texture2D" uid="uid://b2y2muqmywk56" path="res://Art/torpedo_0-variant_ferret.png" id="2_i2axh"]
 [ext_resource type="AudioStream" uid="uid://brih27dctfqlj" path="res://sounds/explode01.ogg" id="3_e6xop"]
 
 [node name="RigidBody2D" type="RigidBody2D"]
@@ -19,7 +19,7 @@ polygon = PackedVector2Array(5, 26, 5, -29, 4, -29, 4, -31, 3, -31, 3, -32, -3, 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 rotation = 1.5708
-texture = ExtResource("2_mhcvj")
+texture = ExtResource("2_i2axh")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(32, -9)

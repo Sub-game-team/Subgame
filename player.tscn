@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=14 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_pvkax"]
 [ext_resource type="Texture2D" uid="uid://e1283ru3wlch" path="res://Art/U-BootV1.png" id="2_id3k4"]
 [ext_resource type="Script" path="res://player_camera.gd" id="3_1tnlc"]
+[ext_resource type="AudioStream" uid="uid://baf5af6l1jh86" path="res://sounds/nord_ambient01.ogg" id="4_gsdcc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5meud"]
 size = Vector2(62, 60)
@@ -152,6 +153,13 @@ offset_right = -116.0
 offset_bottom = 11.0
 label_settings = SubResource("LabelSettings_1un0o")
 
+[node name="AudioStreamPlayer2D_sonar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gsdcc")
+
+[node name="Timer_sonar" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_area_entered"]
 [connection signal="input_event" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_input_event"]
@@ -164,3 +172,4 @@ label_settings = SubResource("LabelSettings_1un0o")
 [connection signal="area_entered" from="Area2D_engine" to="." method="_on_area_2d_engine_area_entered"]
 [connection signal="input_event" from="Area2D_engine" to="." method="_on_area_2d_engine_input_event"]
 [connection signal="timeout" from="Timer_damagecalculation" to="." method="_on_timer_damagecalculation_timeout"]
+[connection signal="timeout" from="Timer_sonar" to="." method="_on_timer_sonar_timeout"]

@@ -84,8 +84,8 @@ func _process(_delta):
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
 		#projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
-                if not activetorpedo == 2:
-		    projectile.set_lock_rotation_enabled(true)
+		if not activetorpedo == 2:
+			projectile.set_lock_rotation_enabled(true)
 		projectile.set_player_reference(self)
 	for i in range(len(damage)):
 		if damage[i] >= 31:
@@ -254,3 +254,9 @@ func _on_area_2d_engine_input_event(_viewport, _event, _shape_idx):
 		repairUnits[4] -= 1
 	if Input.is_action_just_pressed("drain"):
 		draining = 5
+
+func _on_timer_sonar_timeout():
+	$AudioStreamPlayer2D_sonar.play(0.0)
+	var all_torpedos = get_tree().get_nodes_in_group("sonar_torpedo")
+	for i in all_torpedos:
+		i.sonar_ping()
