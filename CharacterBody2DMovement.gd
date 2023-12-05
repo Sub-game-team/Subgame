@@ -84,7 +84,8 @@ func _process(_delta):
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
 		#projectile.set_linear_velocity((get_global_mouse_position() - global_position).normalized() * projectile.speed)
-		projectile.set_lock_rotation_enabled(true)
+                if not activetorpedo == 2:
+		    projectile.set_lock_rotation_enabled(true)
 		projectile.set_player_reference(self)
 	for i in range(len(damage)):
 		if damage[i] >= 31:
