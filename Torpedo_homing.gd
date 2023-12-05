@@ -16,7 +16,7 @@ func _ready():
 	for i in range(len(all_enemy)):
 		distancetomouse[i] = get_global_mouse_position().distance_squared_to(all_enemy[i].global_position)
 	print(distancetomouse)
-	targetenemy = all_enemy[distancetomouse.bsearch(distancetomouse.min())]
+	targetenemy = all_enemy[distancetomouse.find(distancetomouse.min())]
 
 func _integrate_forces(_state):
 	if not stop:
