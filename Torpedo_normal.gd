@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var speed = 800000
+var speed = 8000
 var player
 
 func _process(_delta):

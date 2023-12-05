@@ -21,7 +21,8 @@ func _ready():
 func _integrate_forces(_state):
 	if not stop:
 		SmoothLookAtRigid(self, targetenemy.global_position, 0.01)
-	apply_force(transform.x * speed)
+	if get_real_velocity <= transform.x * speed:
+	    apply_force(transform.x * speed)
 
 func _on_timer_timeout():
 	queue_free()
