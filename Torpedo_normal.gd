@@ -7,7 +7,8 @@ func _process(_delta):
 	pass
 
 func _integrate_forces(_state):
-	apply_force(transform.x * speed)
+        if get_real_velocity() <= transform.x * speed:
+	        apply_force(transform.x * speed)
 
 func _on_timer_timeout():
 	queue_free()
