@@ -9,5 +9,5 @@ func _ready():
 	Input.set_custom_mouse_cursor(crosshair,Input.CURSOR_ARROW,offset)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass     

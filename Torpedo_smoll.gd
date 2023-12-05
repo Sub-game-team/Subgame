@@ -1,15 +1,14 @@
 extends RigidBody2D
 
-var speed = 800000
+var speed = 8000
 var player
-var stop = false
+
+func _integrate_forces(_state):
+	if get_linear_velocity() <= transform.x * speed:
+		apply_force(transform.x * speed)
 
 func _process(_delta):
 	pass
-
-func _integrate_forces(_state):
-	if not stop:
-		apply_force(transform.x * speed)
 
 func _on_timer_timeout():
 	queue_free()
@@ -26,5 +25,3 @@ func _on_body_entered(body):
 		body.queue_free()
 		player.killcount += 1
 	set_visible(false)
-	stop = true
-	
