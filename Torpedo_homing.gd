@@ -36,16 +36,17 @@ func _on_audio_stream_player_2d_finished():
 	queue_free()
 
 func _on_body_entered(body):
-	stop = true
-	$AudioStreamPlayer2D.play(0.0)
-	if body.is_in_group("enemy"):
-		body.queue_free()
-		player.killcount += 1
-	set_visible(false)
+	if not stop:
+		stop = true
+		$AudioStreamPlayer2D.play(0.0)
+		if body.is_in_group("enemy"):
+			body.queue_free()
+			player.killcount += 1
+		set_visible(false)
 
 func sonar_ping():
 	if (not stop) and (not (targetenemy == null)):
-		SmoothLookAtRigid(self, (targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * targetenemy.get_angular_velocity())), 0.3)
+		SmoothLookAtRigid(self, (targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * targetenemy.get_angular_velocity())), 0.4)
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
 	nodeToTurn.angular_velocity = AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed )
