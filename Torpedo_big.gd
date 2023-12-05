@@ -1,10 +1,15 @@
 extends RigidBody2D
 
-var speed = 800
+var speed = 800000
 var player
+var stop = false
 
 func _process(_delta):
 	pass
+
+func _integrate_forces(_state):
+	if not stop:
+		apply_force(transform.x * speed)
 
 func _on_timer_timeout():
 	queue_free()
@@ -17,7 +22,11 @@ func _on_audio_stream_player_2d_finished():
 
 func _on_body_entered(body):
 	$AudioStreamPlayer2D.play(0.0)
-	if body.is_in_group("enemy"):
-		body.queue_free()
-		player.killcount += 1
+	var enemys_to_kill = $Area2D.get_overlapping_areas()
+	print(enemys_to_kill)
+	for i in range(len(enemys_to_kill)):
+		if enemys_to_kill[i].is_in_group("enemy"):
+			enemys_to_kill[i].get_parent().queue_free()
+	player.killcount += len(enemys_to_kill)
 	set_visible(false)
+	stop = true
