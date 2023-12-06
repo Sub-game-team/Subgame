@@ -71,7 +71,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("torpedo3"):
 		activetorpedo = 3
 	if Input.is_action_just_pressed("shoot", true) and readyToFire:
-		#readyToFire = false
+		readyToFire = false
 		$Timer.start(3 * torpedopenalty)
 		if activetorpedo == 0:
 			projectile = projectile_scene0.instantiate()
@@ -167,29 +167,29 @@ func _on_timer_damagecalculation_timeout():
 			x += 1
 
 func _on_area_2d_torpedos_area_entered(area):
-	if area.is_in_group("enemy"):
-		#print("test1")
+	if area.is_in_group("enemyarea"):
+		print("test1")
 		if area.is_in_group("damage5"):
 			damage[0] += 5
 		area.get_parent().queue_free()
 
 
 func _on_area_2d_crew_area_entered(area):
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemyarea"):
 		#print("test2")
 		if area.is_in_group("damage5"):
 			damage[1] += 5
 		area.get_parent().queue_free()
 
 func _on_area_2d_3_area_entered(area):
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemyarea"):
 		#print("test3")
 		if area.is_in_group("damage5"):
 			damage[2] += 5
 		area.get_parent().queue_free()
 
 func _on_area_2d_reactor_area_entered(area):
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemyarea"):
 		#print("test4")
 		if area.is_in_group("damage5"):
 			damage[3] += 5
@@ -197,7 +197,7 @@ func _on_area_2d_reactor_area_entered(area):
 		
 
 func _on_area_2d_engine_area_entered(area):
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemyarea"):
 		#	print("test5")
 		if area.is_in_group("damage5"):
 			damage[4] += 5
