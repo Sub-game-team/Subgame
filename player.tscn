@@ -157,7 +157,6 @@ label_settings = SubResource("LabelSettings_1un0o")
 stream = ExtResource("4_gsdcc")
 
 [node name="Timer_sonar" type="Timer" parent="."]
-wait_time = 1
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
