@@ -4,11 +4,18 @@ var speed = 300.0
 var player
 var distancetomouse = [0, 0, 0, 0]
 var targetenemy = [0, 0, 0 ,0]
-var stop = false
+var stop = true
+var show = false
 var delay = 0.8
+var closestenemydistance = 0
+var timetoenemy = 0
+var targetcoords = Vector2()
 
 func _process(_delta):
-	pass
+	if show and ((not stop) and (not (targetenemy == null))):
+		$Sprite2D2.set_global_position(targetcoords)
+	else:
+		pass
 
 func _ready():
 	var all_enemy = get_tree().get_nodes_in_group("enemy")
@@ -18,16 +25,18 @@ func _ready():
 		for i in range(len(all_enemy)):
 			distancetomouse[i] = get_global_mouse_position().distance_squared_to(all_enemy[i].global_position)
 		#print(distancetomouse)
-		var closestenemydistance = distancetomouse.min()
+		closestenemydistance = distancetomouse.min()
 		targetenemy = all_enemy[distancetomouse.find(closestenemydistance)]
+		stop = false
 	else:
 		stop = true
 func _integrate_forces(_state):
-	set_linear_velocity(Vector2(1, 0).rotated(rotation) * speed * 1)
+	if (not stop) and (not (targetenemy == null)):
+		SmoothLookAtRigid(self, targetcoords, delay)
+	set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed * 1)
 
 func _on_timer_timeout():
-	#queue_free()
-	pass
+	queue_free()
 
 func set_player_reference(player_ref: CharacterBody2D):
 	player = player_ref
@@ -47,11 +56,14 @@ func _on_body_entered(body):
 func sonar_ping():
 	if (not stop) and (not (targetenemy == null)):
 		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
-		var timetoenemy = targetenemydistancetotorpedo / speed
-		SmoothLookAtRigid(self, (targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * timetoenemy)), delay)
+		timetoenemy = targetenemydistancetotorpedo / speed
+		print(timetoenemy)
+		show = true
+		targetcoords = targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * timetoenemy)
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
-	nodeToTurn.angular_velocity = AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed )
+#print(AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed))
+	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 0.5)
 
 #-------------------------
 # these are only called from above functions
