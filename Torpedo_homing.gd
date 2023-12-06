@@ -1,15 +1,15 @@
 extends RigidBody2D
 
-var speed = 400.0
+var speed = 300.0
 var player
 var distancetomouse = [0, 0, 0, 0]
 var targetenemy = [0, 0, 0 ,0]
 var stop = false
-var delay = 0.5
+var delay = 0.8
 
 func _process(_delta):
 	pass
-
+speed
 func _ready():
 	var all_enemy = get_tree().get_nodes_in_group("enemy")
 	if not len(all_enemy) == 0:
@@ -18,10 +18,10 @@ func _ready():
 		for i in range(len(all_enemy)):
 			distancetomouse[i] = get_global_mouse_position().distance_squared_to(all_enemy[i].global_position)
 		#print(distancetomouse)
-		targetenemy = all_enemy[distancetomouse.find(distancetomouse.min())]
+		var closestenemydistance = distancetomouse.min()
+		targetenemy = all_enemy[distancetomouse.find(closestenemydistance)]
 	else:
 		stop = true
-
 func _integrate_forces(_state):
 	set_linear_velocity(Vector2(1, 0).rotated(rotation) * speed * 1)
 
@@ -46,7 +46,9 @@ func _on_body_entered(body):
 
 func sonar_ping():
 	if (not stop) and (not (targetenemy == null)):
-		SmoothLookAtRigid(self, (targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * targetenemy.get_angular_velocity())), 0.4)
+	    var targetenemydistancetotorpedo = global_position().distance_to(targetenemy.get_global_position())
+	    var timetoenemy = targetenemydistancetotorpedo / speed
+		SmoothLookAtRigid(self, (targetenemy.get_global_position() + (targetenemy.get_linear_velocity * timetoenemy)), delay)
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
 	nodeToTurn.angular_velocity = AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed )
