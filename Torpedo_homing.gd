@@ -5,14 +5,14 @@ var player
 var distancetomouse = [0, 0, 0, 0]
 var targetenemy = [0, 0, 0 ,0]
 var stop = true
-var show = false
+var showtarget = false
 var delay = 0.8
 var closestenemydistance = 0
 var timetoenemy = 0
 var targetcoords = Vector2()
 
 func _process(_delta):
-	if show and ((not stop) and (not (targetenemy == null))):
+	if showtarget and ((not stop) and (not (targetenemy == null))):
 		$Sprite2D2.set_global_position(targetcoords)
 	else:
 		pass
@@ -57,8 +57,8 @@ func sonar_ping():
 	if (not stop) and (not (targetenemy == null)):
 		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
 		timetoenemy = targetenemydistancetotorpedo / speed
-		print(timetoenemy)
-		show = true
+		#print(timetoenemy)
+		showtarget = true
 		targetcoords = targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * timetoenemy)
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):

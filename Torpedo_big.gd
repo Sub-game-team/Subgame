@@ -23,7 +23,7 @@ func _on_audio_stream_player_2d_finished():
 func _on_body_entered(_body):
 	$AudioStreamPlayer2D.play(0.0)
 	var enemys_to_kill = $Area2D.get_overlapping_areas()
-	print(enemys_to_kill)
+	#print(enemys_to_kill)
 	for i in range(len(enemys_to_kill)):
 		if enemys_to_kill[i].is_in_group("enemyarea"):
 			enemys_to_kill[i].get_parent().queue_free()

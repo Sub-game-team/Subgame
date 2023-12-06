@@ -39,11 +39,6 @@ max_polyphony = 124
 panning_strength = 2.0
 area_mask = 16
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 5.0
-navigation_layers = 15
-debug_enabled = true
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
