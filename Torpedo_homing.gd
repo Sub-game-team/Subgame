@@ -9,7 +9,7 @@ var delay = 0.8
 
 func _process(_delta):
 	pass
-speed
+
 func _ready():
 	var all_enemy = get_tree().get_nodes_in_group("enemy")
 	if not len(all_enemy) == 0:
@@ -46,9 +46,9 @@ func _on_body_entered(body):
 
 func sonar_ping():
 	if (not stop) and (not (targetenemy == null)):
-	    var targetenemydistancetotorpedo = global_position().distance_to(targetenemy.get_global_position())
-	    var timetoenemy = targetenemydistancetotorpedo / speed
-		SmoothLookAtRigid(self, (targetenemy.get_global_position() + (targetenemy.get_linear_velocity * timetoenemy)), delay)
+		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
+		var timetoenemy = targetenemydistancetotorpedo / speed
+		SmoothLookAtRigid(self, (targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * timetoenemy)), delay)
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
 	nodeToTurn.angular_velocity = AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed )

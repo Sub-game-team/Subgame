@@ -257,11 +257,11 @@ func _on_area_2d_engine_input_event(_viewport, _event, _shape_idx):
 		draining = 5
 
 func _on_timer_sonar_timeout():
-    if x2 == 5:
-	    $AudioStreamPlayer2D_sonar.play(0.0)
+	if x2 == 5:
+		$AudioStreamPlayer2D_sonar.play(0.0)
 		x2 = 0
 	else:
-	    x2 += 1
+		x2 += 1
 	var all_torpedos = get_tree().get_nodes_in_group("sonar_torpedo")
 	for i in all_torpedos:
 		i.sonar_ping()
