@@ -72,7 +72,14 @@ func _process(_delta):
 		activetorpedo = 3
 	if Input.is_action_just_pressed("shoot", true) and readyToFire:
 		readyToFire = false
-		$Timer.start(3 * torpedopenalty)
+		if activetorpedo == 0:
+			$Timer_normaltorp.start(3 * torpedopenalty)
+		elif activetorpedo == 1:
+			$Timer_smalltorp.start(2 * torpedopenalty)
+		elif activetorpedo == 2:
+			$Timer_homingtorp.start(3 * torpedopenalty)
+		elif activetorpedo == 3:
+			$Timer_bigtorp.start(9 * torpedopenalty)
 		if activetorpedo == 0:
 			projectile = projectile_scene0.instantiate()
 		if activetorpedo == 1:
