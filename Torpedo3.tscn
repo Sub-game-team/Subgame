@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://brih27dctfqlj" path="res://sounds/explode01.ogg" id="3_ll8ej"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yl5kr"]
-radius = 200.0
+radius = 400.0
 
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 8

@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var speed = 800000
+var speed = 200.0
 var player
 var stop = false
 
@@ -9,7 +9,7 @@ func _process(_delta):
 
 func _integrate_forces(_state):
 	if not stop:
-		apply_force(transform.x * speed)
+		set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed * 1)
 
 func _on_timer_timeout():
 	queue_free()
