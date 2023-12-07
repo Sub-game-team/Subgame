@@ -8,7 +8,7 @@ var projectile_scene0 = preload("res://Torpedo0.tscn")
 var projectile_scene1 = preload("res://Torpedo1.tscn")
 var projectile_scene2 = preload("res://Torpedo2.tscn")
 var projectile_scene3 = preload("res://Torpedo3.tscn")
-var readyToFire = true
+var readyToFire = [true, true, true, true]
 var damage = [0, 0, 0, 0, 0] #max 30
 var floodUnits = [0, 0, 0, 0, 0] #max 300
 var leak = [0, 0, 0, 0, 0] #0 = no leak; 1 = small leak; 2 = major leak; 3 = big leak;
@@ -64,14 +64,30 @@ func get_input():
 func _process(_delta):
 	if Input.is_action_just_pressed("torpedo0"):
 		activetorpedo = 0
+		$Timer_normaltorp.set_paused(false)
+		$Timer_smalltorp.set_paused(true)
+		$Timer_homingtorp.set_paused(true)
+		$Timer_bigtorp.set_paused(true)
 	if Input.is_action_just_pressed("torpedo1"):
 		activetorpedo = 1
+		$Timer_normaltorp.set_paused(true)
+		$Timer_smalltorp.set_paused(false)
+		$Timer_homingtorp.set_paused(true)
+		$Timer_bigtorp.set_paused(true)
 	if Input.is_action_just_pressed("torpedo2"):
 		activetorpedo = 2
+		$Timer_normaltorp.set_paused(true)
+		$Timer_smalltorp.set_paused(true)
+		$Timer_homingtorp.set_paused(false)
+		$Timer_bigtorp.set_paused(true)
 	if Input.is_action_just_pressed("torpedo3"):
 		activetorpedo = 3
-	if Input.is_action_just_pressed("shoot", true) and readyToFire:
-		readyToFire = false
+		$Timer_normaltorp.set_paused(true)
+		$Timer_smalltorp.set_paused(true)
+		$Timer_homingtorp.set_paused(true)
+		$Timer_bigtorp.set_paused(false)
+	if Input.is_action_just_pressed("shoot", true) and readyToFire[activetorpedo]:
+		readyToFire[activetorpedo] = false
 		if activetorpedo == 0:
 			$Timer_normaltorp.start(3 * torpedopenalty)
 		elif activetorpedo == 1:
@@ -141,7 +157,7 @@ func _process(_delta):
 	#print(draining)
 	#print("---")
 	#print(repaircurrent)
-	$Label.set_text(str(killcount))
+	$Label.set_text(str(killcount) + str(readyToFire))
 	$Label2.set_text(str(damage[0]) + "," + str(floodUnits[0]) + "," + str(repairUnits[0]))
 	$Label3.set_text(str(damage[1]) + "," + str(floodUnits[1]) + "," + str(repairUnits[1]))
 	$Label4.set_text(str(damage[2]) + "," + str(floodUnits[2]) + "," + str(repairUnits[2]))
@@ -152,8 +168,17 @@ func _physics_process(_delta):
 	get_input()
 	move_and_slide()
 
-func _on_timer_timeout():
-	readyToFire = true
+func _on_timer_normaltorp_timeout():
+	readyToFire[0] = true
+
+func _on_timer_smalltorp_timeout():
+	readyToFire[1] = true
+
+func _on_timer_homingtorp_timeout():
+	readyToFire[2] = true
+
+func _on_timer_bigtorp_timeout():
+	readyToFire[3] = true
 
 func _on_timer_damagecalculation_timeout():
 	for i in range(len(leak)):
