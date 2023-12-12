@@ -1,37 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=6 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_pvkax"]
-[ext_resource type="Texture2D" uid="uid://e1283ru3wlch" path="res://Art/U-BootV1.png" id="2_id3k4"]
+[ext_resource type="Texture2D" uid="uid://bjei64rpo8ie6" path="res://UBootV2.png" id="2_57c6f"]
 [ext_resource type="Script" path="res://player_camera.gd" id="3_1tnlc"]
 [ext_resource type="AudioStream" uid="uid://baf5af6l1jh86" path="res://sounds/nord_ambient01.ogg" id="4_gsdcc"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_q0d8u"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5meud"]
-size = Vector2(62, 60)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kji73"]
-size = Vector2(80, 60)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_x6llj"]
-size = Vector2(20, 20)
-
 [sub_resource type="LabelSettings" id="LabelSettings_rrj6r"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_b6kgo"]
-font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_aogl1"]
-font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_fb05a"]
-font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_h0goc"]
-font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_1un0o"]
-font_size = 12
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -42,8 +16,8 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(0, -2)
-texture = ExtResource("2_id3k4")
+position = Vector2(-31, 1)
+texture = ExtResource("2_57c6f")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_smoothed = true
@@ -55,16 +29,11 @@ script = ExtResource("3_1tnlc")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 4)
-polygon = PackedVector2Array(0, 37, 141, 37, 152, 36, 156, 34, 166, 24, 167, 22, 168, 19, 168, 7, 167, 4, 166, 0, 164, -4, 163, -5, 162, -7, 150, -19, 148, -20, 147, -21, 145, -22, 136, -23, 52, -23, -35, -23, -92, -23, -103, -22, -116, -21, -124, -20, -129, -19, -139, -18, -150, -17, -156, -16, -161, -15, -165, -14, -171, -12, -173, -11, -176, -10, -184, -6, -189, -1, -190, 1, -191, 2, -191, 12, -190, 13, -189, 15, -184, 20, -176, 24, -173, 25, -171, 26, -168, 27, -165, 28, -161, 29, -156, 30, -150, 31, -139, 32, -129, 33, -124, 34, -116, 35, -103, 36, -92, 37)
+polygon = PackedVector2Array(0, 8, 51, 8, 53, 7, 54, 6, 55, 5, 56, 4, 56, -7, 55, -9, 54, -11, 53, -12, 52, -13, 17, -13, 17, -15, 16, -17, 15, -19, 9, -19, 10, -21, 11, -22, 11, -24, 10, -25, -5, -25, -6, -24, -6, -22, -5, -21, -4, -19, -10, -19, -11, -17, -12, -15, -12, -13, -39, -13, -46, -12, -53, -11, -56, -10, -58, -9, -60, -8, -62, -7, -63, -6, -64, -5, -65, -4, -65, 0, -64, 1, -63, 2, -62, 3, -60, 4, -58, 5, -54, 6, -47, 7, -38, 8)
 
 [node name="Timer_normaltorp" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-
-[node name="Label" type="Label" parent="Timer_normaltorp"]
-offset_right = 40.0
-offset_bottom = 23.0
-label_settings = SubResource("LabelSettings_q0d8u")
 
 [node name="Timer_smalltorp" type="Timer" parent="."]
 wait_time = 3.0
@@ -78,49 +47,9 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
-[node name="Area2D_torpedos" type="Area2D" parent="."]
-collision_mask = 12
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D_torpedos"]
-position = Vector2(140, 0)
-polygon = PackedVector2Array(-46, -19, -4, -19, 5, -18, 7, -17, 8, -16, 10, -15, 22, -3, 23, -1, 24, 0, 25, 2, 26, 4, 27, 8, 28, 11, 28, 23, 27, 26, 26, 28, 16, 38, 12, 40, 1, 41, -46, 41)
-
-[node name="Area2D_crew" type="Area2D" parent="."]
-collision_mask = 12
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D_crew"]
-position = Vector2(63, 11)
-shape = SubResource("RectangleShape2D_5meud")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 12
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-8, 11)
-shape = SubResource("RectangleShape2D_kji73")
-
-[node name="Area2D_reactor" type="Area2D" parent="."]
-collision_mask = 12
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D_reactor"]
-polygon = PackedVector2Array(-48, -19, -92, -19, -103, -18, -113, -17, -113, 39, -103, 40, -92, 41, -48, 41)
-
-[node name="Area2D_engine" type="Area2D" parent="."]
-collision_mask = 12
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D_engine"]
-position = Vector2(-119, 30)
-polygon = PackedVector2Array(6, 9, 3, 9, -5, 8, -10, 7, -20, 6, -31, 5, -37, 4, -42, 3, -46, 2, -49, 1, -52, 0, -54, -1, -57, -2, -59, -3, -61, -4, -63, -5, -65, -6, -70, -11, -71, -13, -72, -14, -72, -24, -71, -25, -70, -27, -69, -28, -68, -29, -65, -32, -57, -36, -54, -37, -52, -38, -46, -40, -42, -41, -37, -42, -31, -43, -20, -44, -10, -45, -5, -46, 3, -47, 6, -47)
-
 [node name="Timer_damagecalculation" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
-z_index = 2
-position = Vector2(131, 11)
-texture = SubResource("PlaceholderTexture2D_x6llj")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -466.0
@@ -129,48 +58,6 @@ offset_right = -50.0
 offset_bottom = -49.0
 label_settings = SubResource("LabelSettings_rrj6r")
 text_overrun_behavior = 2
-
-[node name="Label2" type="Label" parent="."]
-z_index = 2
-offset_left = 106.0
-offset_top = -15.0
-offset_right = 146.0
-offset_bottom = 8.0
-label_settings = SubResource("LabelSettings_b6kgo")
-horizontal_alignment = 3
-vertical_alignment = 3
-
-[node name="Label3" type="Label" parent="."]
-z_index = 2
-offset_left = 45.0
-offset_top = -16.0
-offset_right = 85.0
-offset_bottom = 7.0
-label_settings = SubResource("LabelSettings_aogl1")
-
-[node name="Label4" type="Label" parent="."]
-z_index = 2
-offset_left = -27.0
-offset_top = -16.0
-offset_right = 13.0
-offset_bottom = 7.0
-label_settings = SubResource("LabelSettings_fb05a")
-
-[node name="Label5" type="Label" parent="."]
-z_index = 2
-offset_left = -100.0
-offset_top = -16.0
-offset_right = -60.0
-offset_bottom = 7.0
-label_settings = SubResource("LabelSettings_h0goc")
-
-[node name="Label6" type="Label" parent="."]
-z_index = 2
-offset_left = -156.0
-offset_top = -12.0
-offset_right = -116.0
-offset_bottom = 11.0
-label_settings = SubResource("LabelSettings_1un0o")
 
 [node name="AudioStreamPlayer2D_sonar" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_gsdcc")
@@ -182,15 +69,5 @@ autostart = true
 [connection signal="timeout" from="Timer_smalltorp" to="." method="_on_timer_smalltorp_timeout"]
 [connection signal="timeout" from="Timer_homingtorp" to="." method="_on_timer_homingtorp_timeout"]
 [connection signal="timeout" from="Timer_bigtorp" to="." method="_on_timer_bigtorp_timeout"]
-[connection signal="area_entered" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_area_entered"]
-[connection signal="input_event" from="Area2D_torpedos" to="." method="_on_area_2d_torpedos_input_event"]
-[connection signal="area_entered" from="Area2D_crew" to="." method="_on_area_2d_crew_area_entered"]
-[connection signal="input_event" from="Area2D_crew" to="." method="_on_area_2d_crew_input_event"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_3_area_entered"]
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="area_entered" from="Area2D_reactor" to="." method="_on_area_2d_reactor_area_entered"]
-[connection signal="input_event" from="Area2D_reactor" to="." method="_on_area_2d_reactor_input_event"]
-[connection signal="area_entered" from="Area2D_engine" to="." method="_on_area_2d_engine_area_entered"]
-[connection signal="input_event" from="Area2D_engine" to="." method="_on_area_2d_engine_input_event"]
 [connection signal="timeout" from="Timer_damagecalculation" to="." method="_on_timer_damagecalculation_timeout"]
 [connection signal="timeout" from="Timer_sonar" to="." method="_on_timer_sonar_timeout"]
