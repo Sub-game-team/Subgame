@@ -38,7 +38,6 @@ autostart = true
 stream = ExtResource("3_bcnb6")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
 texture = SubResource("PlaceholderTexture2D_vmpmi")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
