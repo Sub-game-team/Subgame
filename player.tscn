@@ -31,19 +31,15 @@ script = ExtResource("3_1tnlc")
 position = Vector2(0, 4)
 polygon = PackedVector2Array(0, 8, 51, 8, 53, 7, 54, 6, 55, 5, 56, 4, 56, -7, 55, -9, 54, -11, 53, -12, 52, -13, 17, -13, 17, -15, 16, -17, 15, -19, 9, -19, 10, -21, 11, -22, 11, -24, 10, -25, -5, -25, -6, -24, -6, -22, -5, -21, -4, -19, -10, -19, -11, -17, -12, -15, -12, -13, -39, -13, -46, -12, -53, -11, -56, -10, -58, -9, -60, -8, -62, -7, -63, -6, -64, -5, -65, -4, -65, 0, -64, 1, -63, 2, -62, 3, -60, 4, -58, 5, -54, 6, -47, 7, -38, 8)
 
-[node name="Timer_normaltorp" type="Timer" parent="."]
+[node name="Timer_1torp" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
-[node name="Timer_smalltorp" type="Timer" parent="."]
+[node name="Timer_2torp" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
-[node name="Timer_homingtorp" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
-[node name="Timer_bigtorp" type="Timer" parent="."]
+[node name="Timer_3torp" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
@@ -65,9 +61,8 @@ stream = ExtResource("4_gsdcc")
 [node name="Timer_sonar" type="Timer" parent="."]
 autostart = true
 
-[connection signal="timeout" from="Timer_normaltorp" to="." method="_on_timer_normaltorp_timeout"]
-[connection signal="timeout" from="Timer_smalltorp" to="." method="_on_timer_smalltorp_timeout"]
-[connection signal="timeout" from="Timer_homingtorp" to="." method="_on_timer_homingtorp_timeout"]
-[connection signal="timeout" from="Timer_bigtorp" to="." method="_on_timer_bigtorp_timeout"]
+[connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]
+[connection signal="timeout" from="Timer_2torp" to="." method="_on_timer_2_torp_timeout"]
+[connection signal="timeout" from="Timer_3torp" to="." method="_on_timer_3_torp_timeout"]
 [connection signal="timeout" from="Timer_damagecalculation" to="." method="_on_timer_damagecalculation_timeout"]
 [connection signal="timeout" from="Timer_sonar" to="." method="_on_timer_sonar_timeout"]

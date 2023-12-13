@@ -5,10 +5,7 @@ var yMovement = 0
 var xMovement = 0
 @onready var player_body = get_node(".")
 var projectile_scene0 = preload("res://Torpedo0.tscn")
-var projectile_scene1 = preload("res://Torpedo1.tscn")
-var projectile_scene2 = preload("res://Torpedo2.tscn")
-var projectile_scene3 = preload("res://Torpedo3.tscn")
-var readyToFire = [true, true, true, true]
+var readyToFire = [true, true, true]
 var damage = 0
 var flooded = [false, false, false, false, false]
 var torpedopenalty = 1
@@ -16,15 +13,13 @@ var repairpenalty = 1
 var movementpenalty = 1
 var poweroutage = false
 var reactoroutageoverride = false
-var draining = false
-var x = 1
-var repairmax = 3
-var repaircurrent = 0
+var x = 0
 var killcount = 0
 var activetorpedo = 0
 var projectile
 var distancetomouse
-var x2 = 0
+var homingupgrade = [false, true, false]
+var speedupgrade = 
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -492:
@@ -61,46 +56,28 @@ func get_input():
 func _process(_delta):
 	if Input.is_action_just_pressed("torpedo0"):
 		activetorpedo = 0
-		$Timer_normaltorp.set_paused(false)
-		$Timer_smalltorp.set_paused(true)
-		$Timer_homingtorp.set_paused(true)
-		$Timer_bigtorp.set_paused(true)
+		$Timer_1torp.set_paused(false)
+		$Timer_2torp.set_paused(true)
+		$Timer_3torp.set_paused(true)
 	if Input.is_action_just_pressed("torpedo1"):
 		activetorpedo = 1
-		$Timer_normaltorp.set_paused(true)
-		$Timer_smalltorp.set_paused(false)
-		$Timer_homingtorp.set_paused(true)
-		$Timer_bigtorp.set_paused(true)
+		$Timer_1torp.set_paused(true)
+		$Timer_2torp.set_paused(false)
+		$Timer_3torp.set_paused(true)
 	if Input.is_action_just_pressed("torpedo2"):
 		activetorpedo = 2
-		$Timer_normaltorp.set_paused(true)
-		$Timer_smalltorp.set_paused(true)
-		$Timer_homingtorp.set_paused(false)
-		$Timer_bigtorp.set_paused(true)
-	if Input.is_action_just_pressed("torpedo3"):
-		activetorpedo = 3
-		$Timer_normaltorp.set_paused(true)
-		$Timer_smalltorp.set_paused(true)
-		$Timer_homingtorp.set_paused(true)
-		$Timer_bigtorp.set_paused(false)
+		$Timer_1torp.set_paused(true)
+		$Timer_2torp.set_paused(true)
+		$Timer_3torp.set_paused(false)
 	if Input.is_action_just_pressed("shoot", true) and readyToFire[activetorpedo]:
 		readyToFire[activetorpedo] = false
 		if activetorpedo == 0:
-			$Timer_normaltorp.start(3 * torpedopenalty)
+			$Timer_1torp.start(1 * torpedopenalty)
 		elif activetorpedo == 1:
-			$Timer_smalltorp.start(2 * torpedopenalty)
+			$Timer_2torp.start(1 * torpedopenalty)
 		elif activetorpedo == 2:
-			$Timer_homingtorp.start(3 * torpedopenalty)
-		elif activetorpedo == 3:
-			$Timer_bigtorp.start(9 * torpedopenalty)
-		if activetorpedo == 0:
-			projectile = projectile_scene0.instantiate()
-		if activetorpedo == 1:
-			projectile = projectile_scene1.instantiate()
-		if activetorpedo == 2:
-			projectile = projectile_scene2.instantiate()
-		if activetorpedo == 3:
-			projectile = projectile_scene3.instantiate()
+			$Timer_3torp.start(1 * torpedopenalty)
+		projectile = projectile_scene0.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
@@ -131,30 +108,24 @@ func _physics_process(_delta):
 	get_input()
 	move_and_slide()
 
-func _on_timer_normaltorp_timeout():
-	readyToFire[0] = true
-
-func _on_timer_smalltorp_timeout():
-	readyToFire[1] = true
-
-func _on_timer_homingtorp_timeout():
-	readyToFire[2] = true
-
-func _on_timer_bigtorp_timeout():
-	readyToFire[3] = true
-
 func _on_timer_damagecalculation_timeout():
 	pass
 
-func repairfull():
-	pass
-
 func _on_timer_sonar_timeout():
-	if x2 == 5:
+	if x == 5:
 		$AudioStreamPlayer2D_sonar.play(0.0)
-		x2 = 0
+		x = 0
 	else:
-		x2 += 1
+		x += 1
 	var all_torpedos = get_tree().get_nodes_in_group("sonar_torpedo")
 	for i in all_torpedos:
 		i.sonar_ping()
+
+func _on_timer_1_torp_timeout():
+	readyToFire[0] = true
+
+func _on_timer_2_torp_timeout():
+	readyToFire[1] = true
+
+func _on_timer_3_torp_timeout():
+	readyToFire[2] = true
