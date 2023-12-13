@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2vonva0p6djd"]
+[gd_scene load_steps=6 format=3 uid="uid://b2vonva0p6djd"]
 
 [ext_resource type="Script" path="res://mob.gd" id="1_o3kvi"]
 [ext_resource type="Texture2D" uid="uid://df6asf71gxp7g" path="res://Art/enemy_normal.png" id="2_00tpv"]
@@ -10,6 +10,8 @@ shader_parameter/tint_color = Color(0, 0.698039, 0.188235, 0.6)
 shader_parameter/glow_amount = 0.2
 shader_parameter/glow_threshold = 0.8
 shader_parameter/outline_width = 0.01
+
+[sub_resource type="LabelSettings" id="LabelSettings_e3v2p"]
 
 [node name="mob" type="RigidBody2D" groups=["damage5", "enemy"]]
 material = SubResource("ShaderMaterial_bp576")
@@ -39,3 +41,11 @@ position = Vector2(-1.5, -6.5)
 scale = Vector2(3.05, 1.25)
 
 [node name="Mob_Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 28.0
+label_settings = SubResource("LabelSettings_e3v2p")
+autowrap_mode = 3

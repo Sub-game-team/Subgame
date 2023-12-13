@@ -1,12 +1,15 @@
 extends RigidBody2D
 
-var speed = 1
+var speed = 20
 var player
 var stop = false
 var speedmax = 1600
+var speedmaxmod = 1.0
 var acc = 10
-var radiusmod = 1
+var accmod = 1
+var radiusmod = 1.0
 var damage = 5
+var damagemod = 1.0
 var homing = false
 var distancetomouse = [0, 0, 0, 0]
 var targetenemy = [0, 0, 0 ,0]
@@ -17,7 +20,6 @@ var timetoenemy = 0
 var targetcoords = Vector2()
 
 func _ready():
-	$Area2D/CollisionShape2D.draw_set_transform(position, rotation, scale * radiusmod)
 	var all_enemy = get_tree().get_nodes_in_group("enemy")
 	if not len(all_enemy) == 0:
 		distancetomouse.resize(len(all_enemy))
@@ -31,15 +33,23 @@ func _ready():
 	else:
 		stop = true
 
+func set_stuff():
+	$Area2D/CollisionShape2D.set_scale(Vector2(1*radiusmod, 1*radiusmod))
+	damage = damage * damagemod
+	acc = acc * accmod
+	speedmax = speedmax * speedmaxmod
+
 func _process(_delta):
+	print(speed)
 	if showtarget and ((not stop) and (not (targetenemy == null))) and (homing):
 		$Sprite2D2.set_global_position(targetcoords)
 	else:
 		pass
 
 func _integrate_forces(_state):
-	if not stop:
-		set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed * 1)
+	if (not stop) and homing:
+		SmoothLookAtRigid(self, targetcoords, delay)
+	set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed * 1)
 	if speed <= speedmax - acc:
 		speed += acc
 
@@ -55,26 +65,28 @@ func _on_audio_stream_player_2d_finished():
 func _on_body_entered(_body):
 	$AudioStreamPlayer2D.play(0.0)
 	var enemys_to_kill = $Area2D.get_overlapping_areas()
-	print(enemys_to_kill)
 	for i in range(len(enemys_to_kill)):
 		if enemys_to_kill[i].is_in_group("enemyarea"):
-			enemys_to_kill[i].get_parent().queue_free()
+			enemys_to_kill[i].get_parent().take_damage(damage)
 	player.killcount += len(enemys_to_kill)
 	set_visible(false)
 	stop = true
+	call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 
 
 func sonar_ping():
-	if (not stop) and (not (targetenemy == null)):
+	if (not stop) and (not (targetenemy == null)) and homing:
 		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
-		timetoenemy = targetenemydistancetotorpedo / speed
-		#print(timetoenemy)
+		timetoenemy = (-get_linear_velocity().length() +- sqrt((get_linear_velocity().length()*get_linear_velocity().length())-(4*(0.5*acc)*targetenemydistancetotorpedo)))/(acc)
+		print(timetoenemy)
 		showtarget = true
 		targetcoords = targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * timetoenemy)
+	else:
+		pass
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
 #print(AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed))
-	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 0.5)
+	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 0.6)
 
 #-------------------------
 # these are only called from above functions

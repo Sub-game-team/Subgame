@@ -5,6 +5,8 @@ extends RigidBody2D
 var player: CharacterBody2D
 var visual: Sprite2D
 var chase = false
+var takendamage = 0
+var health = 10
 
 var chase_distance = 300
 
@@ -27,7 +29,11 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	$Label.set_text(str(takendamage))
+	if takendamage >= health:
+		queue_free()
+	else:
+		pass
 	# go in the direction of player
 	# look at direction
 	# damage
@@ -54,3 +60,6 @@ func _physics_process(delta):
 # Function to set the player reference
 func set_player_reference(player_ref: CharacterBody2D):
 	player = player_ref
+
+func take_damage(damagetotake):
+	takendamage += damagetotake

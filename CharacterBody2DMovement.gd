@@ -20,8 +20,8 @@ var projectile
 var distancetomouse
 var homingupgrade = [false, true, false]
 var speedupgrade = [true, false, false]
-var damageupgrade = [false, false, false]
-var radiusupgrade = [false, false, false]
+var damageupgrade = [false, false, true]
+var radiusupgrade = [false, false, true]
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -492:
@@ -82,10 +82,19 @@ func _process(_delta):
 		projectile = projectile_scene0.instantiate()
 		get_parent().add_child(projectile)
 		if speedupgrade[activetorpedo]:
-			projectile.speedmax += 400
-			projectile.acc += 5
+			projectile.speedmaxmod += 0.25
+			projectile.accmod += 0.5
+			projectile.damagemod -= 0.4
 		if homingupgrade[activetorpedo]:
 			projectile.homing = true
+			projectile.damagemod -= 0.4
+		if radiusupgrade[activetorpedo]:
+			projectile.radiusmod += 50
+		if damageupgrade[activetorpedo]:
+			projectile.damagemod += 1
+			projectile.speedmaxmod -= 0.5
+			projectile.accmod -= 0.25
+		projectile.set_stuff()
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_player_reference(self)
@@ -117,7 +126,7 @@ func _on_timer_damagecalculation_timeout():
 	pass
 
 func _on_timer_sonar_timeout():
-	if x == 5:
+	if x == 500:
 		$AudioStreamPlayer2D_sonar.play(0.0)
 		x = 0
 	else:

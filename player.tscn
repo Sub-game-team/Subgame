@@ -59,6 +59,7 @@ text_overrun_behavior = 2
 stream = ExtResource("4_gsdcc")
 
 [node name="Timer_sonar" type="Timer" parent="."]
+wait_time = 0.01
 autostart = true
 
 [connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]
