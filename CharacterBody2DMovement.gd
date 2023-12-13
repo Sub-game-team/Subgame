@@ -13,15 +13,11 @@ var repairpenalty = 1
 var movementpenalty = 1
 var poweroutage = false
 var reactoroutageoverride = false
-var draining = false
-var x = 1
-var repairmax = 3
-var repaircurrent = 0
+var x = 0
 var killcount = 0
 var activetorpedo = 0
 var projectile
 var distancetomouse
-var x2 = 0
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -492:
@@ -120,11 +116,11 @@ func repairfull():
 	pass
 
 func _on_timer_sonar_timeout():
-	if x2 == 5:
+	if x == 5:
 		$AudioStreamPlayer2D_sonar.play(0.0)
-		x2 = 0
+		x = 0
 	else:
-		x2 += 1
+		x += 1
 	var all_torpedos = get_tree().get_nodes_in_group("sonar_torpedo")
 	for i in all_torpedos:
 		i.sonar_ping()
