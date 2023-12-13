@@ -131,18 +131,6 @@ func _physics_process(_delta):
 	get_input()
 	move_and_slide()
 
-func _on_timer_normaltorp_timeout():
-	readyToFire[0] = true
-
-func _on_timer_smalltorp_timeout():
-	readyToFire[1] = true
-
-func _on_timer_homingtorp_timeout():
-	readyToFire[2] = true
-
-func _on_timer_bigtorp_timeout():
-	readyToFire[3] = true
-
 func _on_timer_damagecalculation_timeout():
 	pass
 
