@@ -5,9 +5,6 @@ var yMovement = 0
 var xMovement = 0
 @onready var player_body = get_node(".")
 var projectile_scene0 = preload("res://Torpedo0.tscn")
-var projectile_scene1 = preload("res://Torpedo1.tscn")
-var projectile_scene2 = preload("res://Torpedo2.tscn")
-var projectile_scene3 = preload("res://Torpedo3.tscn")
 var readyToFire = [true, true, true, true]
 var damage = 0
 var flooded = [false, false, false, false, false]
@@ -77,12 +74,6 @@ func _process(_delta):
 		$Timer_smalltorp.set_paused(true)
 		$Timer_homingtorp.set_paused(false)
 		$Timer_bigtorp.set_paused(true)
-	if Input.is_action_just_pressed("torpedo3"):
-		activetorpedo = 3
-		$Timer_normaltorp.set_paused(true)
-		$Timer_smalltorp.set_paused(true)
-		$Timer_homingtorp.set_paused(true)
-		$Timer_bigtorp.set_paused(false)
 	if Input.is_action_just_pressed("shoot", true) and readyToFire[activetorpedo]:
 		readyToFire[activetorpedo] = false
 		if activetorpedo == 0:
@@ -91,16 +82,7 @@ func _process(_delta):
 			$Timer_smalltorp.start(2 * torpedopenalty)
 		elif activetorpedo == 2:
 			$Timer_homingtorp.start(3 * torpedopenalty)
-		elif activetorpedo == 3:
-			$Timer_bigtorp.start(9 * torpedopenalty)
-		if activetorpedo == 0:
-			projectile = projectile_scene0.instantiate()
-		if activetorpedo == 1:
-			projectile = projectile_scene1.instantiate()
-		if activetorpedo == 2:
-			projectile = projectile_scene2.instantiate()
-		if activetorpedo == 3:
-			projectile = projectile_scene3.instantiate()
+		projectile = projectile_scene3.instantiate()
 		get_parent().add_child(projectile)
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
