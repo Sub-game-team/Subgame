@@ -18,6 +18,8 @@ var killcount = 0
 var activetorpedo = 0
 var projectile
 var distancetomouse
+var homingupgrade = [false, true, false]
+var speedupgrade = 
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -492:
