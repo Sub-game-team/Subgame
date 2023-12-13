@@ -19,7 +19,9 @@ var activetorpedo = 0
 var projectile
 var distancetomouse
 var homingupgrade = [false, true, false]
-var speedupgrade = 
+var speedupgrade = [true, false, false]
+var damageupgrade = [false, false, false]
+var radiusupgrade = [false, false, false]
 
 func get_input():
 	if Input.is_action_pressed("left") and xMovement >= -492:
@@ -79,10 +81,13 @@ func _process(_delta):
 			$Timer_3torp.start(1 * torpedopenalty)
 		projectile = projectile_scene0.instantiate()
 		get_parent().add_child(projectile)
+		if speedupgrade[activetorpedo]:
+			projectile.speedmax += 400
+			projectile.acc += 5
+		if homingupgrade[activetorpedo]:
+			projectile.homing = true
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
-		if not activetorpedo == 2:
-			projectile.set_lock_rotation_enabled(true)
 		projectile.set_player_reference(self)
 	if flooded[0]:
 		torpedopenalty = 1.75
@@ -117,7 +122,7 @@ func _on_timer_sonar_timeout():
 		x = 0
 	else:
 		x += 1
-	var all_torpedos = get_tree().get_nodes_in_group("sonar_torpedo")
+	var all_torpedos = get_tree().get_nodes_in_group("torpedo")
 	for i in all_torpedos:
 		i.sonar_ping()
 
