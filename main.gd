@@ -15,8 +15,6 @@ func create_mob():
 	mob.set_player_reference($Player) 
 	add_child(mob)
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var player = player_scene.instantiate()
