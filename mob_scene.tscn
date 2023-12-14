@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2vonva0p6djd"]
+[gd_scene load_steps=7 format=3 uid="uid://b2vonva0p6djd"]
 
 [ext_resource type="Script" path="res://mob.gd" id="1_o3kvi"]
 [ext_resource type="Texture2D" uid="uid://df6asf71gxp7g" path="res://Art/enemy_normal.png" id="2_00tpv"]
@@ -11,13 +11,19 @@ shader_parameter/glow_amount = 0.2
 shader_parameter/glow_threshold = 0.8
 shader_parameter/outline_width = 0.01
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dk6u7"]
+bounce = 5.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_e3v2p"]
 
 [node name="mob" type="RigidBody2D" groups=["damage5", "enemy"]]
 material = SubResource("ShaderMaterial_bp576")
 collision_layer = 4
-collision_mask = 7
-mass = 0.22
+collision_mask = 15
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_dk6u7")
+max_contacts_reported = 5
+contact_monitor = true
 script = ExtResource("1_o3kvi")
 metadata/_edit_group_ = true
 
@@ -49,3 +55,5 @@ offset_right = 20.0
 offset_bottom = 28.0
 label_settings = SubResource("LabelSettings_e3v2p")
 autowrap_mode = 3
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

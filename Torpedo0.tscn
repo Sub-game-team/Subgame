@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://brih27dctfqlj" path="res://sounds/explode01.ogg" id="3_e6xop"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_do5jb"]
-radius = 50.0
+radius = 80.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_llub1"]
 size = Vector2(30, 30)
@@ -43,7 +43,7 @@ area_mask = 16
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 4
+collision_mask = 5
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -51,7 +51,7 @@ shape = SubResource("CircleShape2D_do5jb")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = 1.5708
-polygon = PackedVector2Array(5, 26, 5, -29, 4, -29, 4, -31, 3, -31, 3, -32, -3, -32, -3, -31, -4, -31, -4, -29, -5, -29, -5, 26, -6, 26, -6, 27, -7, 27, -7, 29, -8, 29, -8, 31, -9, 31, -9, 32, 9, 32, 9, 31, 8, 31, 8, 29, 7, 29, 7, 27, 6, 27, 6, 26)
+polygon = PackedVector2Array(6.00009, 25, 5.99989, -30, 4.99989, -30, 4.99988, -32, 3.99988, -32, 3.99988, -33, -4.00012, -33, -4.00012, -32, -5.00012, -32, -5.00011, -30, -6.00011, -30, -5.99991, 25, -6.99991, 25, -6.99991, 26, -7.99991, 26, -7.9999, 28, -8.9999, 28, -8.99989, 30, -9.99989, 30, -9.99988, 33, 10.0001, 33, 10.0001, 30, 9.00011, 30, 9.0001, 28, 8.0001, 28, 8.00009, 26, 7.00009, 26, 7.00009, 25)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_llub1")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=7 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_pvkax"]
 [ext_resource type="Texture2D" uid="uid://bjei64rpo8ie6" path="res://UBootV2.png" id="2_57c6f"]
@@ -6,6 +6,9 @@
 [ext_resource type="AudioStream" uid="uid://baf5af6l1jh86" path="res://sounds/nord_ambient01.ogg" id="4_gsdcc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rrj6r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ysf7i"]
+height = 122.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -53,14 +56,23 @@ offset_top = -122.0
 offset_right = -50.0
 offset_bottom = -49.0
 label_settings = SubResource("LabelSettings_rrj6r")
+autowrap_mode = 3
 text_overrun_behavior = 2
 
 [node name="AudioStreamPlayer2D_sonar" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_gsdcc")
 
 [node name="Timer_sonar" type="Timer" parent="."]
-wait_time = 0.01
+wait_time = 5.0
 autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["player"]]
+position = Vector2(-4, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ysf7i")
 
 [connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]
 [connection signal="timeout" from="Timer_2torp" to="." method="_on_timer_2_torp_timeout"]

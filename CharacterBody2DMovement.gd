@@ -22,15 +22,16 @@ var homingupgrade = [false, true, false]
 var speedupgrade = [true, false, false]
 var damageupgrade = [false, false, true]
 var radiusupgrade = [false, false, true]
+var health = 30
 
 func get_input():
-	if Input.is_action_pressed("left") and xMovement >= -492:
+	if Input.is_action_pressed("left") and xMovement >= -488:
 		xMovement -= 8 * movementpenalty
-	if Input.is_action_pressed("right") and xMovement <= 492:
+	if Input.is_action_pressed("right") and xMovement <= 488:
 		xMovement += 8 * movementpenalty
-	if Input.is_action_pressed("up") and yMovement >= -492:
+	if Input.is_action_pressed("up") and yMovement >= -488:
 		yMovement -= 8 * movementpenalty
-	if Input.is_action_pressed("down") and yMovement <= 492:
+	if Input.is_action_pressed("down") and yMovement <= 488:
 		yMovement += 8 * movementpenalty
 	if xMovement >= 4 and not Input.is_action_pressed("right"):
 		xMovement -= 4
@@ -40,7 +41,16 @@ func get_input():
 		yMovement -= 4
 	if yMovement <= -4 and not Input.is_action_pressed("down"):
 		yMovement += 4
+	if abs(yMovement) == 2:
+		yMovement = 0
+	if abs(xMovement) == 2:
+		xMovement = 0
 	velocity = Vector2(xMovement, yMovement)
+	
+	print("x")
+	print(yMovement)
+	print("y")
+	print(xMovement)
 	#print(velocity) #for debug
 	#print(player_body.get_real_velocity()) #for debug
 	if abs(xMovement) >= 10 or abs(yMovement) >= 10:
@@ -88,8 +98,11 @@ func _process(_delta):
 		if homingupgrade[activetorpedo]:
 			projectile.homing = true
 			projectile.damagemod -= 0.4
+			projectile.accmod -= 0.2
 		if radiusupgrade[activetorpedo]:
-			projectile.radiusmod += 50
+			projectile.radiusmod += 0.75
+			projectile.damagemod += 0.2
+			projectile.accmod -= 0.2
 		if damageupgrade[activetorpedo]:
 			projectile.damagemod += 1
 			projectile.speedmaxmod -= 0.5
@@ -116,7 +129,12 @@ func _process(_delta):
 		movementpenalty = 0.25
 	else:
 		movementpenalty = 1
-	$Label.set_text(str(killcount) + str(readyToFire))
+	$Label.set_text(str(killcount) + str(readyToFire) + str(health))
+	var all_torpedos = get_tree().get_nodes_in_group("torpedo")
+	for i in all_torpedos:
+		i.sonar_ping()
+	if health <= 0:
+		queue_free()
 
 func _physics_process(_delta):
 	get_input()
@@ -126,14 +144,7 @@ func _on_timer_damagecalculation_timeout():
 	pass
 
 func _on_timer_sonar_timeout():
-	if x == 500:
-		$AudioStreamPlayer2D_sonar.play(0.0)
-		x = 0
-	else:
-		x += 1
-	var all_torpedos = get_tree().get_nodes_in_group("torpedo")
-	for i in all_torpedos:
-		i.sonar_ping()
+	$AudioStreamPlayer2D_sonar.play(0.0)
 
 func _on_timer_1_torp_timeout():
 	readyToFire[0] = true
@@ -143,3 +154,6 @@ func _on_timer_2_torp_timeout():
 
 func _on_timer_3_torp_timeout():
 	readyToFire[2] = true
+
+func take_damage(damagetotake):
+	health -= damagetotake

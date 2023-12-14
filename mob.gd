@@ -6,7 +6,9 @@ var player: CharacterBody2D
 var visual: Sprite2D
 var chase = false
 var takendamage = 0
-var health = 10
+var health = 5
+var damage = 5
+var stop = false
 
 var chase_distance = 300
 
@@ -42,20 +44,21 @@ func _process(_delta):
 # weird hostile fish
 
 func _physics_process(delta):
-	var direction = (player.global_position - global_position).angle() + 180 - 45
-	rotation += clampf(direction - rotation,-170,170)
-	linear_velocity = Vector2(-10.0,0.0).rotated(direction) * (speed + temp_speed)
-	# maybe save the points where to go in a list and thereby follow the player?
-	# later
-	#print("Distance: ", player.global_position.distance_to(global_position), ", temporary speed: ", temp_speed, ", chase: ", chase)
-	if player.global_position.distance_to(global_position) <= chase_distance and not chase:
-		chase = true
-		temp_speed += 10
-	elif player.global_position.distance_to(global_position) > chase_distance and chase:
-		chase = false
-		
-	if temp_speed > 0:
-		temp_speed -= 1 * delta
+	if not stop:
+		var direction = (player.global_position - global_position).angle() + 180 - 45
+		rotation += clampf(direction - rotation,-170,170)
+		linear_velocity = Vector2(-10.0,0.0).rotated(direction) * (speed + temp_speed)
+		# maybe save the points where to go in a list and thereby follow the player?
+		# later
+		#print("Distance: ", player.global_position.distance_to(global_position), ", temporary speed: ", temp_speed, ", chase: ", chase)
+		if player.global_position.distance_to(global_position) <= chase_distance and not chase:
+			chase = true
+			temp_speed += 10
+		elif player.global_position.distance_to(global_position) > chase_distance and chase:
+			chase = false
+			
+		if temp_speed > 0:
+			temp_speed -= 1 * delta
 
 # Function to set the player reference
 func set_player_reference(player_ref: CharacterBody2D):
@@ -63,3 +66,11 @@ func set_player_reference(player_ref: CharacterBody2D):
 
 func take_damage(damagetotake):
 	takendamage += damagetotake
+
+func _on_body_entered(body):
+	if body.is_in_group("player"):
+		body.take_damage(damage)
+		stop = true
+		queue_free()
+	else:
+		pass

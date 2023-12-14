@@ -40,7 +40,6 @@ func set_stuff():
 	speedmax = speedmax * speedmaxmod
 
 func _process(_delta):
-	print(speed)
 	if showtarget and ((not stop) and (not (targetenemy == null))) and (homing):
 		$Sprite2D2.set_global_position(targetcoords)
 	else:
@@ -66,7 +65,7 @@ func _on_body_entered(_body):
 	$AudioStreamPlayer2D.play(0.0)
 	var enemys_to_kill = $Area2D.get_overlapping_areas()
 	for i in range(len(enemys_to_kill)):
-		if enemys_to_kill[i].is_in_group("enemyarea"):
+		if enemys_to_kill[i].is_in_group("enemyarea") or enemys_to_kill[i].is_in_group("player"):
 			enemys_to_kill[i].get_parent().take_damage(damage)
 	player.killcount += len(enemys_to_kill)
 	set_visible(false)
@@ -77,8 +76,7 @@ func _on_body_entered(_body):
 func sonar_ping():
 	if (not stop) and (not (targetenemy == null)) and homing:
 		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
-		timetoenemy = (-get_linear_velocity().length() +- sqrt((get_linear_velocity().length()*get_linear_velocity().length())-(4*(0.5*acc)*targetenemydistancetotorpedo)))/(acc)
-		print(timetoenemy)
+		timetoenemy = calculateTimeToHit(targetenemydistancetotorpedo, speed, acc)
 		showtarget = true
 		targetcoords = targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * timetoenemy)
 	else:
@@ -86,7 +84,7 @@ func sonar_ping():
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
 #print(AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed))
-	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 0.6)
+	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 0.8)
 
 #-------------------------
 # these are only called from above functions
@@ -96,3 +94,21 @@ func TargetAngle( currentPosition, targetPosition ):
 	return (targetPosition - currentPosition).angle()
 func GetAngle( currentAngle, targetAngle ):
 	return fposmod( targetAngle - currentAngle + PI, PI * 2 ) - PI
+
+func calculateTimeToHit(distance: float, initialSpeed: float, acceleration: float) -> float:
+	var a = 0.5 * acceleration
+	var b = initialSpeed
+	var c = -distance
+
+	var discriminant = b * b - 4 * a * c
+
+	if discriminant < 0:
+		# No real roots (object won't hit)
+		return -1
+
+	var sqrtDiscriminant = sqrt(discriminant)
+
+	var positiveRoot = (-b + sqrtDiscriminant) / (2 * a)
+
+	# Ignore negative root since time cannot be negative
+	return positiveRoot
