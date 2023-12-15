@@ -7,7 +7,7 @@ var xMovement = 0
 var projectile_scene0 = preload("res://Torpedo0.tscn")
 var readyToFire = [true, true, true]
 var damage = 0
-var flooded = [false, false, false, false, false]
+var flooded = [false, false, false]
 var torpedopenalty = 1
 var repairpenalty = 1
 var movementpenalty = 1
@@ -16,15 +16,19 @@ var reactoroutageoverride = false
 var x = 0
 var killcount = 0
 var activetorpedo = 0
+var activetorpedocooldown = [0, 0, 0]
 var projectile
 var distancetomouse
 var homingupgrade = [false, true, false]
 var speedupgrade = [true, false, false]
 var damageupgrade = [false, false, true]
 var radiusupgrade = [false, false, true]
-var health = 30
+var currenthealth = 30
+var maxhealth = 30
+var repairready = false
+var healing = false
 
-func get_input():
+func get_movement():
 	if Input.is_action_pressed("left") and xMovement >= -488:
 		xMovement -= 8 * movementpenalty
 	if Input.is_action_pressed("right") and xMovement <= 488:
@@ -37,22 +41,15 @@ func get_input():
 		xMovement -= 4
 	if xMovement <= -4 and not Input.is_action_pressed("left"):
 		xMovement += 4
-	if yMovement >= 4 and not Input.is_action_pressed("up"):
-		yMovement -= 4
-	if yMovement <= -4 and not Input.is_action_pressed("down"):
+	if yMovement <= -4 and not Input.is_action_pressed("up"):
 		yMovement += 4
+	if yMovement >= 4 and not Input.is_action_pressed("down"):
+		yMovement -= 4
 	if abs(yMovement) == 2:
 		yMovement = 0
 	if abs(xMovement) == 2:
 		xMovement = 0
 	velocity = Vector2(xMovement, yMovement)
-	
-	print("x")
-	print(yMovement)
-	print("y")
-	print(xMovement)
-	#print(velocity) #for debug
-	#print(player_body.get_real_velocity()) #for debug
 	if abs(xMovement) >= 10 or abs(yMovement) >= 10:
 		if is_on_ceiling() or is_on_floor() or is_on_wall():
 			velocity = player_body.get_real_velocity()
@@ -66,6 +63,27 @@ func get_input():
 				yMovement = -18
 
 func _process(_delta):
+	torpedo_cooldown()
+	torpedo_select_input()
+	torpedo_shoot_input()
+	variable_processing()
+	visualizeanddebug()
+	torpedo_ping()
+	checkhealth()
+	repair()
+	
+func torpedo_cooldown():
+	for i in range(len(homingupgrade)):
+		if homingupgrade[i]:
+			activetorpedocooldown[i] += 2
+		if damageupgrade[i]:
+			activetorpedocooldown[i] += 3
+		if radiusupgrade[i]:
+			activetorpedocooldown[i] += 2
+		if speedupgrade[i]:
+			activetorpedocooldown[i] += 1
+
+func torpedo_select_input():
 	if Input.is_action_just_pressed("torpedo0"):
 		activetorpedo = 0
 		$Timer_1torp.set_paused(false)
@@ -81,14 +99,16 @@ func _process(_delta):
 		$Timer_1torp.set_paused(true)
 		$Timer_2torp.set_paused(true)
 		$Timer_3torp.set_paused(false)
+
+func torpedo_shoot_input():
 	if Input.is_action_just_pressed("shoot", true) and readyToFire[activetorpedo]:
 		readyToFire[activetorpedo] = false
 		if activetorpedo == 0:
-			$Timer_1torp.start(1 * torpedopenalty)
+			$Timer_1torp.start((1+activetorpedocooldown[0])*torpedopenalty)
 		elif activetorpedo == 1:
-			$Timer_2torp.start(1 * torpedopenalty)
+			$Timer_2torp.start((1+activetorpedocooldown[1])*torpedopenalty)
 		elif activetorpedo == 2:
-			$Timer_3torp.start(1 * torpedopenalty)
+			$Timer_3torp.start((1+activetorpedocooldown[2])* torpedopenalty)
 		projectile = projectile_scene0.instantiate()
 		get_parent().add_child(projectile)
 		if speedupgrade[activetorpedo]:
@@ -111,33 +131,45 @@ func _process(_delta):
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_player_reference(self)
+
+func variable_processing():
 	if flooded[0]:
 		torpedopenalty = 1.75
 	else:
 		torpedopenalty = 1
-	if flooded[1]:
-		repairpenalty = 0.5
-	else:
 		repairpenalty = 1
-	if flooded[3]:
+	if flooded[1]:
 		poweroutage = true
 		reactoroutageoverride = true
 	else:
 		poweroutage = true
 		reactoroutageoverride = true
-	if flooded[4]:
-		movementpenalty = 0.25
+	if flooded[2]:
+		movementpenalty = 0.5
 	else:
 		movementpenalty = 1
-	$Label.set_text(str(killcount) + str(readyToFire) + str(health))
+
+func visualizeanddebug():
+	$Label.set_text("killcount: " + str(killcount) + "\n" + "torpedoready:" + str(readyToFire) + "\n" + "health: " + str(currenthealth) + "\n" + "repair ready in: " + str(int($Timer_repaircooldown.get_time_left())) + "\n" + "broken parts:" + str(flooded))
+
+func torpedo_ping():
 	var all_torpedos = get_tree().get_nodes_in_group("torpedo")
 	for i in all_torpedos:
 		i.sonar_ping()
-	if health <= 0:
-		queue_free()
+
+func checkhealth():
+	if currenthealth <= 0:
+		OS.kill(OS.get_process_id())
+
+func repair():
+	if Input.is_action_just_pressed("repair") and repairready:
+		repairready = false
+		$Timer_repaircooldown.start()
+		for i in flooded:
+			i = false
 
 func _physics_process(_delta):
-	get_input()
+	get_movement()
 	move_and_slide()
 
 func _on_timer_damagecalculation_timeout():
@@ -156,4 +188,23 @@ func _on_timer_3_torp_timeout():
 	readyToFire[2] = true
 
 func take_damage(damagetotake):
-	health -= damagetotake
+	currenthealth -= damagetotake
+	var randomgen = (randi() % 19)
+	#randomgen = 4
+	if randomgen <= 2:
+		flooded[randomgen] = true
+	healing = false
+	$Timer_regen.start()
+
+func _on_timer_repaircooldown_timeout():
+	repairready = true
+
+func _on_timer_regen_timeout():
+	healing = true
+	$Timer_regen2.start()
+
+func _on_timer_regen_2_timeout():
+	if healing:
+		if currenthealth < maxhealth:
+			currenthealth += 1
+		$Timer_regen2.start()

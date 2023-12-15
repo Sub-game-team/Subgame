@@ -72,7 +72,6 @@ func _on_body_entered(_body):
 	stop = true
 	call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 
-
 func sonar_ping():
 	if (not stop) and (not (targetenemy == null)) and homing:
 		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
@@ -83,15 +82,14 @@ func sonar_ping():
 		pass
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
-#print(AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed))
 	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 0.8)
 
-#-------------------------
-# these are only called from above functions
 func AngularLookAt( currentPosition, currentRotation, targetPosition, turnTime ):
 	return GetAngle( currentRotation, TargetAngle( currentPosition, targetPosition ) )/turnTime
+
 func TargetAngle( currentPosition, targetPosition ):
 	return (targetPosition - currentPosition).angle()
+
 func GetAngle( currentAngle, targetAngle ):
 	return fposmod( targetAngle - currentAngle + PI, PI * 2 ) - PI
 
