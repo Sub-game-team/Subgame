@@ -1,5 +1,5 @@
 extends Area2D
-@onready var spawnArea = $CollisionShape2D.shape.extents
+@onready var spawnArea = $CollisionShape2D.get_shape().extents
 @onready var origin = $CollisionShape2D.get_global_position() -  spawnArea
 
 func gen_random_pos():

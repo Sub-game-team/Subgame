@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=8 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_iubxo"]
 [ext_resource type="Texture2D" uid="uid://bjei64rpo8ie6" path="res://UBootV2.png" id="2_57c6f"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ysf7i"]
 height = 122.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tinit"]
+radius = 300.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -81,6 +84,13 @@ one_shot = true
 
 [node name="Timer_regen2" type="Timer" parent="."]
 one_shot = true
+
+[node name="Area2D_ressourcecollect" type="Area2D" parent="." groups=["ressource_collector"]]
+collision_mask = 16
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_ressourcecollect"]
+shape = SubResource("CircleShape2D_tinit")
 
 [connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]
 [connection signal="timeout" from="Timer_2torp" to="." method="_on_timer_2_torp_timeout"]

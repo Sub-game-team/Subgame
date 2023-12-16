@@ -65,7 +65,6 @@ func get_movement():
 				yMovement = -18
 
 func _process(_delta):
-
 	torpedo_select_input()
 	torpedo_shoot_input()
 	variable_processing()
@@ -73,7 +72,8 @@ func _process(_delta):
 	torpedo_ping()
 	checkhealth()
 	repair()
-	
+	collect_ressources()
+
 func torpedo_cooldown():
 	for i in range(len(homingupgrade)):
 		if homingupgrade[i]:
@@ -170,6 +170,14 @@ func repair():
 		for i in flooded:
 			i = false
 
+func collect_ressources():
+	var ressourcestocollect = $Area2D_ressourcecollect.get_overlapping_areas()
+	if not (ressourcestocollect == null):
+		for i in ressourcestocollect:
+			if i.is_in_group("iron"):
+				heal(5)
+			i.queue_free()
+
 func _physics_process(_delta):
 	get_movement()
 	move_and_slide()
@@ -207,3 +215,8 @@ func _on_timer_regen_2_timeout():
 		if currenthealth < maxhealth:
 			currenthealth += 1
 		$Timer_regen2.start()
+
+func heal(toheal: int):
+	currenthealth += toheal
+	if currenthealth > maxhealth:
+		currenthealth = maxhealth

@@ -99,6 +99,7 @@ repair={
 2d_physics/layer_3="Enemies"
 2d_navigation/layer_3="Enemies"
 2d_physics/layer_4="Torpedos"
+2d_physics/layer_5="ressource_mobs"
 
 [physics]
 

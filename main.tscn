@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3d142e6e7wlg"]
+[gd_scene load_steps=9 format=3 uid="uid://b3d142e6e7wlg"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_7x3uh"]
 [ext_resource type="PackedScene" uid="uid://b2vonva0p6djd" path="res://mob_scene.tscn" id="2_6ptv3"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ct2gdi5dvmsha" path="res://tilemap.tscn" id="4_njx7p"]
 [ext_resource type="PackedScene" uid="uid://cdt00qtk6kkbj" path="res://crosshair.tscn" id="5_3e7h7"]
 [ext_resource type="Script" path="res://Area2D_mobspawner.gd" id="6_6j3ew"]
+[ext_resource type="PackedScene" uid="uid://d117jckee3qt1" path="res://Vulkan_schnecken.tscn" id="6_ad2yy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea6bn"]
-size = Vector2(2000, 2000)
+size = Vector2(3, 2752)
 
 [node name="main" type="Node"]
 script = ExtResource("1_7x3uh")
@@ -16,15 +17,26 @@ mob_scene = ExtResource("2_6ptv3")
 player_scene = ExtResource("3_8y4yx")
 tileset = ExtResource("4_njx7p")
 crosshair_scene = ExtResource("5_3e7h7")
+vulkanschnecken_scene = ExtResource("6_ad2yy")
+
+[node name="TileMap" parent="." instance=ExtResource("4_njx7p")]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4096.0
 autostart = true
 
 [node name="Area2D_mobspawner" type="Area2D" parent="."]
 script = ExtResource("6_6j3ew")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_mobspawner"]
+shape = SubResource("RectangleShape2D_ea6bn")
+
+[node name="Area2D_vulkanschneckenspawner" type="Area2D" parent="."]
+position = Vector2(-1.343, 0)
+script = ExtResource("6_6j3ew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_vulkanschneckenspawner"]
+position = Vector2(-1341.16, -352)
 shape = SubResource("RectangleShape2D_ea6bn")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
