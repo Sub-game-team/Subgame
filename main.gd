@@ -5,11 +5,11 @@ extends Node
 @export var tileset: PackedScene
 @export var crosshair_scene: PackedScene
 
-func create_mob():
+func create_mob(pos: Vector2 = Vector2(500,0)):
 	var mob = mob_scene.instantiate()
 	var direction = 0
 	mob.rotation = direction
-	mob.position = Vector2(500, 0)  # just temporary
+	mob.position = pos
 
 	# Pass the player node reference to the mob
 	mob.set_player_reference($Player) 
@@ -31,4 +31,4 @@ func _process(_delta):
 
 
 func _on_timer_timeout():
-	create_mob()
+	create_mob($Area2D_mobspawner.gen_random_pos())

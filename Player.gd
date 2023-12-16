@@ -27,6 +27,9 @@ var maxhealth = 30
 var repairready = false
 var healing = false
 
+func _ready():
+	torpedo_cooldown()
+
 func get_movement():
 	if Input.is_action_pressed("left") and xMovement >= -488:
 		xMovement -= 8 * movementpenalty
@@ -62,7 +65,7 @@ func get_movement():
 				yMovement = -18
 
 func _process(_delta):
-	torpedo_cooldown()
+
 	torpedo_select_input()
 	torpedo_shoot_input()
 	variable_processing()
@@ -80,7 +83,7 @@ func torpedo_cooldown():
 		if radiusupgrade[i]:
 			activetorpedocooldown[i] += 2
 		if speedupgrade[i]:
-			activetorpedocooldown[i] += 1
+			activetorpedocooldown[i] += 0
 
 func torpedo_select_input():
 	if Input.is_action_just_pressed("torpedo0"):
@@ -112,8 +115,8 @@ func torpedo_shoot_input():
 		get_parent().add_child(projectile)
 		if speedupgrade[activetorpedo]:
 			projectile.speedmaxmod += 0.25
-			projectile.accmod += 0.5
-			projectile.damagemod -= 0.4
+			projectile.accmod += 2
+			projectile.damagemod -= 0.6
 		if homingupgrade[activetorpedo]:
 			projectile.homing = true
 			projectile.damagemod -= 0.4
