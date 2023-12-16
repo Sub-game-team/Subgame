@@ -13,7 +13,6 @@ var repairpenalty = 1
 var movementpenalty = 1
 var poweroutage = false
 var reactoroutageoverride = false
-var x = 0
 var killcount = 0
 var activetorpedo = 0
 var activetorpedocooldown = [0, 0, 0]
@@ -171,9 +170,6 @@ func repair():
 func _physics_process(_delta):
 	get_movement()
 	move_and_slide()
-
-func _on_timer_damagecalculation_timeout():
-	pass
 
 func _on_timer_sonar_timeout():
 	$AudioStreamPlayer2D_sonar.play(0.0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ch43k4w4dvjsy"]
 
-[ext_resource type="Script" path="res://CharacterBody2DMovement.gd" id="1_pvkax"]
+[ext_resource type="Script" path="res://Player.gd" id="1_iubxo"]
 [ext_resource type="Texture2D" uid="uid://bjei64rpo8ie6" path="res://UBootV2.png" id="2_57c6f"]
 [ext_resource type="Script" path="res://player_camera.gd" id="3_1tnlc"]
 [ext_resource type="AudioStream" uid="uid://baf5af6l1jh86" path="res://sounds/nord_ambient01.ogg" id="4_gsdcc"]
@@ -14,7 +14,7 @@ height = 122.0
 z_index = 1
 collision_mask = 7
 motion_mode = 1
-script = ExtResource("1_pvkax")
+script = ExtResource("1_iubxo")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -45,10 +45,6 @@ one_shot = true
 [node name="Timer_3torp" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-
-[node name="Timer_damagecalculation" type="Timer" parent="."]
-wait_time = 0.25
-autostart = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = -466.0
@@ -89,7 +85,6 @@ one_shot = true
 [connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]
 [connection signal="timeout" from="Timer_2torp" to="." method="_on_timer_2_torp_timeout"]
 [connection signal="timeout" from="Timer_3torp" to="." method="_on_timer_3_torp_timeout"]
-[connection signal="timeout" from="Timer_damagecalculation" to="." method="_on_timer_damagecalculation_timeout"]
 [connection signal="timeout" from="Timer_sonar" to="." method="_on_timer_sonar_timeout"]
 [connection signal="timeout" from="Timer_repaircooldown" to="." method="_on_timer_repaircooldown_timeout"]
 [connection signal="timeout" from="Timer_regen" to="." method="_on_timer_regen_timeout"]
