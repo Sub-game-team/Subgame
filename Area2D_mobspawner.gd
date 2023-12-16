@@ -7,7 +7,3 @@ func gen_random_pos():
 	var y = randf_range(origin.y, spawnArea.y)
 	
 	return Vector2(x, y)
-
-func _process(_delta):
-	print(spawnArea)
-	print(origin)
