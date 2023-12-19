@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3d142e6e7wlg"]
+[gd_scene load_steps=10 format=3 uid="uid://b3d142e6e7wlg"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_7x3uh"]
 [ext_resource type="PackedScene" uid="uid://b2vonva0p6djd" path="res://mob_scene.tscn" id="2_6ptv3"]
@@ -7,18 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cdt00qtk6kkbj" path="res://crosshair.tscn" id="5_3e7h7"]
 [ext_resource type="Script" path="res://Area2D_mobspawner.gd" id="6_6j3ew"]
 [ext_resource type="PackedScene" uid="uid://d117jckee3qt1" path="res://Vulkan_schnecken.tscn" id="6_ad2yy"]
+[ext_resource type="Texture2D" uid="uid://cj4jlmn7rc2pr" path="res://Art/blue_water_ecxample.png" id="8_gnlaa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea6bn"]
 size = Vector2(3, 2752)
-
-[sub_resource type="Gradient" id="Gradient_ay8dq"]
-interpolation_mode = 1
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_wh3pu"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bxsc4"]
-color_ramp = SubResource("Gradient_ay8dq")
-noise = SubResource("FastNoiseLite_wh3pu")
 
 [node name="main" type="Node"]
 script = ExtResource("1_7x3uh")
@@ -49,11 +41,11 @@ position = Vector2(-1341.16, -352)
 shape = SubResource("RectangleShape2D_ea6bn")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
+color = Color(0.00784314, 0.00784314, 0.00784314, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasModulate"]
-position = Vector2(-5000, -5000)
-scale = Vector2(10000, 10000)
-texture = SubResource("NoiseTexture2D_bxsc4")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-25.5, -59.0002)
+scale = Vector2(50.4648, 37.6172)
+texture = ExtResource("8_gnlaa")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
