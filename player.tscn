@@ -92,6 +92,12 @@ input_pickable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_ressourcecollect"]
 shape = SubResource("CircleShape2D_tinit")
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+blend_mode = 2
+range_z_min = -50
+range_z_max = 50
+max_distance = 10.0
+
 [connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]
 [connection signal="timeout" from="Timer_2torp" to="." method="_on_timer_2_torp_timeout"]
 [connection signal="timeout" from="Timer_3torp" to="." method="_on_timer_3_torp_timeout"]
