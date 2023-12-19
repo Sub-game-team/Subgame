@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=12 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_iubxo"]
 [ext_resource type="Texture2D" uid="uid://bjei64rpo8ie6" path="res://UBootV2.png" id="2_57c6f"]
 [ext_resource type="Script" path="res://player_camera.gd" id="3_1tnlc"]
 [ext_resource type="AudioStream" uid="uid://baf5af6l1jh86" path="res://sounds/nord_ambient01.ogg" id="4_gsdcc"]
 [ext_resource type="Script" path="res://flashlight.gd" id="5_rgvdp"]
+[ext_resource type="Texture2D" uid="uid://dgbqo64atuto0" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="6_y0o4n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rrj6r"]
 
@@ -20,7 +21,7 @@ radius = 300.0
 gradient = SubResource("Gradient_2fh6l")
 width = 500
 fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
+fill_to = Vector2(0.458716, 0)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -107,6 +108,10 @@ rotation = 1.5708
 texture = SubResource("GradientTexture2D_xtnlt")
 offset = Vector2(262, 0)
 script = ExtResource("5_rgvdp")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+range_item_cull_mask = 3
+texture = ExtResource("6_y0o4n")
 
 [connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]
 [connection signal="timeout" from="Timer_2torp" to="." method="_on_timer_2_torp_timeout"]
