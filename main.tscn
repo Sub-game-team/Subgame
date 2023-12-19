@@ -22,7 +22,7 @@ vulkanschnecken_scene = ExtResource("6_ad2yy")
 [node name="TileMap" parent="." instance=ExtResource("4_njx7p")]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 4096.0
+wait_time = 3.0
 autostart = true
 
 [node name="Area2D_mobspawner" type="Area2D" parent="."]

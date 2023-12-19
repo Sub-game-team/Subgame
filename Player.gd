@@ -167,8 +167,8 @@ func repair():
 	if Input.is_action_just_pressed("repair") and repairready:
 		repairready = false
 		$Timer_repaircooldown.start()
-		for i in flooded:
-			i = false
+		for i in range(len(flooded)):
+			flooded[i] = false
 
 func collect_ressources():
 	var ressourcestocollect = $Area2D_ressourcecollect.get_overlapping_areas()
@@ -197,7 +197,7 @@ func _on_timer_3_torp_timeout():
 func take_damage(damagetotake):
 	currenthealth -= damagetotake
 	var randomgen = (randi() % 19)
-	#randomgen = 4
+	#randomgen = 1
 	if randomgen <= 2:
 		flooded[randomgen] = true
 	healing = false
