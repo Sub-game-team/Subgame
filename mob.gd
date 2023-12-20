@@ -9,7 +9,6 @@ var takendamage = 0
 var health = 5
 var damage = 5
 var stop = false
-var ping_light = 0.0
 var x = 0
 
 var chase_distance = 300
