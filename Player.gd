@@ -25,6 +25,7 @@ var currenthealth = 30
 var maxhealth = 30
 var repairready = false
 var healing = false
+var inv_ressources = [0, 0] #iron,Copper
 
 func _ready():
 	torpedo_cooldown()
@@ -150,7 +151,7 @@ func variable_processing():
 		movementpenalty = 1
 
 func visualizeanddebug():
-	$Label.set_text("killcount: " + str(killcount) + "\n" + "torpedoready:" + str(readyToFire) + "\n" + "health: " + str(currenthealth) + "\n" + "repair ready in: " + str(int($Timer_repaircooldown.get_time_left())) + "\n" + "broken parts:" + str(flooded))
+	$Label.set_text("killcount: " + str(killcount) + "\n" + "torpedoready:" + str(readyToFire) + "\n" + "health: " + str(currenthealth) + "\n" + "repair ready in: " + str(int($Timer_repaircooldown.get_time_left())) + "\n" + "broken parts:" + str(flooded) + str(inv_ressources))
 
 func torpedo_ping():
 	var all_torpedos = get_tree().get_nodes_in_group("torpedo")
@@ -172,8 +173,8 @@ func collect_ressources():
 	var ressourcestocollect = $Area2D_ressourcecollect.get_overlapping_areas()
 	if not (ressourcestocollect == null):
 		for i in ressourcestocollect:
-			if i.is_in_group("iron"):
-				heal(5)
+			for x in range(len(inv_ressources)):
+				inv_ressources[x] += i.ressources[x]
 			i.queue_free()
 
 func _physics_process(_delta):

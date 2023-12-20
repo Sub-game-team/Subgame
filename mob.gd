@@ -9,8 +9,8 @@ var takendamage = 0
 var health = 5
 var damage = 5
 var stop = false
-var ping_light = 0.0
 var x = 0
+var y = 0
 
 var chase_distance = 300
 
@@ -33,22 +33,24 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var y = 0
 	$Label.set_text(str(takendamage))
 	if takendamage >= health:
+		player.killcount += 1
 		queue_free()
 	if x == 1:
-		$PointLight2D.set_energy($PointLight2D.get_energy()-0.2)
+		$PointLight2D.set_energy($PointLight2D.get_energy()+0.2)
 		y += 1
 		if y >= 4:
 			x += 1
 			y = 0
 	if x == 2:
-		$PointLight2D.set_energy($PointLight2D.get_energy()+0.05)
+		$PointLight2D.set_energy($PointLight2D.get_energy()-0.002)
 		y += 1
-		if y >= 16:
+		if y >= 400:
 			x = 0
 			y = 0
+	print(x)
+	print(y)
 	# go in the direction of player
 	# look at direction
 	# damage
