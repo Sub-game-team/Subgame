@@ -140,11 +140,10 @@ func variable_processing():
 		torpedopenalty = 1
 	if flooded[1]:
 		poweroutage = true
-                change_flashlight(-0.01)
+		$PointLight2D.change_flashlight_energy(-0.01)
 	else:
 		poweroutage = false
-                change_flashlight(0.01
-
+		$PointLight2D.change_flashlight_energy(0.01)
 	if flooded[2]:
 		movementpenalty = 0.5
 	else:
@@ -183,6 +182,9 @@ func _physics_process(_delta):
 
 func _on_timer_sonar_timeout():
 	$AudioStreamPlayer2D_sonar.play(0.0)
+	var all_enemies = get_tree().get_nodes_in_group("enemy")
+	for i in all_enemies:
+		i.ping()
 
 func _on_timer_1_torp_timeout():
 	readyToFire[0] = true
@@ -196,7 +198,7 @@ func _on_timer_3_torp_timeout():
 func take_damage(damagetotake):
 	currenthealth -= damagetotake
 	var randomgen = (randi() % 19)
-	#randomgen = 1
+	randomgen = 1
 	if randomgen <= 2:
 		flooded[randomgen] = true
 	healing = false
@@ -219,7 +221,3 @@ func heal(toheal: int):
 	currenthealth += toheal
 	if currenthealth > maxhealth:
 		currenthealth = maxhealth
-
-func change_flashlight(changeby: float = 0.01):
-        if 0.1 < $pointlight2D.get_energy()-changeby < 1:
-                $pointlight2D.set_energy($pointlight2D.get_energy()+changeby)

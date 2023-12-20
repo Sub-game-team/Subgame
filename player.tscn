@@ -105,6 +105,7 @@ shape = SubResource("CircleShape2D_tinit")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 rotation = 1.5708
 blend_mode = 2
+shadow_enabled = true
 texture = ExtResource("5_s1b4r")
 offset = Vector2(500, 0)
 script = ExtResource("5_rgvdp")
