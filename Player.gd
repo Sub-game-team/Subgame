@@ -12,7 +12,6 @@ var torpedopenalty = 1
 var repairpenalty = 1
 var movementpenalty = 1
 var poweroutage = false
-var reactoroutageoverride = false
 var killcount = 0
 var activetorpedo = 0
 var activetorpedocooldown = [0, 0, 0]
@@ -139,13 +138,13 @@ func variable_processing():
 		torpedopenalty = 1.75
 	else:
 		torpedopenalty = 1
-		repairpenalty = 1
 	if flooded[1]:
 		poweroutage = true
-		reactoroutageoverride = true
+                change_flashlight(-0.01)
 	else:
-		poweroutage = true
-		reactoroutageoverride = true
+		poweroutage = false
+                change_flashlight(0.01
+
 	if flooded[2]:
 		movementpenalty = 0.5
 	else:
@@ -220,3 +219,7 @@ func heal(toheal: int):
 	currenthealth += toheal
 	if currenthealth > maxhealth:
 		currenthealth = maxhealth
+
+func change_flashlight(changeby: float = 0.01):
+        if 0.1 < $pointlight2D.get_energy()-changeby < 1:
+                $pointlight2D.set_energy($pointlight2D.get_energy()+changeby)
