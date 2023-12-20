@@ -25,6 +25,7 @@ var currenthealth = 30
 var maxhealth = 30
 var repairready = false
 var healing = false
+var inv_ressources = [0, 0] #iron,
 
 func _ready():
 	torpedo_cooldown()
