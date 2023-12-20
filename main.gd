@@ -26,7 +26,7 @@ func _ready():
 	var crosshair = crosshair_scene.instantiate()
 	add_child(crosshair)
 	var vulkanschnecke = vulkanschnecken_scene.instantiate()
-	vulkanschnecke.position = Vector2($Area2D_vulkanschneckenspawner.gen_random_pos())
+	vulkanschnecke.position = Vector2(-1340, 800)
 	add_child(vulkanschnecke)
 
 func _on_timer_timeout():
