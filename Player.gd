@@ -173,8 +173,7 @@ func collect_ressources():
 	var ressourcestocollect = $Area2D_ressourcecollect.get_overlapping_areas()
 	if not (ressourcestocollect == null):
 		for i in ressourcestocollect:
-			if i.is_in_group("iron"):
-				heal(5)
+			inv_ressources += ressourcestocollect.get_parent().ressources
 			i.queue_free()
 
 func _physics_process(_delta):
