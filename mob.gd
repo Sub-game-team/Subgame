@@ -44,7 +44,7 @@ func _process(_delta):
 			x += 1
 			y = 0
 	if x == 2:
-		$PointLight2D.set_energy($PointLight2D.get_energy()-0.05)
+		$PointLight2D.set_energy($PointLight2D.get_energy()+0.05)
 		y += 1
 		if y >= 16:
 			x = 0
