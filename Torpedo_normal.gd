@@ -14,7 +14,7 @@ var homing = false
 var distancetomouse = [0, 0, 0, 0]
 var targetenemy = [0, 0, 0 ,0]
 var showtarget = false
-var delay = 0.8
+var delay = 0.4
 var closestenemydistance = 0
 var timetoenemy = 0
 var targetcoords = Vector2()
@@ -67,7 +67,6 @@ func _on_body_entered(_body):
 	for i in range(len(enemys_to_kill)):
 		if enemys_to_kill[i].is_in_group("enemyarea") or enemys_to_kill[i].is_in_group("player"):
 			enemys_to_kill[i].get_parent().take_damage(damage)
-	player.killcount += len(enemys_to_kill)
 	set_visible(false)
 	stop = true
 	call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
@@ -82,8 +81,7 @@ func sonar_ping():
 		pass
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
-	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 0.8)
-
+	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 1.5)
 func AngularLookAt( currentPosition, currentRotation, targetPosition, turnTime ):
 	return GetAngle( currentRotation, TargetAngle( currentPosition, targetPosition ) )/turnTime
 

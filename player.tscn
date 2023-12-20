@@ -106,12 +106,15 @@ shape = SubResource("CircleShape2D_tinit")
 rotation = 1.5708
 blend_mode = 2
 shadow_enabled = true
+shadow_item_cull_mask = 3
 texture = ExtResource("5_s1b4r")
 offset = Vector2(500, 0)
 script = ExtResource("5_rgvdp")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 7
 texture = ExtResource("6_y0o4n")
 
 [connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]

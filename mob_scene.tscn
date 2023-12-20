@@ -41,7 +41,7 @@ use_parent_material = true
 texture = ExtResource("2_00tpv")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
-light_mask = 7
+light_mask = 6
 occluder = SubResource("OccluderPolygon2D_pgxjp")
 sdf_collision = false
 occluder_light_mask = 15
