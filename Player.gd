@@ -17,10 +17,10 @@ var activetorpedo = 0
 var activetorpedocooldown = [0, 0, 0]
 var projectile
 var distancetomouse
-var homingupgrade = [false, true, false]
-var speedupgrade = [true, false, false]
-var damageupgrade = [false, false, true]
-var radiusupgrade = [false, false, true]
+var homingupgrade = [false, false, false]
+var speedupgrade = [false, false, false]
+var damageupgrade = [false, false, false]
+var radiusupgrade = [false, false, false]
 var currenthealth = 30
 var maxhealth = 30
 var repairready = false
@@ -65,6 +65,7 @@ func get_movement():
 				yMovement = -18
 
 func _process(_delta):
+	conftorpedo()
 	torpedo_select_input()
 	torpedo_shoot_input()
 	variable_processing()
@@ -73,6 +74,20 @@ func _process(_delta):
 	checkhealth()
 	repair()
 	collect_ressources()
+
+func conftorpedo():
+	homingupgrade[0] = $TabContainer/torp1/CheckButton.is_pressed()
+	homingupgrade[1] = $TabContainer/torp2/CheckButton.is_pressed()
+	homingupgrade[2] = $TabContainer/torp3/CheckButton.is_pressed()
+	speedupgrade[0] = $TabContainer/torp1/CheckButton2.is_pressed()
+	speedupgrade[1] = $TabContainer/torp2/CheckButton2.is_pressed()
+	speedupgrade[2] = $TabContainer/torp3/CheckButton2.is_pressed()
+	damageupgrade[0] = $TabContainer/torp1/CheckButton3.is_pressed()
+	damageupgrade[1] = $TabContainer/torp2/CheckButton3.is_pressed()
+	damageupgrade[2] = $TabContainer/torp3/CheckButton3.is_pressed()
+	radiusupgrade[0] = $TabContainer/torp1/CheckButton4.is_pressed()
+	radiusupgrade[1] = $TabContainer/torp2/CheckButton4.is_pressed()
+	radiusupgrade[2] = $TabContainer/torp3/CheckButton4.is_pressed()
 
 func torpedo_cooldown():
 	for i in range(len(homingupgrade)):
@@ -199,7 +214,7 @@ func _on_timer_3_torp_timeout():
 func take_damage(damagetotake):
 	currenthealth -= damagetotake
 	var randomgen = (randi() % 19)
-	randomgen = 1
+	#randomgen = 1
 	if randomgen <= 2:
 		flooded[randomgen] = true
 	healing = false

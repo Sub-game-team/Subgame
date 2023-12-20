@@ -1,5 +1,5 @@
 extends Area2D
-@export var ressources = [0, 0] #Iron,Copper
+@export var ressources = [5, 0] #Iron,Copper
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

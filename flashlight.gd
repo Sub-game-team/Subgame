@@ -12,5 +12,4 @@ func _process(_delta):
 
 func change_flashlight_energy(changeby: float):
 	if 0.35 < (get_energy()+changeby) and (get_energy()+changeby) < 1:
-		set_energy(get_energy()+changeby)#
-	print(get_energy())
+		set_energy(get_energy()+changeby)

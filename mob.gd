@@ -49,8 +49,6 @@ func _process(_delta):
 		if y >= 400:
 			x = 0
 			y = 0
-	print(x)
-	print(y)
 	# go in the direction of player
 	# look at direction
 	# damage

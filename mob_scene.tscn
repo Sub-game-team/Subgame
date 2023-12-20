@@ -61,7 +61,7 @@ label_settings = SubResource("LabelSettings_e3v2p")
 autowrap_mode = 3
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.2
+energy = 0.0
 texture = ExtResource("4_nj2iy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
