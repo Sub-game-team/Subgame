@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var speed = 20
+var speed = 200
 var player
 var stop = false
 var speedmax = 1600
@@ -14,7 +14,7 @@ var homing = false
 var distancetomouse = [0, 0, 0, 0]
 var targetenemy = [0, 0, 0 ,0]
 var showtarget = false
-var delay = 0.4
+var delay = 0.016
 var closestenemydistance = 0
 var timetoenemy = 0
 var targetcoords = Vector2()
@@ -35,7 +35,7 @@ func _ready():
 
 func set_stuff():
 	$Area2D/CollisionShape2D.set_scale(Vector2(1*radiusmod, 1*radiusmod))
-	damage = damage * damagemod
+	damage = max(damage * damagemod, 1)
 	acc = acc * accmod
 	speedmax = speedmax * speedmaxmod
 
@@ -76,12 +76,13 @@ func sonar_ping():
 		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
 		timetoenemy = calculateTimeToHit(targetenemydistancetotorpedo, speed, acc)
 		showtarget = true
-		targetcoords = targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * timetoenemy)
+		targetcoords = targetenemy.get_global_position()# + (targetenemy.get_linear_velocity() * timetoenemy)
 	else:
 		pass
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
-	nodeToTurn.angular_velocity = min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 1.5)
+	nodeToTurn.angular_velocity = max(min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 1.5), -1.5)
+
 func AngularLookAt( currentPosition, currentRotation, targetPosition, turnTime ):
 	return GetAngle( currentRotation, TargetAngle( currentPosition, targetPosition ) )/turnTime
 

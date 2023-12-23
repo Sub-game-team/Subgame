@@ -23,6 +23,7 @@ physics_material_override = SubResource("PhysicsMaterial_dk6u7")
 max_contacts_reported = 5
 contact_monitor = true
 script = ExtResource("1_o3kvi")
+speed = 30
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

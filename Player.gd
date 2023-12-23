@@ -26,9 +26,10 @@ var maxhealth = 30
 var repairready = false
 var healing = false
 var inv_ressources = [0, 0] #iron,Copper
+var start = false
 
 func _ready():
-	torpedo_cooldown()
+	pass
 
 func get_movement():
 	if Input.is_action_pressed("left") and xMovement >= -488:
@@ -65,15 +66,15 @@ func get_movement():
 				yMovement = -18
 
 func _process(_delta):
-	conftorpedo()
-	torpedo_select_input()
-	torpedo_shoot_input()
-	variable_processing()
-	visualizeanddebug()
-	torpedo_ping()
-	checkhealth()
-	repair()
-	collect_ressources()
+	if start:
+		torpedo_select_input()
+		torpedo_shoot_input()
+		variable_processing()
+		visualizeanddebug()
+		torpedo_ping()
+		checkhealth()
+		repair()
+		collect_ressources()
 
 func conftorpedo():
 	homingupgrade[0] = $TabContainer/torp1/CheckButton.is_pressed()
@@ -130,20 +131,20 @@ func torpedo_shoot_input():
 		get_parent().add_child(projectile)
 		if speedupgrade[activetorpedo]:
 			projectile.speedmaxmod += 0.25
-			projectile.accmod += 2
+			projectile.accmod += 1
 			projectile.damagemod -= 0.6
 		if homingupgrade[activetorpedo]:
 			projectile.homing = true
-			projectile.damagemod -= 0.4
-			projectile.accmod -= 0.2
+			projectile.damagemod -= 0.2
+			projectile.accmod -= 0.1
 		if radiusupgrade[activetorpedo]:
 			projectile.radiusmod += 0.75
 			projectile.damagemod += 0.2
 			projectile.accmod -= 0.2
 		if damageupgrade[activetorpedo]:
-			projectile.damagemod += 1
+			projectile.damagemod += 0.8
 			projectile.speedmaxmod -= 0.5
-			projectile.accmod -= 0.25
+			projectile.accmod -= 0.35
 		projectile.set_stuff()
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
@@ -193,8 +194,9 @@ func collect_ressources():
 			i.queue_free()
 
 func _physics_process(_delta):
-	get_movement()
-	move_and_slide()
+	if start:
+		get_movement()
+		move_and_slide()
 
 func _on_timer_sonar_timeout():
 	$AudioStreamPlayer2D_sonar.play(0.0)
@@ -217,23 +219,16 @@ func take_damage(damagetotake):
 	#randomgen = 1
 	if randomgen <= 2:
 		flooded[randomgen] = true
-	healing = false
-	$Timer_regen.start()
 
 func _on_timer_repaircooldown_timeout():
 	repairready = true
-
-func _on_timer_regen_timeout():
-	healing = true
-	$Timer_regen2.start()
-
-func _on_timer_regen_2_timeout():
-	if healing:
-		if currenthealth < maxhealth:
-			currenthealth += 1
-		$Timer_regen2.start()
 
 func heal(toheal: int):
 	currenthealth += toheal
 	if currenthealth > maxhealth:
 		currenthealth = maxhealth
+
+func start_sub():
+	start = true
+	torpedo_cooldown()
+	conftorpedo()

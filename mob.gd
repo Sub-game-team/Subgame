@@ -73,7 +73,8 @@ func _physics_process(delta):
 		if temp_speed > 0:
 			temp_speed -= 1 * delta
 
-# Function to set the player reference
+	# Function to set the player reference
+
 func set_player_reference(player_ref: CharacterBody2D):
 	player = player_ref
 

@@ -157,7 +157,7 @@ text = "radius"
 stream = ExtResource("4_gsdcc")
 
 [node name="Timer_sonar" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="." groups=["player"]]
@@ -173,13 +173,6 @@ shape = SubResource("CapsuleShape2D_ysf7i")
 wait_time = 30.0
 one_shot = true
 autostart = true
-
-[node name="Timer_regen" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
-
-[node name="Timer_regen2" type="Timer" parent="."]
-one_shot = true
 
 [node name="Area2D_ressourcecollect" type="Area2D" parent="." groups=["ressource_collector"]]
 collision_mask = 16
@@ -208,5 +201,3 @@ texture = ExtResource("6_y0o4n")
 [connection signal="timeout" from="Timer_3torp" to="." method="_on_timer_3_torp_timeout"]
 [connection signal="timeout" from="Timer_sonar" to="." method="_on_timer_sonar_timeout"]
 [connection signal="timeout" from="Timer_repaircooldown" to="." method="_on_timer_repaircooldown_timeout"]
-[connection signal="timeout" from="Timer_regen" to="." method="_on_timer_regen_timeout"]
-[connection signal="timeout" from="Timer_regen2" to="." method="_on_timer_regen_2_timeout"]
