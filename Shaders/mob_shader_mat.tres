@@ -1,8 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bw602x4inua28"]
-
-[ext_resource type="Shader" path="res://Shaders/mob_shader.gdshader" id="1_abkwf"]
-
-[resource]
-shader = ExtResource("1_abkwf")
-shader_parameter/tint_color = Color(0, 0.698039, 0.188235, 0.6)
-shader_parameter/glow_amount = 0.2

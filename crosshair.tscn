@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdt00qtk6kkbj"]
-
-[ext_resource type="Script" path="res://crosshair.gd" id="1_4sqcd"]
-
-[node name="Crosshair" type="Node2D"]
-z_index = 2
-script = ExtResource("1_4sqcd")
