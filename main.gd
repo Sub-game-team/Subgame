@@ -5,6 +5,7 @@ extends Node
 @export var tileset: PackedScene
 @export var crosshair_scene: PackedScene
 @export var vulkanschnecken_scene: PackedScene
+var player
 
 func create_mob(pos: Vector2 = Vector2(500,0)):
 	var mob = mob_scene.instantiate()
@@ -18,11 +19,11 @@ func create_mob(pos: Vector2 = Vector2(500,0)):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var player = player_scene.instantiate()
+	player = player_scene.instantiate()
 	add_child(player)
 	var tile_set = tileset.instantiate()
 	add_child(tile_set)
-	create_mob()
+	
 	var crosshair = crosshair_scene.instantiate()
 	add_child(crosshair)
 	var vulkanschnecke = vulkanschnecken_scene.instantiate()
@@ -31,3 +32,12 @@ func _ready():
 
 func _on_timer_timeout():
 	create_mob($Area2D_mobspawner.gen_random_pos())
+
+
+func _on_button_pressed():
+	player.start_sub()
+	create_mob()
+	$Timer.start(3)
+	$Button.queue_free()
+	$Label.queue_free()
+	$Player/TabContainer.queue_free()
