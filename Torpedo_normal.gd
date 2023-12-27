@@ -62,14 +62,17 @@ func _on_audio_stream_player_2d_finished():
 	queue_free()
 
 func _on_body_entered(_body):
-	$AudioStreamPlayer2D.play(0.0)
-	var enemys_to_kill = $Area2D.get_overlapping_areas()
-	for i in range(len(enemys_to_kill)):
-		if enemys_to_kill[i].is_in_group("enemyarea") or enemys_to_kill[i].is_in_group("player"):
-			enemys_to_kill[i].get_parent().take_damage(damage)
-	set_visible(false)
-	stop = true
-	call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+	if not stop:
+		$AudioStreamPlayer2D.play(0.0)
+		var enemys_to_kill = $Area2D.get_overlapping_areas()
+		for i in range(len(enemys_to_kill)):
+			if enemys_to_kill[i].is_in_group("enemyarea") or enemys_to_kill[i].is_in_group("player"):
+				enemys_to_kill[i].get_parent().take_damage(damage)
+		set_visible(false)
+		stop = true
+	else:
+		pass
+	#call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 
 func sonar_ping():
 	if (not stop) and (not (targetenemy == null)) and homing:

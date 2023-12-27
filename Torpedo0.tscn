@@ -40,7 +40,6 @@ stream = ExtResource("3_e6xop")
 max_distance = 3000.0
 max_polyphony = 124
 panning_strength = 2.0
-area_mask = 16
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
