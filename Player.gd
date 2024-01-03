@@ -6,7 +6,6 @@ var xMovement = 0
 @onready var player_body = get_node(".")
 var projectile_scene0 = preload("res://Torpedo0.tscn")
 var readyToFire = [true, true, true]
-var damage = 0
 var flooded = [false, false, false]
 var torpedopenalty = 1
 var repairpenalty = 1
@@ -232,3 +231,14 @@ func start_sub():
 	start = true
 	torpedo_cooldown()
 	conftorpedo()
+
+func save():
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"parent" : get_parent().get_path(),
+		"pos_x" : position.x, # Vector2 is not supported by JSON
+		"pos_y" : position.y,
+		"current_health" : currenthealth,
+		"max_health" : maxhealth,
+	}
+	return save_dict

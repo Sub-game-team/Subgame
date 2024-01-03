@@ -44,10 +44,10 @@ texture = ExtResource("8_gnlaa")
 
 [node name="Button" type="Button" parent="."]
 light_mask = 4
-offset_left = 119.0
-offset_top = -193.0
-offset_right = 296.0
-offset_bottom = -57.0
+offset_left = -1499.0
+offset_top = -2912.0
+offset_right = 1264.0
+offset_bottom = 1897.0
 text = "start"
 icon = ExtResource("9_jmoii")
 
@@ -81,5 +81,9 @@ radius:
 +2s cooldown
 "
 
+[node name="Timer_save" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer_save" to="." method="_on_timer_save_timeout"]

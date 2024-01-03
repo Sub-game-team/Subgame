@@ -8,7 +8,7 @@ var chase = false
 var takendamage = 0
 var health = 5
 var damage = 5
-var stop = false
+var stop = true
 var x = 0
 var y = 0
 
