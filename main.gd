@@ -6,6 +6,7 @@ extends Node
 @export var crosshair_scene: PackedScene
 @export var vulkanschnecken_scene: PackedScene
 
+var reset_progress = false
 
 func create_mob(pos: Vector2 = Vector2(500,0)):
 	var mob = mob_scene.instantiate()
@@ -20,7 +21,11 @@ func create_mob(pos: Vector2 = Vector2(500,0)):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	load_game()
+	if not reset_progress:
+		load_game()
+	else:
+		var player = player_scene.instantiate()
+		add_child(player)
 	var tile_set = tileset.instantiate()
 	add_child(tile_set)
 	
