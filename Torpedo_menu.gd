@@ -3,13 +3,12 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	load_settings()
-
+	if get_parent().reset_settings == false:
+		load_settings()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
 
 func _on_button_pressed():
 	var torp_menu_stuff = get_tree().get_nodes_in_group("torpedo_menu")
@@ -74,7 +73,6 @@ func load_settings():
 		for i in node_data.keys():
 			buttons[x].set_pressed(node_data[i])
 			x += 1
-
 
 func _on_check_button_pressed():
 	save_settings()

@@ -19,6 +19,7 @@ player_scene = ExtResource("3_8y4yx")
 tileset = ExtResource("4_njx7p")
 crosshair_scene = ExtResource("5_3e7h7")
 vulkanschnecken_scene = ExtResource("6_ad2yy")
+reset_progress = true
 
 [node name="TileMap" parent="." instance=ExtResource("4_njx7p")]
 
@@ -34,11 +35,9 @@ script = ExtResource("6_6j3ew")
 shape = SubResource("RectangleShape2D_ea6bn")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.00784314, 0.00784314, 0.00784314, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-25.5, -59.0002)
 scale = Vector2(50.4648, 37.6172)
 texture = ExtResource("8_gnlaa")

@@ -76,18 +76,49 @@ func _process(_delta):
 		collect_ressources()
 
 func conftorpedo():
-	homingupgrade[0] = $TabContainer/torp1/CheckButton.is_pressed()
-	homingupgrade[1] = $TabContainer/torp2/CheckButton.is_pressed()
-	homingupgrade[2] = $TabContainer/torp3/CheckButton.is_pressed()
-	speedupgrade[0] = $TabContainer/torp1/CheckButton2.is_pressed()
-	speedupgrade[1] = $TabContainer/torp2/CheckButton2.is_pressed()
-	speedupgrade[2] = $TabContainer/torp3/CheckButton2.is_pressed()
-	damageupgrade[0] = $TabContainer/torp1/CheckButton3.is_pressed()
-	damageupgrade[1] = $TabContainer/torp2/CheckButton3.is_pressed()
-	damageupgrade[2] = $TabContainer/torp3/CheckButton3.is_pressed()
-	radiusupgrade[0] = $TabContainer/torp1/CheckButton4.is_pressed()
-	radiusupgrade[1] = $TabContainer/torp2/CheckButton4.is_pressed()
-	radiusupgrade[2] = $TabContainer/torp3/CheckButton4.is_pressed()
+	if not FileAccess.file_exists("res://Savegames/settings.save"):
+		return
+	var settings_file = FileAccess.open("res://Savegames/settings.save", FileAccess.READ)
+	while settings_file.get_position() < settings_file.get_length():
+		var json_string = settings_file.get_line()
+
+		# Creates the helper class to interact with JSON
+		var json = JSON.new()
+
+		# Check if there is any error while parsing the JSON string, skip in case of failure
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		# Get the data from the JSON object
+		var node_data = json.get_data()
+
+		for i in node_data.keys():
+			if i == "Torpedo1_homing":
+				homingupgrade[0] = node_data[i]
+			elif i == "Torpedo2_homing":
+				homingupgrade[1] = node_data[i]
+			elif i == "Torpedo3_homing":
+				homingupgrade[2] = node_data[i]
+			elif i == "Torpedo1_damage":
+				damageupgrade[0] = node_data[i]
+			elif i == "Torpedo2_damage":
+				damageupgrade[1] = node_data[i]
+			elif i == "Torpedo3_damage":
+				damageupgrade[2] = node_data[i]
+			elif i == "Torpedo1_speed":
+				speedupgrade[0] = node_data[i]
+			elif i == "Torpedo2_speed":
+				speedupgrade[1] = node_data[i]
+			elif i == "Torpedo3_speed":
+				speedupgrade[2] = node_data[i]
+			elif i == "Torpedo1_radius":
+				radiusupgrade[0] = node_data[i]
+			elif i == "Torpedo2_radius":
+				radiusupgrade[1] = node_data[i]
+			elif i == "Torpedo3_radius":
+				radiusupgrade[2] = node_data[i]
 
 func torpedo_cooldown():
 	for i in range(len(homingupgrade)):
@@ -238,7 +269,7 @@ func save():
 		"parent" : get_parent().get_path(),
 		"pos_x" : position.x, # Vector2 is not supported by JSON
 		"pos_y" : position.y,
-		"current_health" : currenthealth,
-		"max_health" : maxhealth,
+		"currenthealth" : currenthealth,
+		"maxhealth" : maxhealth,
 	}
 	return save_dict

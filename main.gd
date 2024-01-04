@@ -6,7 +6,7 @@ extends Node
 @export var crosshair_scene: PackedScene
 @export var vulkanschnecken_scene: PackedScene
 
-var reset_progress = true
+@export var reset_progress = false
 
 func create_mob(pos: Vector2 = Vector2(500,0)):
 	var mob = mob_scene.instantiate()
