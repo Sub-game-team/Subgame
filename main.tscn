@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3d142e6e7wlg"]
+[gd_scene load_steps=10 format=3 uid="uid://b3d142e6e7wlg"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_7x3uh"]
 [ext_resource type="PackedScene" uid="uid://b2vonva0p6djd" path="res://mob_scene.tscn" id="2_6ptv3"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://Area2D_mobspawner.gd" id="6_6j3ew"]
 [ext_resource type="PackedScene" uid="uid://d117jckee3qt1" path="res://Vulkan_schnecken.tscn" id="6_ad2yy"]
 [ext_resource type="Texture2D" uid="uid://cj4jlmn7rc2pr" path="res://Art/blue_water_ecxample.png" id="8_gnlaa"]
-[ext_resource type="Texture2D" uid="uid://cy2vf6e010hwk" path="res://icon.svg" id="9_jmoii"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea6bn"]
 size = Vector2(26.0031, 2752)
@@ -20,6 +19,7 @@ player_scene = ExtResource("3_8y4yx")
 tileset = ExtResource("4_njx7p")
 crosshair_scene = ExtResource("5_3e7h7")
 vulkanschnecken_scene = ExtResource("6_ad2yy")
+reset_progress = true
 
 [node name="TileMap" parent="." instance=ExtResource("4_njx7p")]
 
@@ -42,44 +42,7 @@ position = Vector2(-25.5, -59.0002)
 scale = Vector2(50.4648, 37.6172)
 texture = ExtResource("8_gnlaa")
 
-[node name="Button" type="Button" parent="."]
-light_mask = 4
-offset_left = 119.0
-offset_top = -193.0
-offset_right = 296.0
-offset_bottom = -57.0
-text = "start"
-icon = ExtResource("9_jmoii")
-
-[node name="Label" type="Label" parent="."]
-light_mask = 4
-offset_left = 382.0
-offset_top = -321.0
-offset_right = 930.0
-offset_bottom = 88.0
-text = "homing:
-makes torp home
--20% damage
--10% acceleration
-+2s cooldown
-
-speed:
-+25% max speed
-+100% acceleration
--60% damage
-
-damage:
-+80% damage
--50% maxspeed
--35% acceleration
-+3s cooldown
-
-radius:
-+75% explosion radius
-+ 20% damage
--20% acceleration
-+2s cooldown
-"
+[node name="Timer_save" type="Timer" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer_save" to="." method="_on_timer_save_timeout"]

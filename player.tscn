@@ -16,7 +16,7 @@ height = 122.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tinit"]
 radius = 300.0
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["Persist", "player"]]
 z_index = 1
 collision_mask = 7
 motion_mode = 1
@@ -66,92 +66,6 @@ autowrap_mode = 3
 range_item_cull_mask = 4
 texture = ExtResource("6_y0o4n")
 texture_scale = 50.0
-
-[node name="TabContainer" type="TabContainer" parent="."]
-light_mask = 4
-offset_left = -535.0
-offset_top = -226.0
-offset_right = -114.0
-offset_bottom = -164.0
-clip_tabs = false
-drag_to_rearrange_enabled = true
-
-[node name="torp1" type="HBoxContainer" parent="TabContainer"]
-light_mask = 4
-layout_mode = 2
-focus_mode = 2
-
-[node name="CheckButton" type="CheckButton" parent="TabContainer/torp1"]
-light_mask = 4
-layout_mode = 2
-text = "homing"
-
-[node name="CheckButton2" type="CheckButton" parent="TabContainer/torp1"]
-light_mask = 4
-layout_mode = 2
-text = "speed"
-
-[node name="CheckButton3" type="CheckButton" parent="TabContainer/torp1"]
-light_mask = 4
-layout_mode = 2
-text = "damage"
-
-[node name="CheckButton4" type="CheckButton" parent="TabContainer/torp1"]
-light_mask = 4
-layout_mode = 2
-text = "radius"
-
-[node name="torp2" type="HBoxContainer" parent="TabContainer"]
-visible = false
-light_mask = 4
-layout_mode = 2
-focus_mode = 2
-
-[node name="CheckButton" type="CheckButton" parent="TabContainer/torp2"]
-light_mask = 4
-layout_mode = 2
-text = "homing"
-
-[node name="CheckButton2" type="CheckButton" parent="TabContainer/torp2"]
-light_mask = 4
-layout_mode = 2
-text = "speed"
-
-[node name="CheckButton3" type="CheckButton" parent="TabContainer/torp2"]
-light_mask = 4
-layout_mode = 2
-text = "damage"
-
-[node name="CheckButton4" type="CheckButton" parent="TabContainer/torp2"]
-light_mask = 4
-layout_mode = 2
-text = "radius"
-
-[node name="torp3" type="HBoxContainer" parent="TabContainer"]
-visible = false
-light_mask = 4
-layout_mode = 2
-focus_mode = 2
-
-[node name="CheckButton" type="CheckButton" parent="TabContainer/torp3"]
-light_mask = 4
-layout_mode = 2
-text = "homing"
-
-[node name="CheckButton2" type="CheckButton" parent="TabContainer/torp3"]
-light_mask = 4
-layout_mode = 2
-text = "speed"
-
-[node name="CheckButton3" type="CheckButton" parent="TabContainer/torp3"]
-light_mask = 4
-layout_mode = 2
-text = "damage"
-
-[node name="CheckButton4" type="CheckButton" parent="TabContainer/torp3"]
-light_mask = 4
-layout_mode = 2
-text = "radius"
 
 [node name="AudioStreamPlayer2D_sonar" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_gsdcc")
