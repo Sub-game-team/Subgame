@@ -1,0 +1,164 @@
+[gd_scene load_steps=4 format=3 uid="uid://d362xpiokd2ht"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_vn0x7"]
+[ext_resource type="PackedScene" uid="uid://b3d142e6e7wlg" path="res://main.tscn" id="2_d5m02"]
+[ext_resource type="Script" path="res://Torpedo_menu.gd" id="3_yhpsc"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_vn0x7")
+room_1_1 = ExtResource("2_d5m02")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Button" type="Button" parent="Node2D"]
+light_mask = 4
+offset_left = 78.0
+offset_top = -227.0
+offset_right = 255.0
+offset_bottom = -91.0
+text = "start"
+
+[node name="Node2D2" type="Node2D" parent="."]
+script = ExtResource("3_yhpsc")
+
+[node name="Button" type="Button" parent="Node2D2"]
+offset_left = -165.0
+offset_top = -226.0
+offset_right = -11.0
+offset_bottom = -92.0
+text = "Torpedo"
+
+[node name="Label" type="Label" parent="Node2D2/Button" groups=["torpedo_menu"]]
+visible = false
+light_mask = 4
+offset_left = -383.0
+offset_top = -168.0
+offset_right = 165.0
+offset_bottom = 401.0
+text = "homing:
+makes torp home
+-20% damage
+-10% acceleration
++2s cooldown
+
+speed:
++25% max speed
++100% acceleration
+-60% damage
+
+damage:
++80% damage
+-50% maxspeed
+-35% acceleration
++3s cooldown
+
+radius:
++75% explosion radius
++ 20% damage
+-20% acceleration
++2s cooldown
+"
+
+[node name="TabContainer" type="TabContainer" parent="Node2D2/Button" groups=["torpedo_menu"]]
+visible = false
+light_mask = 4
+offset_left = -268.0
+offset_top = -65.0
+offset_right = 153.0
+offset_bottom = -3.0
+clip_tabs = false
+drag_to_rearrange_enabled = true
+
+[node name="torp1" type="HBoxContainer" parent="Node2D2/Button/TabContainer"]
+light_mask = 4
+layout_mode = 2
+focus_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="Node2D2/Button/TabContainer/torp1"]
+light_mask = 4
+layout_mode = 2
+text = "homing"
+
+[node name="CheckButton2" type="CheckButton" parent="Node2D2/Button/TabContainer/torp1"]
+light_mask = 4
+layout_mode = 2
+text = "speed"
+
+[node name="CheckButton3" type="CheckButton" parent="Node2D2/Button/TabContainer/torp1"]
+light_mask = 4
+layout_mode = 2
+text = "damage"
+
+[node name="CheckButton4" type="CheckButton" parent="Node2D2/Button/TabContainer/torp1"]
+light_mask = 4
+layout_mode = 2
+text = "radius"
+
+[node name="torp2" type="HBoxContainer" parent="Node2D2/Button/TabContainer"]
+visible = false
+light_mask = 4
+layout_mode = 2
+focus_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="Node2D2/Button/TabContainer/torp2"]
+light_mask = 4
+layout_mode = 2
+text = "homing"
+
+[node name="CheckButton2" type="CheckButton" parent="Node2D2/Button/TabContainer/torp2"]
+light_mask = 4
+layout_mode = 2
+text = "speed"
+
+[node name="CheckButton3" type="CheckButton" parent="Node2D2/Button/TabContainer/torp2"]
+light_mask = 4
+layout_mode = 2
+text = "damage"
+
+[node name="CheckButton4" type="CheckButton" parent="Node2D2/Button/TabContainer/torp2"]
+light_mask = 4
+layout_mode = 2
+text = "radius"
+
+[node name="torp3" type="HBoxContainer" parent="Node2D2/Button/TabContainer"]
+visible = false
+light_mask = 4
+layout_mode = 2
+focus_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="Node2D2/Button/TabContainer/torp3"]
+light_mask = 4
+layout_mode = 2
+text = "homing"
+
+[node name="CheckButton2" type="CheckButton" parent="Node2D2/Button/TabContainer/torp3"]
+light_mask = 4
+layout_mode = 2
+text = "speed"
+
+[node name="CheckButton3" type="CheckButton" parent="Node2D2/Button/TabContainer/torp3"]
+light_mask = 4
+layout_mode = 2
+text = "damage"
+
+[node name="CheckButton4" type="CheckButton" parent="Node2D2/Button/TabContainer/torp3"]
+light_mask = 4
+layout_mode = 2
+text = "radius"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="pressed" from="Node2D/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D2/Button" to="Node2D2" method="_on_button_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp1/CheckButton" to="Node2D2" method="_on_check_button_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp1/CheckButton2" to="Node2D2" method="_on_check_button_2_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp1/CheckButton3" to="Node2D2" method="_on_check_button_3_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp1/CheckButton4" to="Node2D2" method="_on_check_button_4_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp2/CheckButton" to="Node2D2" method="_on_check_button_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp2/CheckButton2" to="Node2D2" method="_on_check_button_2_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp2/CheckButton3" to="Node2D2" method="_on_check_button_3_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp2/CheckButton4" to="Node2D2" method="_on_check_button_4_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp3/CheckButton" to="Node2D2" method="_on_check_button_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp3/CheckButton2" to="Node2D2" method="_on_check_button_2_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp3/CheckButton3" to="Node2D2" method="_on_check_button_3_pressed"]
+[connection signal="pressed" from="Node2D2/Button/TabContainer/torp3/CheckButton4" to="Node2D2" method="_on_check_button_4_pressed"]

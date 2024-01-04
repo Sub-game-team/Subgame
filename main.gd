@@ -6,7 +6,7 @@ extends Node
 @export var crosshair_scene: PackedScene
 @export var vulkanschnecken_scene: PackedScene
 
-var reset_progress = false
+var reset_progress = true
 
 func create_mob(pos: Vector2 = Vector2(500,0)):
 	var mob = mob_scene.instantiate()
@@ -26,6 +26,7 @@ func _ready():
 	else:
 		var player = player_scene.instantiate()
 		add_child(player)
+		save_game()
 	var tile_set = tileset.instantiate()
 	add_child(tile_set)
 	
@@ -34,6 +35,11 @@ func _ready():
 	var vulkanschnecke = vulkanschnecken_scene.instantiate()
 	vulkanschnecke.position = Vector2(-1340, 800)
 	add_child(vulkanschnecke)
+	$Timer_save.start()
+	$Player.start_sub()
+	create_mob()
+	$mob.stop = false
+	$Timer.start(3)
 
 func _on_timer_timeout():
 	create_mob($Area2D_mobspawner.gen_random_pos())
@@ -44,9 +50,7 @@ func _on_button_pressed():
 	create_mob()
 	$mob.stop = false
 	$Timer.start(3)
-	$Button.queue_free()
-	$Label.queue_free()
-	$Player/TabContainer.queue_free()
+
 
 func save_game():
 	var save_game = FileAccess.open("res://Savegames/save1.save", FileAccess.WRITE)

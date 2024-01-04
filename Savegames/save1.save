@@ -1,1 +1,1 @@
-{"current_health":30,"filename":"res://player.tscn","max_health":30,"parent":"/root/main","pos_x":-549.935791015625,"pos_y":1186.07861328125}
+{"current_health":30,"filename":"res://player.tscn","max_health":30,"parent":"/root/Node/main","pos_x":0,"pos_y":0}
