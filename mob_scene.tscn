@@ -1,32 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2vonva0p6djd"]
+[gd_scene load_steps=8 format=3 uid="uid://b2vonva0p6djd"]
 
+[ext_resource type="Material" uid="uid://bw602x4inua28" path="res://Shaders/mob_shader_mat.tres" id="1_al6sl"]
 [ext_resource type="Script" path="res://mob.gd" id="1_o3kvi"]
-[ext_resource type="Texture2D" uid="uid://df6asf71gxp7g" path="res://enemy_normal.png" id="2_00tpv"]
+[ext_resource type="Texture2D" uid="uid://df6asf71gxp7g" path="res://Art/enemy_normal.png" id="2_00tpv"]
+[ext_resource type="Texture2D" uid="uid://dgbqo64atuto0" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="4_nj2iy"]
 
-[node name="mob" type="RigidBody2D"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dk6u7"]
+bounce = 5.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pgxjp"]
+cull_mode = 1
+polygon = PackedVector2Array(-29, 0, -29, 2, -28, 2, -28, 3, -22, 3, -22, 4, -2, 4, -2, 5, 4, 5, 4, 4, 10, 4, 10, 3, 14, 3, 14, 2, 16, 2, 16, 1, 17, 1, 17, 0, 18, 0, 18, -3, 20, -3, 20, -4, 23, -4, 23, -3, 26, -3, 26, -2, 29, -2, 29, -5, 28, -5, 28, -7, 26, -7, 26, -8, 27, -8, 27, -9, 28, -9, 28, -11, 27, -11, 27, -12, 24, -12, 24, -11, 21, -11, 21, -10, 20, -10, 20, -9, 19, -9, 19, -10, 14, -10, 14, -11, 10, -11, 10, -12, 1, -12, 1, -14, 2, -14, 2, -16, 3, -16, 3, -18, 2, -18, 2, -19, 1, -19, 1, -18, -1, -18, -1, -17, -2, -17, -2, -16, -3, -16, -3, -13, -4, -13, -4, -12, -5, -12, -5, -11, -10, -11, -10, -10, -13, -10, -13, -9, -16, -9, -16, -8, -17, -8, -17, -7, -19, -7, -19, -6, -21, -6, -21, -5, -23, -5, -23, -3, -25, -3, -25, -2, -26, -2, -26, -1, -28, -1, -28, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e3v2p"]
+
+[node name="mob" type="RigidBody2D" groups=["damage5", "enemy"]]
+material = ExtResource("1_al6sl")
 collision_layer = 4
-collision_mask = 7
-gravity_scale = 0.0
+collision_mask = 15
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_dk6u7")
+max_contacts_reported = 5
+contact_monitor = true
 script = ExtResource("1_o3kvi")
+speed = 30
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-19, 4, -2, 5, 4, 5, 10, 4, 14, 3, 16, 2, 17, 1, 18, 0, 18, -3, 21, -4, 23, -3, 26, -2, 29, -2, 29, -4, 27, -7, 26, -8, 27, -10, 27, -11, 24, -11, 20, -9, 19, -9, 14, -10, 9, -12, 1, -12, -5, -11, -10, -10, -16, -9, -18, -7, -20, -6, -22, -4, -24, -3, -26, -1, -29, 0, -29, 2, -23, 3)
 
-[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+[node name="Area2D" type="Area2D" parent="." groups=["damage5", "enemyarea"]]
 collision_layer = 4
 collision_mask = 13
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
-scale = Vector2(1.1, 1.1)
 polygon = PackedVector2Array(-19, 4, -2, 5, 4, 5, 10, 4, 14, 3, 16, 2, 17, 1, 18, 0, 18, -3, 21, -4, 23, -3, 26, -2, 29, -2, 29, -4, 27, -7, 26, -8, 27, -10, 27, -11, 24, -11, 20, -9, 19, -9, 14, -10, 9, -12, 1, -12, -5, -11, -10, -10, -16, -9, -18, -7, -20, -6, -22, -4, -24, -3, -26, -1, -29, 0, -29, 2, -23, 3)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+use_parent_material = true
 texture = ExtResource("2_00tpv")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+light_mask = 6
+occluder = SubResource("OccluderPolygon2D_pgxjp")
+sdf_collision = false
+occluder_light_mask = 15
+
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1.5, -6.5)
+scale = Vector2(3.05, 1.25)
 
 [node name="Mob_Timer" type="Timer" parent="."]
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = 5.0
+offset_right = 20.0
+offset_bottom = 28.0
+label_settings = SubResource("LabelSettings_e3v2p")
+autowrap_mode = 3
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.0
+texture = ExtResource("4_nj2iy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

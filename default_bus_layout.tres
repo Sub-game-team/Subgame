@@ -1,0 +1,22 @@
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://8q6tnlmgeaek"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_tjd15"]
+resource_name = "Reverb"
+damping = 0.0
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_glee3"]
+resource_name = "LowPassFilter"
+cutoff_hz = 2318.0
+
+[sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_ygk4h"]
+resource_name = "NotchFilter"
+db = 2
+
+[resource]
+bus/0/volume_db = -5.93075
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_tjd15")
+bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource("AudioEffectLowPassFilter_glee3")
+bus/0/effect/1/enabled = true
+bus/0/effect/2/effect = SubResource("AudioEffectNotchFilter_ygk4h")
+bus/0/effect/2/enabled = true

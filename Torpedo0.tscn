@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://coqipnqfok8dj"]
+
+[ext_resource type="Script" path="res://Torpedo_normal.gd" id="1_rh35h"]
+[ext_resource type="Texture2D" uid="uid://b2y2muqmywk56" path="res://Art/torpedo_0-variant_ferret.png" id="2_i2axh"]
+[ext_resource type="AudioStream" uid="uid://brih27dctfqlj" path="res://sounds/explode01.ogg" id="3_e6xop"]
+[ext_resource type="Texture2D" uid="uid://dgbqo64atuto0" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="4_rwyix"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_do5jb"]
+radius = 80.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_llub1"]
+size = Vector2(30, 30)
+
+[node name="RigidBody2D" type="RigidBody2D" groups=["torpedo"]]
+collision_layer = 8
+collision_mask = 6
+mass = 1000.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_rh35h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+rotation = 1.5708
+texture = ExtResource("2_i2axh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(32, -9)
+rotation = 1.5708
+scale = Vector2(0.36, 1.28)
+rect = Rect2(0, 0, 50, 50)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_e6xop")
+max_distance = 3000.0
+max_polyphony = 124
+panning_strength = 2.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 5
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_do5jb")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+polygon = PackedVector2Array(6.00009, 25, 5.99989, -30, 4.99989, -30, 4.99988, -32, 3.99988, -32, 3.99988, -33, -4.00012, -33, -4.00012, -32, -5.00012, -32, -5.00011, -30, -6.00011, -30, -5.99991, 25, -6.99991, 25, -6.99991, 26, -7.99991, 26, -7.9999, 28, -8.9999, 28, -8.99989, 30, -9.99989, 30, -9.99988, 33, 10.0001, 33, 10.0001, 30, 9.00011, 30, 9.0001, 28, 8.0001, 28, 8.00009, 26, 7.00009, 26, 7.00009, 25)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_llub1")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("4_rwyix")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
