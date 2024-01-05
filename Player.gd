@@ -32,13 +32,13 @@ func _ready():
 
 func get_movement():
 	if Input.is_action_pressed("left") and xMovement >= -488:
-		xMovement -= 8 * movementpenalty
+		xMovement -= 8 * Input.get_action_strength("left") * movementpenalty
 	if Input.is_action_pressed("right") and xMovement <= 488:
-		xMovement += 8 * movementpenalty
+		xMovement += 8 * Input.get_action_strength("right") * movementpenalty
 	if Input.is_action_pressed("up") and yMovement >= -488:
-		yMovement -= 8 * movementpenalty
+		yMovement -= 8 * Input.get_action_strength("up") * movementpenalty
 	if Input.is_action_pressed("down") and yMovement <= 488:
-		yMovement += 8 * movementpenalty
+		yMovement += 8 * Input.get_action_strength("down") * movementpenalty
 	if xMovement >= 4 and not Input.is_action_pressed("right"):
 		xMovement -= 4
 	if xMovement <= -4 and not Input.is_action_pressed("left"):

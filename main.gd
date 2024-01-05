@@ -49,7 +49,7 @@ func _on_button_pressed():
 	$Player.start_sub()
 	create_mob()
 	$mob.stop = false
-	$Timer.start(3)
+	$Timer.start()
 
 
 func save_game():

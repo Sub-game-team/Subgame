@@ -19,11 +19,13 @@ player_scene = ExtResource("3_8y4yx")
 tileset = ExtResource("4_njx7p")
 crosshair_scene = ExtResource("5_3e7h7")
 vulkanschnecken_scene = ExtResource("6_ad2yy")
+reset_progress = true
 
 [node name="TileMap" parent="." instance=ExtResource("4_njx7p")]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 
 [node name="Area2D_mobspawner" type="Area2D" parent="."]
 monitoring = false
