@@ -5,6 +5,7 @@ var yMovement = 0
 var xMovement = 0
 @onready var player_body = get_node(".")
 var projectile_scene0 = preload("res://Torpedo0.tscn")
+var electrogun_scene = preload("res://electrogun_projectile.tscn")
 var readyToFire = [true, true, true]
 var flooded = [false, false, false]
 var torpedopenalty = 1
@@ -273,3 +274,9 @@ func save():
 		"maxhealth" : maxhealth,
 	}
 	return save_dict
+
+func electrogun_shoot(pos: Vector2, targetpos: Vector2, triggerchance: int):
+	var electrogun_projectile = electrogun_scene.instantiate()
+	electrogun_projectile.set_global_position(pos)
+	electrogun_projectile.look_at(targetpos)
+	electrogun_projectile.triggerchance = triggerchance
