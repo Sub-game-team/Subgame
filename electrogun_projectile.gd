@@ -33,7 +33,6 @@ func _on_body_entered(body):
 	var randomgen = randi() % 100
 	if randomgen <= triggerchance and targetenemy != null:
 		player.call_deferred("electrogun_shoot", self.get_global_position(), targetenemy.get_global_position(), triggerchance-0)
-		print("test")
 	queue_free()
 
 func set_player_reference(player_ref: CharacterBody2D):
