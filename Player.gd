@@ -69,6 +69,7 @@ func _process(_delta):
 	if start:
 		torpedo_select_input()
 		torpedo_shoot_input()
+		electrogun_shoot_input()
 		variable_processing()
 		visualizeanddebug()
 		torpedo_ping()
@@ -181,6 +182,10 @@ func torpedo_shoot_input():
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_player_reference(self)
 
+func electrogun_shoot_input():
+	if Input.is_action_just_pressed("right_click", true):
+		electrogun_shoot(global_position, get_global_mouse_position(), 100)
+
 func variable_processing():
 	if flooded[0]:
 		torpedopenalty = 1.75
@@ -246,7 +251,7 @@ func _on_timer_3_torp_timeout():
 
 func take_damage(damagetotake):
 	currenthealth -= damagetotake
-	var randomgen = (randi() % 19)
+	var randomgen = randi() % 19
 	#randomgen = 1
 	if randomgen <= 2:
 		flooded[randomgen] = true
@@ -277,6 +282,8 @@ func save():
 
 func electrogun_shoot(pos: Vector2, targetpos: Vector2, triggerchance: int):
 	var electrogun_projectile = electrogun_scene.instantiate()
+	get_parent().add_child(electrogun_projectile)
 	electrogun_projectile.set_global_position(pos)
 	electrogun_projectile.look_at(targetpos)
 	electrogun_projectile.triggerchance = triggerchance
+	electrogun_projectile.set_player_reference(self)
