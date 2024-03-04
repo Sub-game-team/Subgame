@@ -110,8 +110,13 @@ shadow_enabled = true
 shadow_item_cull_mask = 7
 texture = ExtResource("6_y0o4n")
 
+[node name="Timer_electrogun" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="Timer_1torp" to="." method="_on_timer_1_torp_timeout"]
 [connection signal="timeout" from="Timer_2torp" to="." method="_on_timer_2_torp_timeout"]
 [connection signal="timeout" from="Timer_3torp" to="." method="_on_timer_3_torp_timeout"]
 [connection signal="timeout" from="Timer_sonar" to="." method="_on_timer_sonar_timeout"]
 [connection signal="timeout" from="Timer_repaircooldown" to="." method="_on_timer_repaircooldown_timeout"]
+[connection signal="timeout" from="Timer_electrogun" to="." method="_on_timer_electrogun_timeout"]

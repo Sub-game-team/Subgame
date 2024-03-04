@@ -7,6 +7,7 @@ var xMovement = 0
 var projectile_scene0 = preload("res://Torpedo0.tscn")
 var electrogun_scene = preload("res://electrogun_projectile.tscn")
 var readyToFire = [true, true, true]
+var electrogunReadyToFire = true
 var flooded = [false, false, false]
 var torpedopenalty = 1
 var repairpenalty = 1
@@ -183,7 +184,7 @@ func torpedo_shoot_input():
 		projectile.set_player_reference(self)
 
 func electrogun_shoot_input():
-	if Input.is_action_just_pressed("right_click", true):
+	if Input.is_action_just_pressed("right_click", true) and electrogunReadyToFire:
 		electrogun_shoot(global_position, get_global_mouse_position(), 100)
 
 func variable_processing():
@@ -287,3 +288,8 @@ func electrogun_shoot(pos: Vector2, targetpos: Vector2, triggerchance: int):
 	electrogun_projectile.look_at(targetpos)
 	electrogun_projectile.triggerchance = triggerchance
 	electrogun_projectile.set_player_reference(self)
+	electrogunReadyToFire = false
+	$Timer_electrogun.start()
+
+func _on_timer_electrogun_timeout():
+	electrogunReadyToFire = true

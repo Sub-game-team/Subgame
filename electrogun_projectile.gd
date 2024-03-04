@@ -5,6 +5,7 @@ var damage = 2
 var distancetomouse = [0, 0, 0, 0]
 var targetenemy: Node
 var player
+var speed = 3000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +16,7 @@ func _process(_delta):
 	pass
 
 func _integrate_forces(_state):
-	set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * 5000)
+	set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed)
 
 func _on_body_entered(body):
 	var closestenemydistance = 0
@@ -37,3 +38,6 @@ func _on_body_entered(body):
 
 func set_player_reference(player_ref: CharacterBody2D):
 	player = player_ref
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()
