@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dgbqo64atuto0" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="4_nj2iy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dk6u7"]
-bounce = 5.0
+absorbent = true
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pgxjp"]
 cull_mode = 1
@@ -18,7 +18,7 @@ polygon = PackedVector2Array(-29, 0, -29, 2, -28, 2, -28, 3, -22, 3, -22, 4, -2,
 material = ExtResource("1_al6sl")
 collision_layer = 4
 collision_mask = 15
-mass = 0.01
+mass = 500.0
 physics_material_override = SubResource("PhysicsMaterial_dk6u7")
 max_contacts_reported = 5
 contact_monitor = true
