@@ -1,14 +1,14 @@
 extends RigidBody2D
 
-var speed = 200
+var speed = 160000 #200
 var player
-var stop = false
-var speedmax = 1600
+var stop = true
+var speedmax = 160000
 var speedmaxmod = 1.0
 var acc = 10
 var accmod = 1
 var radiusmod = 1.0
-var damage = 5
+var damage = 0
 var damagemod = 1.0
 var homing = false
 var distancetomouse = [0, 0, 0, 0]
@@ -30,13 +30,14 @@ func _ready():
 		targetenemy = all_enemy[distancetomouse.find(closestenemydistance)]
 		stop = false
 	else:
-		stop = true
+		stop = false
 
 func set_stuff():
 	$Area2D/CollisionShape2D.set_scale(Vector2(1*radiusmod, 1*radiusmod))
 	damage = max(damage * damagemod, 1)
 	acc = acc * accmod
 	speedmax = speedmax * speedmaxmod
+	set_linear_velocity(player.get_velocity())
 
 func _process(_delta):
 	if showtarget and ((not stop) and (not (targetenemy == null))) and (homing):
@@ -47,7 +48,8 @@ func _process(_delta):
 func _integrate_forces(_state):
 	if (not stop) and homing:
 		SmoothLookAtRigid(self, targetcoords, delay)
-	set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed * 1)
+	apply_central_force(Vector2(1, 0).rotated(global_rotation) * speed * 1)
+	print(get_linear_velocity())
 	if speed <= speedmax - acc:
 		speed += acc
 

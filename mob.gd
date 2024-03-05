@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var speed = 10
+@export var speed = 100000
 @export var temp_speed = 0
 var player: CharacterBody2D
 var visual: Sprite2D
@@ -56,11 +56,11 @@ func _process(_delta):
 	
 # weird hostile fish
 
-func _physics_process(delta):
+func _integrate_forces(_state):
 	if not stop:
 		var direction = (player.global_position - global_position).angle() + 180 - 45
 		rotation += clampf(direction - rotation,-170,170)
-		linear_velocity = Vector2(-10.0,0.0).rotated(direction) * (speed + temp_speed)
+		apply_central_force(Vector2(-1,0).rotated(direction) * (speed + temp_speed))
 		# maybe save the points where to go in a list and thereby follow the player?
 		# later
 		#print("Distance: ", player.global_position.distance_to(global_position), ", temporary speed: ", temp_speed, ", chase: ", chase)
@@ -71,7 +71,7 @@ func _physics_process(delta):
 			chase = false
 			
 		if temp_speed > 0:
-			temp_speed -= 1 * delta
+			temp_speed -= 1
 
 	# Function to set the player reference
 

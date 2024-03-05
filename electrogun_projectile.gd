@@ -16,7 +16,7 @@ func _process(_delta):
 	pass
 
 func _integrate_forces(_state):
-	set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed)
+	constant_force = (Vector2(1, 0).rotated(global_rotation) * speed)
 
 func _on_body_entered(body):
 	var closestenemydistance = 0
