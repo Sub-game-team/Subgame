@@ -16,7 +16,7 @@ func _process(_delta):
 	pass
 
 func _integrate_forces(_state):
-	constant_force = (Vector2(1, 0).rotated(global_rotation) * speed)
+	set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed)
 
 func _on_body_entered(body):
 	var closestenemydistance = 0
@@ -32,7 +32,7 @@ func _on_body_entered(body):
 			targetenemy = all_enemy[distancetomouse.find(closestenemydistance)]
 	var randomgen = randi() % 100
 	if randomgen <= triggerchance and targetenemy != null:
-		player.call_deferred("electrogun_shoot", self.get_global_position(), targetenemy.get_global_position(), triggerchance-0)
+		player.call_deferred("electrogun_shoot", self.get_global_position(), targetenemy.get_global_position(), triggerchance-20)
 	queue_free()
 
 func set_player_reference(player_ref: CharacterBody2D):

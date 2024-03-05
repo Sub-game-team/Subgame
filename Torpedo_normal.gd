@@ -1,9 +1,9 @@
 extends RigidBody2D
 
-var speed = 160000 #200
+var speed = 20000 #200
 var player
 var stop = true
-var speedmax = 160000
+var speedmax = 20000
 var speedmaxmod = 1.0
 var acc = 10
 var accmod = 1
@@ -37,7 +37,8 @@ func set_stuff():
 	damage = max(damage * damagemod, 1)
 	acc = acc * accmod
 	speedmax = speedmax * speedmaxmod
-	set_linear_velocity(player.get_velocity())
+	speed = speedmax * speedmaxmod
+	set_linear_velocity(player.get_velocity()*0.8)
 
 func _process(_delta):
 	if showtarget and ((not stop) and (not (targetenemy == null))) and (homing):
@@ -49,7 +50,6 @@ func _integrate_forces(_state):
 	if (not stop) and homing:
 		SmoothLookAtRigid(self, targetcoords, delay)
 	apply_central_force(Vector2(1, 0).rotated(global_rotation) * speed * 1)
-	print(get_linear_velocity())
 	if speed <= speedmax - acc:
 		speed += acc
 

@@ -15,7 +15,7 @@ size = Vector2(30, 30)
 [node name="RigidBody2D" type="RigidBody2D" groups=["torpedo"]]
 collision_layer = 8
 collision_mask = 6
-mass = 350.0
+mass = 35.0
 physics_material_override = ExtResource("1_xak7a")
 max_contacts_reported = 1
 contact_monitor = true
