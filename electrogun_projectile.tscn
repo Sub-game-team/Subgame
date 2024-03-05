@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dl8f11o2vhqrt"]
+
+[ext_resource type="Script" path="res://electrogun_projectile.gd" id="1_lcc4t"]
+[ext_resource type="Texture2D" uid="uid://co8s31mlo73xn" path="res://Art/electrogun.png" id="2_c60gx"]
+[ext_resource type="Texture2D" uid="uid://dgbqo64atuto0" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="3_2qfvk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aa6l0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4u60"]
+size = Vector2(20, 12)
+
+[node name="Electrogun_projectile" type="RigidBody2D"]
+light_mask = 4
+collision_layer = 0
+collision_mask = 6
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_aa6l0")
+continuous_cd = 1
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp_mode = 1
+script = ExtResource("1_lcc4t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x4u60")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.19209e-06, -4.76837e-07)
+scale = Vector2(0.625, 0.75)
+texture = ExtResource("2_c60gx")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.2, 0.183)
+texture = ExtResource("3_2qfvk")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -26,7 +26,6 @@ func _ready():
 		targetenemy.resize(len(all_enemy))
 		for i in range(len(all_enemy)):
 			distancetomouse[i] = get_global_mouse_position().distance_squared_to(all_enemy[i].global_position)
-		#print(distancetomouse)
 		closestenemydistance = distancetomouse.min()
 		targetenemy = all_enemy[distancetomouse.find(closestenemydistance)]
 		stop = false

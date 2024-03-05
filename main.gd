@@ -43,14 +43,7 @@ func _ready():
 
 func _on_timer_timeout():
 	create_mob($Area2D_mobspawner.gen_random_pos())
-
-func _on_button_pressed():
-	$Timer_save.start()
-	$Player.start_sub()
-	create_mob()
-	$mob.stop = false
-	$Timer.start(3)
-
+	#pass
 
 func save_game():
 	var save_game = FileAccess.open("res://Savegames/save1.save", FileAccess.WRITE)
@@ -73,7 +66,6 @@ func save_game():
 
 		# Store the save dictionary as a new line in the save file.
 		save_game.store_line(json_string)
-
 
 func _on_timer_save_timeout():
 	save_game()
