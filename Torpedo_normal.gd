@@ -38,7 +38,7 @@ func set_stuff():
 	acc = acc * accmod
 	speedmax = speedmax * speedmaxmod
 	speed = speedmax * speedmaxmod
-	set_linear_velocity(player.get_velocity()*0.8)
+	set_linear_velocity(player.get_velocity()*1)
 
 func _process(_delta):
 	if showtarget and ((not stop) and (not (targetenemy == null))) and (homing):
