@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var speed = 10
+@export var speed = 50000
 @export var temp_speed = 0
 var player: CharacterBody2D
 var visual: Sprite2D
@@ -22,15 +22,6 @@ func _ready():
 	sprite_node.material = shader_material
 	#shader_material.set_shader_param("tint_color", Color(0.1, 0.69, 0.33, 0.6)) # Set your initial tint color
 
-func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-		if event.pressed:
-			# Right mouse button pressed, activate the shader
-			$Sprite2D.material = shader_material
-		else:
-			# Right mouse button released, deactivate the shader
-			$Sprite2D.material = null
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	$Label.set_text(str(takendamage))
@@ -49,6 +40,8 @@ func _process(_delta):
 		if y >= 400:
 			x = 0
 			y = 0
+	if $PointLight2D.get_energy() < 0:
+		$PointLight2D.set_energy(0)
 	# go in the direction of player
 	# look at direction
 	# damage
@@ -56,11 +49,11 @@ func _process(_delta):
 	
 # weird hostile fish
 
-func _physics_process(delta):
+func _integrate_forces(_state):
 	if not stop:
 		var direction = (player.global_position - global_position).angle() + 180 - 45
 		rotation += clampf(direction - rotation,-170,170)
-		linear_velocity = Vector2(-10.0,0.0).rotated(direction) * (speed + temp_speed)
+		apply_central_force(Vector2(-1,0).rotated(direction) * (speed + temp_speed))
 		# maybe save the points where to go in a list and thereby follow the player?
 		# later
 		#print("Distance: ", player.global_position.distance_to(global_position), ", temporary speed: ", temp_speed, ", chase: ", chase)
@@ -71,7 +64,7 @@ func _physics_process(delta):
 			chase = false
 			
 		if temp_speed > 0:
-			temp_speed -= 1 * delta
+			temp_speed -= 1
 
 	# Function to set the player reference
 
@@ -88,6 +81,6 @@ func _on_body_entered(body):
 		queue_free()
 	else:
 		pass
-		
+
 func ping():
 	x = 1
