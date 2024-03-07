@@ -1,9 +1,9 @@
 extends RigidBody2D
 
-var speed = 20000 #200
+var speed = 40000 #200
 var player
 var stop = true
-var speedmax = 20000
+var speedmax = 40000
 var speedmaxmod = 1.0
 var acc = 10
 var accmod = 1

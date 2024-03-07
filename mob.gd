@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var speed = 20000
+@export var speed = 40000
 @export var temp_speed = 0
 var player: CharacterBody2D
 var visual: Sprite2D

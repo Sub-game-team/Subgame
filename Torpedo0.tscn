@@ -19,6 +19,8 @@ mass = 35.0
 physics_material_override = ExtResource("1_xak7a")
 max_contacts_reported = 1
 contact_monitor = true
+linear_damp_mode = 1
+linear_damp = 2.0
 script = ExtResource("1_rh35h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
