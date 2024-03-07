@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=12 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_iubxo"]
 [ext_resource type="Texture2D" uid="uid://bjei64rpo8ie6" path="res://UBootV2.png" id="2_57c6f"]
 [ext_resource type="Script" path="res://player_camera.gd" id="3_1tnlc"]
 [ext_resource type="AudioStream" uid="uid://baf5af6l1jh86" path="res://sounds/nord_ambient01.ogg" id="4_gsdcc"]
 [ext_resource type="Script" path="res://flashlight.gd" id="5_rgvdp"]
-[ext_resource type="Texture2D" uid="uid://dsnhxk8joy2c6" path="res://FICKDICHGIMP.png" id="5_s1b4r"]
 [ext_resource type="Texture2D" uid="uid://dgbqo64atuto0" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="6_y0o4n"]
+[ext_resource type="Texture2D" uid="uid://d255cj75ffvar" path="res://point_light.png" id="8_7vxse"]
+[ext_resource type="Texture2D" uid="uid://c1fq7ph7o1hd4" path="res://Unbenannt.png" id="8_sjy6n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rrj6r"]
 
@@ -100,7 +101,7 @@ rotation = 1.5708
 blend_mode = 2
 shadow_enabled = true
 shadow_item_cull_mask = 3
-texture = ExtResource("5_s1b4r")
+texture = ExtResource("8_sjy6n")
 offset = Vector2(500, 0)
 script = ExtResource("5_rgvdp")
 
@@ -108,7 +109,7 @@ script = ExtResource("5_rgvdp")
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_item_cull_mask = 7
-texture = ExtResource("6_y0o4n")
+texture = ExtResource("8_7vxse")
 
 [node name="Timer_electrogun" type="Timer" parent="."]
 wait_time = 0.5

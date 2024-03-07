@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://bw602x4inua28" path="res://Shaders/mob_shader_mat.tres" id="1_al6sl"]
 [ext_resource type="Script" path="res://mob.gd" id="1_o3kvi"]
 [ext_resource type="Texture2D" uid="uid://df6asf71gxp7g" path="res://Art/enemy_normal.png" id="2_00tpv"]
-[ext_resource type="Texture2D" uid="uid://dgbqo64atuto0" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="4_nj2iy"]
+[ext_resource type="Texture2D" uid="uid://d255cj75ffvar" path="res://point_light.png" id="4_xgo67"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dk6u7"]
 absorbent = true
@@ -63,7 +63,7 @@ label_settings = SubResource("LabelSettings_e3v2p")
 autowrap_mode = 3
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.0
-texture = ExtResource("4_nj2iy")
+blend_mode = 2
+texture = ExtResource("4_xgo67")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
