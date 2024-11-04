@@ -22,8 +22,8 @@ var homingupgrade = [false, false, false]
 var speedupgrade = [false, false, false]
 var damageupgrade = [false, false, false]
 var radiusupgrade = [false, false, false]
-var currenthealth = 30
-var maxhealth = 30
+var currenthealth = 300
+var maxhealth = 300
 var repairready = false
 var healing = false
 var inv_ressources = [0, 0] #iron,Copper
@@ -178,14 +178,14 @@ func torpedo_shoot_input():
 			projectile.damagemod += 0.8
 			projectile.speedmaxmod -= 0.5
 			projectile.accmod -= 0.35
-		projectile.set_stuff()
 		projectile.global_position = global_position
 		projectile.look_at(get_global_mouse_position())
 		projectile.set_player_reference(self)
+		projectile.set_stuff()
 
 func electrogun_shoot_input():
 	if Input.is_action_just_pressed("right_click", true) and electrogunReadyToFire:
-		electrogun_shoot(global_position, get_global_mouse_position(), 100)
+		electrogun_shoot(global_position, get_global_mouse_position(), 100, null)
 
 func variable_processing():
 	if flooded[0]:
@@ -281,7 +281,7 @@ func save():
 	}
 	return save_dict
 
-func electrogun_shoot(pos: Vector2, targetpos: Vector2, triggerchance: int):
+func electrogun_shoot(pos: Vector2, targetpos: Vector2, triggerchance: int, bodytoignore):
 	var electrogun_projectile = electrogun_scene.instantiate()
 	get_parent().add_child(electrogun_projectile)
 	electrogun_projectile.set_global_position(pos)
@@ -289,6 +289,7 @@ func electrogun_shoot(pos: Vector2, targetpos: Vector2, triggerchance: int):
 	electrogun_projectile.triggerchance = triggerchance
 	electrogun_projectile.set_player_reference(self)
 	electrogunReadyToFire = false
+	electrogun_projectile.bodytoignore = bodytoignore
 	$Timer_electrogun.start()
 
 func _on_timer_electrogun_timeout():

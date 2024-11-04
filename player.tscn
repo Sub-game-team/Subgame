@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://ch43k4w4dvjsy"]
+[gd_scene load_steps=12 format=3 uid="uid://ch43k4w4dvjsy"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_iubxo"]
 [ext_resource type="Texture2D" uid="uid://bjei64rpo8ie6" path="res://UBootV2.png" id="2_57c6f"]
 [ext_resource type="Script" path="res://player_camera.gd" id="3_1tnlc"]
 [ext_resource type="AudioStream" uid="uid://baf5af6l1jh86" path="res://sounds/nord_ambient01.ogg" id="4_gsdcc"]
 [ext_resource type="Script" path="res://flashlight.gd" id="5_rgvdp"]
-[ext_resource type="Texture2D" uid="uid://dsnhxk8joy2c6" path="res://FICKDICHGIMP.png" id="5_s1b4r"]
 [ext_resource type="Texture2D" uid="uid://dgbqo64atuto0" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="6_y0o4n"]
+[ext_resource type="Texture2D" uid="uid://d255cj75ffvar" path="res://point_light.png" id="8_7vxse"]
+[ext_resource type="Texture2D" uid="uid://c1fq7ph7o1hd4" path="res://Unbenannt.png" id="8_sjy6n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rrj6r"]
 
@@ -24,7 +25,7 @@ script = ExtResource("1_iubxo")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-light_mask = 2
+light_mask = 8
 z_index = 1
 position = Vector2(-31, 1)
 texture = ExtResource("2_57c6f")
@@ -54,7 +55,6 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
-light_mask = 4
 offset_left = -466.0
 offset_top = -122.0
 offset_right = -50.0
@@ -63,7 +63,7 @@ label_settings = SubResource("LabelSettings_rrj6r")
 autowrap_mode = 3
 
 [node name="PointLight2D" type="PointLight2D" parent="Label"]
-range_item_cull_mask = 4
+blend_mode = 2
 texture = ExtResource("6_y0o4n")
 texture_scale = 50.0
 
@@ -98,17 +98,18 @@ shape = SubResource("CircleShape2D_tinit")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 rotation = 1.5708
 blend_mode = 2
+range_item_cull_mask = 3
 shadow_enabled = true
-shadow_item_cull_mask = 3
-texture = ExtResource("5_s1b4r")
+shadow_item_cull_mask = 2
+texture = ExtResource("8_sjy6n")
 offset = Vector2(500, 0)
 script = ExtResource("5_rgvdp")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-range_item_cull_mask = 3
+range_item_cull_mask = 10
 shadow_enabled = true
-shadow_item_cull_mask = 7
-texture = ExtResource("6_y0o4n")
+shadow_item_cull_mask = 2
+texture = ExtResource("8_7vxse")
 
 [node name="Timer_electrogun" type="Timer" parent="."]
 wait_time = 0.5

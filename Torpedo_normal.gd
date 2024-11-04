@@ -1,9 +1,9 @@
 extends RigidBody2D
 
-var speed = 200
+var speed = 40000 #200
 var player
-var stop = false
-var speedmax = 1600
+var stop = true
+var speedmax = 40000
 var speedmaxmod = 1.0
 var acc = 10
 var accmod = 1
@@ -12,8 +12,8 @@ var damage = 5
 var damagemod = 1.0
 var homing = false
 var distancetomouse = [0, 0, 0, 0]
-var targetenemy = [0, 0, 0 ,0]
-var showtarget = false
+var targetenemy = null
+var showtarget = true
 var delay = 0.016
 var closestenemydistance = 0
 var timetoenemy = 0
@@ -23,20 +23,22 @@ func _ready():
 	var all_enemy = get_tree().get_nodes_in_group("enemy")
 	if not len(all_enemy) == 0:
 		distancetomouse.resize(len(all_enemy))
-		targetenemy.resize(len(all_enemy))
+		#targetenemy.resize(len(all_enemy))
 		for i in range(len(all_enemy)):
 			distancetomouse[i] = get_global_mouse_position().distance_squared_to(all_enemy[i].global_position)
 		closestenemydistance = distancetomouse.min()
 		targetenemy = all_enemy[distancetomouse.find(closestenemydistance)]
 		stop = false
 	else:
-		stop = true
+		stop = false
 
 func set_stuff():
 	$Area2D/CollisionShape2D.set_scale(Vector2(1*radiusmod, 1*radiusmod))
 	damage = max(damage * damagemod, 1)
 	acc = acc * accmod
 	speedmax = speedmax * speedmaxmod
+	speed = speedmax * speedmaxmod
+	set_linear_velocity(player.get_velocity()*1)
 
 func _process(_delta):
 	if showtarget and ((not stop) and (not (targetenemy == null))) and (homing):
@@ -47,7 +49,7 @@ func _process(_delta):
 func _integrate_forces(_state):
 	if (not stop) and homing:
 		SmoothLookAtRigid(self, targetcoords, delay)
-	set_linear_velocity(Vector2(1, 0).rotated(global_rotation) * speed * 1)
+	apply_central_force(Vector2(1, 0).rotated(global_rotation) * speed * 1)
 	if speed <= speedmax - acc:
 		speed += acc
 
@@ -78,12 +80,13 @@ func sonar_ping():
 		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
 		timetoenemy = calculateTimeToHit(targetenemydistancetotorpedo, speed, acc)
 		showtarget = true
-		targetcoords = targetenemy.get_global_position()# + (targetenemy.get_linear_velocity() * timetoenemy)
+		targetcoords = targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * (50*timetoenemy))
+		print(timetoenemy)
 	else:
 		pass
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
-	nodeToTurn.angular_velocity = max(min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 1.5), -1.5)
+	nodeToTurn.angular_velocity = max(min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 1.8), -1.8)
 
 func AngularLookAt( currentPosition, currentRotation, targetPosition, turnTime ):
 	return GetAngle( currentRotation, TargetAngle( currentPosition, targetPosition ) )/turnTime
