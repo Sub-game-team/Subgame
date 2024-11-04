@@ -12,8 +12,8 @@ var damage = 5
 var damagemod = 1.0
 var homing = false
 var distancetomouse = [0, 0, 0, 0]
-var targetenemy = [0, 0, 0 ,0]
-var showtarget = false
+var targetenemy = null
+var showtarget = true
 var delay = 0.016
 var closestenemydistance = 0
 var timetoenemy = 0
@@ -23,7 +23,7 @@ func _ready():
 	var all_enemy = get_tree().get_nodes_in_group("enemy")
 	if not len(all_enemy) == 0:
 		distancetomouse.resize(len(all_enemy))
-		targetenemy.resize(len(all_enemy))
+		#targetenemy.resize(len(all_enemy))
 		for i in range(len(all_enemy)):
 			distancetomouse[i] = get_global_mouse_position().distance_squared_to(all_enemy[i].global_position)
 		closestenemydistance = distancetomouse.min()
@@ -80,12 +80,13 @@ func sonar_ping():
 		var targetenemydistancetotorpedo = global_position.distance_to(targetenemy.get_global_position())
 		timetoenemy = calculateTimeToHit(targetenemydistancetotorpedo, speed, acc)
 		showtarget = true
-		targetcoords = targetenemy.get_global_position()# + (targetenemy.get_linear_velocity() * timetoenemy)
+		targetcoords = targetenemy.get_global_position() + (targetenemy.get_linear_velocity() * (50*timetoenemy))
+		print(timetoenemy)
 	else:
 		pass
 
 func SmoothLookAtRigid( nodeToTurn, targetPosition, turnSpeed ):
-	nodeToTurn.angular_velocity = max(min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 1.5), -1.5)
+	nodeToTurn.angular_velocity = max(min((AngularLookAt( nodeToTurn.global_position, nodeToTurn.global_rotation, targetPosition, turnSpeed)), 1.8), -1.8)
 
 func AngularLookAt( currentPosition, currentRotation, targetPosition, turnTime ):
 	return GetAngle( currentRotation, TargetAngle( currentPosition, targetPosition ) )/turnTime

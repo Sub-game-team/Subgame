@@ -25,7 +25,7 @@ script = ExtResource("1_iubxo")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-light_mask = 2
+light_mask = 8
 z_index = 1
 position = Vector2(-31, 1)
 texture = ExtResource("2_57c6f")
@@ -55,7 +55,6 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
-light_mask = 4
 offset_left = -466.0
 offset_top = -122.0
 offset_right = -50.0
@@ -64,7 +63,7 @@ label_settings = SubResource("LabelSettings_rrj6r")
 autowrap_mode = 3
 
 [node name="PointLight2D" type="PointLight2D" parent="Label"]
-range_item_cull_mask = 4
+blend_mode = 2
 texture = ExtResource("6_y0o4n")
 texture_scale = 50.0
 
@@ -99,16 +98,17 @@ shape = SubResource("CircleShape2D_tinit")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 rotation = 1.5708
 blend_mode = 2
+range_item_cull_mask = 3
 shadow_enabled = true
-shadow_item_cull_mask = 3
+shadow_item_cull_mask = 2
 texture = ExtResource("8_sjy6n")
 offset = Vector2(500, 0)
 script = ExtResource("5_rgvdp")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-range_item_cull_mask = 3
+range_item_cull_mask = 10
 shadow_enabled = true
-shadow_item_cull_mask = 7
+shadow_item_cull_mask = 2
 texture = ExtResource("8_7vxse")
 
 [node name="Timer_electrogun" type="Timer" parent="."]

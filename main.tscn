@@ -24,7 +24,6 @@ reset_progress = true
 [node name="TileMap" parent="." instance=ExtResource("4_njx7p")]
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="Area2D_mobspawner" type="Area2D" parent="."]
 monitoring = false
@@ -34,13 +33,15 @@ script = ExtResource("6_6j3ew")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D_mobspawner"]
 shape = SubResource("RectangleShape2D_ea6bn")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.00784314, 0.00784314, 0.00784314, 1)
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-25.5, -59.0002)
-scale = Vector2(50.4648, 37.6172)
+show_behind_parent = true
+light_mask = 14
+scale = Vector2(28.1797, 26.6836)
 texture = ExtResource("8_gnlaa")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+light_mask = 0
+color = Color(0.490196, 0.490196, 0.490196, 1)
 
 [node name="Timer_save" type="Timer" parent="."]
 
